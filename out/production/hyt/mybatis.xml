@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+        <typeAlias alias="adv" type="com.xuri.vo.Adv"/>
+        <typeAlias alias="lunimg" type="com.xuri.vo.Lunimg"/>
+        <typeAlias alias="user" type="com.xuri.vo.User"/>
+        <typeAlias alias="payorder" type="com.xuri.vo.Payorder"/>
+        <typeAlias alias="fanorder" type="com.xuri.vo.FanOrder"/>
+        <typeAlias alias="tiorder" type="com.xuri.vo.TiOrder"/>
+        <typeAlias alias="help" type="com.xuri.vo.Help"/>
+        <typeAlias alias="syuser" type="com.xuri.vo.Syuser"/>
+        <typeAlias alias="role" type="com.xuri.vo.Role"/>
+        <typeAlias alias="tree" type="com.xuri.vo.Tree"/>
+        <typeAlias alias="roleTree" type="com.xuri.vo.RoleTree"/>
+        <typeAlias alias="type" type="com.xuri.vo.Type"/>
+        <typeAlias alias="searchPageUtil" type="com.xuri.vo.SearchPageUtil"/>
+        <typeAlias alias="utilVo" type="com.xuri.vo.UtilVo"/>
+        <typeAlias alias="video" type="com.xuri.vo.Video"/>
+        <typeAlias alias="advice" type="com.xuri.vo.Advice"/>
+        <typeAlias alias="hySystem" type="com.xuri.vo.HySystem"/>
+        <typeAlias alias="notice" type="com.xuri.vo.Notice"/>
+        <typeAlias alias="share" type="com.xuri.vo.Share"/>
+        <typeAlias alias="hyView" type="com.xuri.vo.HyView"/>
+        <typeAlias alias="hyUserStat" type="com.xuri.vo.HyUserStat"/>
+        <typeAlias alias="advMod" type="com.xuri.vo.AdvMod"/>
+        <typeAlias alias="wxMobileSale" type="com.xuri.vo.WxMobileSale"/>
+    </typeAliases>
+    
+	<mappers>
+		<mapper resource="mappings/user.xml"/>
+		<mapper resource="mappings/payorder.xml"/>
+		<mapper resource="mappings/lunimg.xml"/>
+		<mapper resource="mappings/help.xml"/>
+		<mapper resource="mappings/util.xml"/>
+		<mapper resource="mappings/syuser.xml"/>
+		<mapper resource="mappings/role.xml"/>
+		<mapper resource="mappings/base.xml"/>
+		<mapper resource="mappings/system.xml"/>
+		<mapper resource="mappings/video.xml"/>
+		<mapper resource="mappings/type.xml"/>
+		<mapper resource="mappings/advice.xml"/>
+		<mapper resource="mappings/notice.xml"/>
+		<mapper resource="mappings/adv.xml"/>
+		<mapper resource="mappings/share.xml"/>
+		<mapper resource="mappings/hyview.xml"/>
+		<mapper resource="mappings/tiorder.xml"/>
+        <mapper resource="mappings/wxMobileSale.xml"/>
+	</mappers>
+</configuration>

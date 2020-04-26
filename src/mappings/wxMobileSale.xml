@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wxMobileSale">
+	<select id="wxmobilesale_select" parameterType="wxMobileSale" resultType="wxMobileSale">
+    	SELECT * FROM sy_wx_mobile_sale
+		<where>
+			1=1
+			<if test="object.hasSale != -1">
+				AND hasSale=#{object.hasSale}
+			</if>
+			<if test="object.searchType !=null and object.searchType != '' and object.searchType == 'scalNum' and object.mobileNum !=null and object.mobileNum != '' ">
+				AND mobileNum like "%"#{object.mobileNum}"%"
+			</if>
+			<if test="object.searchType !=null and object.searchType != '' and object.searchType == 'anyNum' and object.mobileNum !=null and object.mobileNum != '' ">
+				AND mobileNum like "%"#{object.mobileNum}"%"
+			</if>
+			<if test="object.searchType !=null and object.searchType != '' and object.searchType == 'endNum' and object.mobileNum !=null and object.mobileNum != '' ">
+				AND mobileNum like "%"#{object.mobileNum}
+			</if>
+			<if test="object.ids !=null and object.ids != '' ">
+				AND id in
+				<foreach collection="object._ids" item="id" index="index" open="(" close=")" separator=",">
+					#{id}
+				</foreach>
+			</if>
+		</where>
+    </select>
+	<select id="wxmobilesale_count" parameterType="searchPageUtil" resultType="int">
+		SELECT count(*) FROM sy_wx_mobile_sale
+		<where>
+			1=1
+			<if test="object.hasSale != -1">
+				AND hasSale=#{object.hasSale}
+			</if>
+			<if test="object.searchType !=null and object.searchType != '' and object.searchType == 'scalNum' and object.mobileNum !=null and object.mobileNum != '' ">
+				AND mobileNum like "%"#{object.mobileNum}"%"
+			</if>
+			<if test="object.searchType !=null and object.searchType != '' and object.searchType == 'anyNum' and object.mobileNum !=null and object.mobileNum != '' ">
+				AND mobileNum like "%"#{object.mobileNum}"%"
+			</if>
+			<if test="object.searchType !=null and object.searchType != '' and object.searchType == 'endNum' and object.mobileNum !=null and object.mobileNum != '' ">
+				AND mobileNum like "%"#{object.mobileNum}
+			</if>
+			<if test="object.ids !=null and object.ids != '' ">
+				AND id in
+				<foreach collection="object._ids" item="id" index="index" open="(" close=")" separator=",">
+					#{id}
+				</foreach>
+			</if>
+		</where>
+	</select>
+	<select id="wxmobilesale_pageList" parameterType="searchPageUtil" resultType="wxMobileSale">
+		SELECT s.*  FROM sy_wx_mobile_sale s
+		<where>
+			1=1
+			<if test="object.hasSale != -1">
+				AND hasSale=#{object.hasSale}
+			</if>
+<!--			<if test="object !=null and object.hasSale != null and object.hasSale != '' and  object.hasSale != '-1'.toString()">-->
+<!--				AND hasSale=#{object.hasSale}-->
+<!--			</if>-->
+			<if test="object.searchType !=null and object.searchType != '' and object.searchType == 'scalNum' and object.mobileNum !=null and object.mobileNum != ''">
+				AND mobileNum like "%"#{object.mobileNum}"%"
+			</if>
+			<if test="object.searchType !=null and object.searchType != '' and object.searchType == 'anyNum' and object.mobileNum !=null and object.mobileNum != '' ">
+				AND mobileNum like "%"#{object.mobileNum}"%"
+			</if>
+			<if test="object.searchType !=null and object.searchType != '' and object.searchType == 'endNum' and object.mobileNum !=null and object.mobileNum != '' ">
+				AND mobileNum like "%"#{object.mobileNum}
+			</if>
+			<if test="object.ids !=null and object.ids != '' ">
+				AND id in
+				<foreach collection="object._ids" item="id" index="index" open="(" close=")" separator=",">
+					#{id}
+				</foreach>
+			</if>
+		</where>
+		ORDER BY s.id DESC LIMIT ${startRow},${page.pageRecordCount}
+	</select>
+	<select id="wxmobilesaledetail_select" parameterType="wxMobileSale" resultType="wxMobileSale">
+    	SELECT * FROM sy_wx_mobile_sale
+    	<where>
+    		1=1
+    		<if test="id !=null and id != ''">
+				AND id=#{id}
+			</if>
+    	</where>
+    </select>
+
+	<!--
+        <update id="advtopusetag_update" parameterType="adv">
+            UPDATE hy_adv SET useTag='1' WHERE id IN (SELECT id FROM (SELECT id FROM hy_adv WHERE userId=#{userId} ORDER BY id DESC LIMIT 0,1) AS t)
+        </update>
+        <update id="advtotusetag_update" parameterType="adv">
+            UPDATE hy_adv SET useTag='0' WHERE userId=#{userId}
+        </update>
+        <update id="advusetag_update" parameterType="adv">
+            UPDATE hy_adv SET useTag='1' WHERE id=#{id}
+        </update>
+        <delete id="adv_delete" parameterType="adv">
+            DELETE FROM hy_adv WHERE id=#{id}
+        </delete>
+
+        <select id="advmod_select" parameterType="advMod" resultType="advMod">
+            SELECT h.*,t.typeName FROM hy_advmod h
+            LEFT JOIN sy_type t ON t.id=h.typeId
+            <where>
+                <if test="typeId != null and typeId != ''.toString()">
+                    AND typeId=#{typeId}
+                </if>
+            </where>
+            ORDER BY rid
+        </select>-->
+	<insert id="advmod_insert" parameterType="advMod">
+    	INSERT INTO hy_advmod (typeId, imgUrl, rid) VALUES (#{typeId}, #{imgUrl}, #{rid})
+    </insert>
+<!--	<update id="_update" parameterType="wxmobilesale">-->
+<!--    	UPDATE hy_advmod SET hasSale=#{hasSale},imgUrl=#{imgUrl},rid=#{rid} WHERE id=#{id}-->
+<!--    </update>-->
+	<delete id="wxmobilesale_delete" parameterType="wxMobileSale">
+    	DELETE FROM sy_wx_mobile_sale WHERE id=#{id}
+    </delete>
+	<update id="wxmobilesale_update" parameterType="wxmobilesale">
+		UPDATE sy_wx_mobile_sale
+		<set>
+			<if test="hasSale != null and hasSale != ''">hasSale=#{hasSale},</if>
+			<if test="province != null and province != ''">province=#{province},</if>
+			<if test="city != null and city != ''">city=#{city},</if>
+			<if test="price != null and price != ''">price=#{price},</if>
+			<if test="mobileNum != null and mobileNum != ''">mobileNum=#{mobileNum},</if>
+			<if test="telephoneBill != null and telephoneBill != ''">telephoneBill=#{telephoneBill},</if>
+			<if test="minimumConsumption != null and minimumConsumption != ''">minimumConsumption=#{minimumConsumption},</if>
+			<if test="details != null and details != ''">details=#{details},</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+	<insert id="wxmobilesale_insert" parameterType="wxMobileSale">
+    	INSERT INTO sy_wx_mobile_sale (province,city,price,mobileNum,telephoneBill,minimumConsumption,hasSale,details) VALUES
+    	(#{province},#{city},#{price},#{mobileNum},#{telephoneBill},#{minimumConsumption},#{hasSale},#{details})
+    </insert>
+</mapper>

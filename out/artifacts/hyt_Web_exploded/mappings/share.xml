@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="share">
+	<resultMap type="share" id="shareResult">
+        <result property="id" column="id" javaType="String" jdbcType="VARCHAR" typeHandler="com.xuri.util.EmptyStringIfNull"/>
+        <result property="videoId" column="videoId" javaType="String" jdbcType="VARCHAR" typeHandler="com.xuri.util.EmptyStringIfNull"/>
+        <result property="articleId" column="articleId" javaType="String" jdbcType="VARCHAR" typeHandler="com.xuri.util.EmptyStringIfNull"/>
+        <association property="video" javaType="video">
+			<id property="id" column="vid" typeHandler="com.xuri.util.EmptyStringIfNull"/>
+	        <result property="title" column="vtitle" javaType="String" jdbcType="VARCHAR" typeHandler="com.xuri.util.EmptyStringIfNull"/>
+	        <result property="imagePath" column="vimagePath" javaType="String" jdbcType="VARCHAR" typeHandler="com.xuri.util.EmptyStringIfNull"/>
+	        <result property="viewNum" column="vviewNum" javaType="String" jdbcType="VARCHAR" typeHandler="com.xuri.util.EmptyStringIfNull"/>
+	        <result property="shareNum" column="vshareNum" javaType="String" jdbcType="VARCHAR" typeHandler="com.xuri.util.EmptyStringIfNull"/>
+	        <result property="createTime" column="vcreateTime" javaType="String" jdbcType="VARCHAR" typeHandler="com.xuri.util.EmptyStringIfNull"/>
+		</association>
+	</resultMap>
+	<select id="share_count" parameterType="searchPageUtil" resultType="int">
+    	SELECT count(*) FROM hy_share
+    </select>
+    <select id="share_pageList" parameterType="searchPageUtil" resultMap="shareResult">
+    	SELECT s.id, s.videoId, s.articleId, v.id as vid, v.title as vtitle, v.imagePath as vimagePath, v.viewNum as vviewNum, v.shareNum as vshareNum, v.createTime as vcreateTime, 
+    	a.id as aid, a.title as atitle, a.imagePath as aimagePath, a.viewNum as aviewNum, a.shareNum as ashareNum, a.createTime as acreateTime FROM hy_share s 
+		LEFT JOIN hy_video v ON v.id=s.videoId
+		LEFT JOIN hy_article a ON a.id=s.articleId
+    	ORDER BY s.id DESC LIMIT ${startRow},${page.pageRecordCount}
+    </select>
+	<select id="share_select" parameterType="share" resultType="share">
+    	SELECT s.id,s.videoId,s.userId,s.viewNum,s.shareNum,DATE_FORMAT(s.createTime, '%Y-%m-%d %H:%i') as createTime,v.title FROM hy_share s
+		LEFT JOIN hy_video v ON v.id=s.videoId where s.userId=#{userId}
+    </select>
+    <select id="sharedetail_select" parameterType="share" resultType="share">
+    	SELECT * FROM hy_share where videoId=#{videoId} and userId=#{userId}
+    </select>
+	<select id="selectShareNear" parameterType="share" resultType="share">
+    	SELECT s.id,s.videoId,s.userId,s.viewNum,s.shareNum,DATE_FORMAT(s.createTime, '%Y-%m-%d %H:%i') AS createTime,v.title,u.niName,u.phone FROM hy_share s
+		LEFT JOIN hy_video v ON v.id=s.videoId
+		LEFT JOIN hy_user u ON u.id=s.userId ORDER BY s.id DESC LIMIT 0,40
+    </select>
+	<insert id="share_insert" parameterType="share">
+    	INSERT INTO hy_share (videoId, articleId, userId, viewNum, shareNum, createTime) 
+    	VALUES (#{videoId}, #{articleId}, #{userId}, '1', '1', NOW())
+	</insert>
+	<update id="share_update" parameterType="share">
+		UPDATE hy_share
+		<set>
+			<if test="viewNum !=null and viewNum != ''">
+				viewNum=viewNum+${viewNum},
+			</if>
+			<if test="shareNum !=null and shareNum != ''">
+				shareNum=shareNum+${shareNum},
+			</if>
+		</set>
+		WHERE videoId=#{videoId} AND userId=#{userId}
+	</update>
+	<delete id="share_delete" parameterType="share">
+    	DELETE FROM hy_share WHERE id=#{id}
+	</delete>
+</mapper>

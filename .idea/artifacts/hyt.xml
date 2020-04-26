@@ -1,0 +1,22 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="hyt">
+    <output-path>$PROJECT_DIR$/out/artifacts/hyt</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="hyt" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$USER_HOME$/Desktop/ooxml-schemas-1.1.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/poi-3.9.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/poi-ooxml-3.9.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/poi-ooxml-schemas-3.9.jar" />
+          <element id="file-copy" path="$USER_HOME$/Desktop/xmlbeans-2.3.0.jar" />
+          <element id="library" level="project" name="lib" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="hyt/web/Web" />
+      <element id="artifact" artifact-name="hyt2019" />
+    </root>
+  </artifact>
+</component>

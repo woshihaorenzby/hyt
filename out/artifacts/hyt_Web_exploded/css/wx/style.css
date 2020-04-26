@@ -1,0 +1,575 @@
+/*index*/
+.index_tou {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background: #323739;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 10;
+}
+
+.index_tou p {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    color: #FFF;
+    font-size: 22px;
+    position: relative;
+}
+
+.index_tou p span {
+    max-width: 80%;
+    padding: 0 3%;
+    height: 40px;
+    margin: auto;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.index_tou_img {
+    width: 30px;
+    float: right;
+    top: 5px;
+    position: absolute;
+    right: 3%;
+}
+
+.index_tou_img2 {
+    width: 30px;
+    float: right;
+    top: 5px;
+    position: absolute;
+    right: 3%;
+    margin-right: 40px;
+}
+
+.index_tou_img3 {
+    width: 20px;
+    float: left;
+    top: 10px;
+    position: absolute;
+    left: 3%;
+}
+
+.index_nr {
+    width: 100%;
+    background: #FFF;
+    padding-left: 3%;
+    padding-right: 3%;
+    border-top: 1px solid #DEDEDE;
+    border-bottom: 1px solid #DEDEDE;
+}
+
+.index_nr ul {
+}
+
+.index_nr ul li {
+    /*height: 60px;*/
+    /*padding: 10px 0;*/
+    /*border-bottom: 1px solid #DEDEDE;*/
+    /*position: relative;*/
+    /*padding-right: 2.91%;*/
+    /*margin-top: 10px;*/
+    -webkit-box-align: center;
+    -webkit-box-pack: justify;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    display: -ms-flexbox;
+    display: flex;
+    height: 8.533vw;
+    justify-content: space-between;
+}
+
+.index_nr ul li img {
+    float: left;
+    display: block;
+    width: 85px;
+    height: 65px;
+    margin-right: 10px;
+    border-radius: 4px;
+}
+
+.index_p1 {
+    width: 67%;
+    height: 18px;
+    line-height: 20px;
+    font-size: 13.66px;
+    overflow: hidden;
+    font-family: PingFang-SC-Medium;
+    padding-bottom: 9px;
+}
+
+.index_p2 {
+    height: 20px;
+    line-height: 20px;
+    color: #999;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.index_p3 {
+    position: absolute;
+    font-size: 12px;
+    color: #CCC;
+    left: 50%;
+    bottom: 10px;
+    top: 62px;
+}
+
+.index_di, .index_di2 {
+    width: 100%;
+    height: 52px;
+    background: #fff;
+    border-top: 1px solid #DEDEDE;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.index_di div, .index_di2 div {
+    height: 52px;
+    width: 33%;
+    float: left;
+    text-align: center;
+    color: #999999;
+    font-size: 12px;
+    padding-top: 6px;
+}
+
+.index_di2 div {
+    width: 25%;
+}
+
+.index_di div img, .index_di2 div img {
+    width: 25px;
+    height: 25px;
+}
+
+.sousuo {
+    width: 90%;
+    /*height: 35px;*/
+    line-height: 35px;
+    margin: 0 auto 10px;
+    padding: 0 0 0 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    position: relative;
+    border: 1px solid #DEDEDE;
+    display: none;
+}
+
+.sousuo > input[type="search"] {
+    width: 100%;
+    height: 33px;
+    padding-right: 35px;
+    background: #fdfdfd;
+}
+
+.sousuo > input[type="submit"] {
+    width: 33px;
+    height: 33px;
+    background: #fdfdfd url(../icon/seach_hui.png) no-repeat 6px;
+    background-size: 25px 25px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+
+/*��������*/
+.wode_tou {
+    background: #FFF;
+    padding: 8px 3%;
+    position: relative;
+    border-bottom: 1px solid #DEDEDE;
+    border-top: 1px solid #DEDEDE;
+}
+
+.wode_touxiang {
+    width: 70px;
+    height: 70px;
+    margin-right: 15px;
+    border-radius: 4px;
+    display: block;
+    float: left;
+}
+
+.wode_p1 {
+    width: 70%;
+    height: 30px;
+    max-height: 30px;
+    line-height: 30px;
+    font-size: 20px;
+    color: #000;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.wode_p2 {
+    width: 68%;
+    height: 20px;
+    max-height: 20px;
+    line-height: 20px;
+    font-size: 16px;
+    color: #000;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.wode_jiantou {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    right: 4%;
+    top: 50%;
+    margin-top: -6px;
+}
+
+.ziliao_ul {
+    padding-left: 3%;
+    background: #fff;
+    border-bottom: 1px solid #DEDEDE;
+    border-top: 1px solid #DEDEDE;
+    font-size: 14px;
+}
+
+.ziliao_ul a li {
+    height: 45px;
+    line-height: 45px;
+    border-bottom: 1px solid #F0F0F0;
+    padding-right: 2.91%;
+    position: relative;
+    color: #333;
+    right: 1.5%;
+}
+
+.gerenshuju_ul {
+    height: 30px;
+}
+
+.gerenshuju_ul li {
+    width: 33.3333%;
+    height: 30px;
+    line-height: 38px;
+    text-align: center;
+    float: left;
+    color: #000;
+}
+
+
+.guanggao {
+    width: 100%;
+    min-height: 100px;
+    text-align: center;
+    position: relative;
+    border: 1px solid #DEDEDE;
+    background: #fff;
+}
+
+.photo_w100 {
+    border: 1px solid #DEDEDE;
+    width: 100%;
+    position: relative;
+    z-index: 9;
+}
+
+.photo_w100 img {
+    height: 100%;
+    width: 100%;
+    z-index: 9;
+}
+
+/*<��Ʒ�б�ͼ>*/
+.photo_w100-1 {
+    position: absolute;
+    top: 75px;
+    text-align: center;
+    width: 94%;
+    line-height: 100px;
+    border: 1px solid #DEDEDE;
+    height: 100px;
+    background: #fff;
+    z-index: -1
+}
+
+/*<��Ʒ�б�ͼ>*/
+
+.guanggao img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9;
+}
+
+.xiangqing_ceng {
+    z-index: 10;
+    bottom: 0;
+    left: 0;
+    color: #FFF;
+    height: auto;
+    width: 100%;
+    color: #FFF;
+    background: rgba(0, 0, 0, 0.5);
+    text-align: left;
+    padding: 3px 10px;
+    font-size: 14px;
+}
+
+.xq_tc {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.xq_tc ul {
+    width: 100%;
+    min-height: 160px;
+    background: #FFF;
+    position: absolute;
+    z-index: 11;
+    left: 0;
+    bottom: -160px;
+}
+
+.xq_tc ul li {
+    width: 25%;
+    height: 100px;
+    float: left;
+    color: #CCC;
+    font-size: 12px;
+    text-align: center;
+    border-right: 1px solid #DEDEDE;
+    border-bottom: 1px solid #DEDEDE;
+}
+
+.xq_tc ul li img {
+    width: 50px;
+    height: 50px;
+    margin-top: 18px;
+    margin-bottom: 2px;
+    border-radius: 4px;
+}
+
+
+/*��������*/
+.wanshanziliao {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    color: #333;
+    padding: 5px 8px;
+    margin-bottom: 8px;
+    border: 1px solid #DEDEDE;
+}
+
+.wanshanziliao2 {
+    width: 100%;
+    height: 80px;
+    border: 1px solid #DEDEDE;
+    padding: 4px;
+    text-align: left;
+    font-size: 14px;
+    color: #000;
+    resize: none;
+    outline: none;
+}
+
+/*��Ϣ����*/
+.xiaoxi_ul {
+    background: #FFF;
+}
+
+.xiaoxi_ul li {
+    height: 70px;
+    overflow: hidden;
+    border-bottom: 1px solid #DEDEDE;
+}
+
+
+/*推广*/
+.tuiguang_xuanxiang {
+    width: 100%;
+    padding: 10px 0;
+    background: #FFF;
+    position: relative;
+    margin-top: 50px;
+    padding: 10px 5px 0px 5px;
+    overflow: hidden;
+}
+
+.tuiguang_xuanxiang div {
+    width: 20%;
+    float: left;
+    height: auto;
+    color: #000;
+    font-size: 1.2rem;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.tuiguang_xuanxiang div img {
+    width: 80%;
+    height: auto;
+}
+
+.zhinan {
+    width: 100%;
+    background-color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.zhuanqianzhinan {
+    color: #e9443e;
+    font-size: 18px;
+    width: 100%;
+    height: 54px;
+    line-height: 54px;
+    padding: 0 10%;
+    text-align: center;
+}
+
+.zhinan_xuanxiang {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 20px 10%;
+}
+
+.zhinan_xuanxiang li {
+    width: 25%;
+    font-size: 11px;
+    text-align: center;
+    color: #595959;
+    float: left;
+}
+
+.zhinan_xuanxiang li img {
+    width: 54px;
+    height: 54px;
+    margin: 5px 0;
+}
+
+
+/*轮播*/
+.focus {
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    top: 50px;
+}
+
+.focus .hd {
+    width: 100%;
+    height: 11px;
+    position: absolute;
+    z-index: 1;
+    bottom: 5px;
+    text-align: center;
+}
+
+.focus .hd ul {
+    display: inline-block;
+    height: 10px;
+    padding: 3px 5px;
+    background-color: rgba(255, 255, 255, 0.7);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    font-size: 0;
+    vertical-align: top;
+}
+
+.focus .hd ul li {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background: #8C8C8C;
+    margin: 0 5px;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.focus .hd ul .on {
+    background: #FE6C9C;
+}
+
+.focus .bd {
+    position: relative;
+    z-index: 0;
+}
+
+.focus .bd li img {
+    width: 100%;
+    background: url(../zTreeStyle/img/loading.gif) center center no-repeat;
+}
+
+
+.tuiTitle {
+    position: fixed;
+    z-index: 999;
+    background-color: #ef111e;
+    width: 100%;
+    height: 50px;
+    color: #fff;
+}
+
+.tuiTileLeft {
+    position: absolute;
+    color: #fff;
+    width: 50px;
+    padding: 2px 0px 0px 5px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.tuiTileRight {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 60px;
+    color: #fff;
+    text-align: right;
+    padding: 2px 5px 0px 0px;
+    font-size: 0.7rem;
+    text-align: center;
+}
+
+.tuiTileCenter {
+    text-align: center;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bolder;
+    width: 100%;
+    position: absolute;
+    line-height: 50px;
+    z-index: 10;
+}
+
+.tuiTitle img {
+    width: 30px;
+    height: 30px;
+}
+	
+	

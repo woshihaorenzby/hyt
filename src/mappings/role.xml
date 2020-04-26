@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="role">
+	<resultMap type="role" id="roleResult">
+        <result property="id" column="id" javaType="String" jdbcType="VARCHAR" typeHandler="com.xuri.util.EmptyStringIfNull"/>
+        <result property="roleName" column="roleName" javaType="String" jdbcType="VARCHAR" typeHandler="com.xuri.util.EmptyStringIfNull"/>
+        <result property="roleDes" column="roleDes" javaType="String" jdbcType="VARCHAR" typeHandler="com.xuri.util.EmptyStringIfNull"/>
+        <result property="createTime" column="createTime" javaType="String" jdbcType="VARCHAR" typeHandler="com.xuri.util.EmptyStringIfNull"/>
+        <result property="updateTime" column="updateTime" javaType="String" jdbcType="VARCHAR" typeHandler="com.xuri.util.EmptyStringIfNull"/>
+    </resultMap>
+	<select id="role_count" parameterType="searchPageUtil" resultType="int">
+    	SELECT count(*) FROM sy_role
+    </select>
+    <select id="role_pageList" parameterType="searchPageUtil" resultMap="roleResult">
+    	SELECT * FROM sy_role ORDER BY id DESC LIMIT ${startRow},${page.pageRecordCount}
+    </select>
+    <insert id="role_insert" parameterType="role">
+    	INSERT INTO sy_role (roleName, roleDes, createTime) VALUES (#{roleName}, #{roleDes}, NOW())
+    </insert>
+    <update id="role_update" parameterType="role">
+    	UPDATE sy_role SET roleName=#{roleName}, roleDes=#{roleDes}, updateTime=NOW() WHERE id=#{id} 
+    </update>
+    <delete id="role_delete" parameterType="role">
+    	DELETE FROM sy_role WHERE id=#{id}
+    </delete>
+    <select id="role_select" parameterType="role" resultMap="roleResult">
+    	SELECT * FROM sy_role ORDER BY id
+    </select>
+    <select id="tree_select" parameterType="tree" resultType="tree">
+    	SELECT * FROM sy_tree ORDER BY id
+    </select>
+    <select id="treeinrole_select" resultType="String">
+		SELECT id FROM sy_role_tree WHERE roleId=#{roleId} AND treeId=#{treeId}
+	</select>
+    <delete id="roletree_delete" parameterType="roleTree">
+    	DELETE FROM sy_role_tree WHERE roleId=#{roleId}
+    </delete>
+    <insert id="roletreelist_insert" parameterType="roleTree">
+    	INSERT INTO sy_role_tree (roleId, treeId) VALUES 
+	    <foreach collection="list" item="item" index="index" separator="," >  
+	        (#{item.roleId},#{item.treeId})  
+	    </foreach>
+    </insert>
+</mapper>

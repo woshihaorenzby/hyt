@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="help">
+	<select id="help_count" parameterType="searchPageUtil" resultType="int">
+    	SELECT count(*) FROM bs_help
+    </select>
+    <select id="help_pageList" parameterType="searchPageUtil" resultType="help">
+    	SELECT * FROM bs_help ORDER BY id DESC LIMIT ${startRow},${page.pageRecordCount}
+    </select>
+    <insert id="help_insert" parameterType="help">
+    	INSERT INTO bs_help (title, url, rid, display, createTime) VALUES 
+    	(#{title}, #{url}, #{rid}, '1', NOW())
+    </insert>
+    <update id="help_update" parameterType="help">
+    	UPDATE bs_help SET title=#{title}, url=#{url}, rid=#{rid}, updateTime=NOW() WHERE id=#{id} 
+    </update>
+    <delete id="help_delete" parameterType="help">
+    	DELETE FROM bs_help WHERE id=#{id}
+    </delete>
+    <select id="helpdetail_select" parameterType="help" resultType="help">
+    	SELECT * FROM bs_help WHERE id=#{id}
+    </select>
+    <select id="help_select" parameterType="help" resultType="help">
+    	SELECT * FROM bs_help WHERE display=#{display} ORDER BY rid
+    </select>
+</mapper>

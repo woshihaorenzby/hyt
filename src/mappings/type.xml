@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="type">
+    <select id="type_select" parameterType="type" resultType="type">
+        SELECT * FROM sy_type
+        <where>
+            <if test="typeLei != null and typeLei != ''.toString()">
+                AND typeLei=#{typeLei}
+            </if>
+            <if test="topShow != null and topShow != ''.toString()">
+                AND topShow=#{topShow}
+            </if>
+        </where>
+        ORDER BY rid
+    </select>
+    <insert id="type_insert" parameterType="type">
+    	INSERT INTO sy_type (typeLei, typeName, typeImg, rid, display, webUrl) VALUES
+    	(#{typeLei}, #{typeName}, #{typeImg}, #{rid}, '1', #{webUrl})
+    </insert>
+    <update id="type_update" parameterType="type">
+    	UPDATE sy_type SET typeName=#{typeName},typeImg=#{typeImg},webUrl=#{webUrl},rid=#{rid} WHERE id=#{id}
+    </update>
+    <delete id="type_delete" parameterType="type">
+    	DELETE FROM sy_type WHERE id=#{id}
+    </delete>
+</mapper>

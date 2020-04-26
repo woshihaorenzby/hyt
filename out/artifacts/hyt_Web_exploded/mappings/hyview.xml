@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hyView">
+    <select id="hyviewdetail_select" parameterType="hyView" resultType="hyView">
+    	SELECT * FROM hy_view WHERE type=#{type} AND figure=#{figure}
+    	<if test="articleId !=null and articleId != ''">
+			AND articleId=#{articleId}
+		</if>
+    	<if test="videoId !=null and videoId != ''">
+			AND videoId=#{videoId}
+		</if>
+    </select>
+     <insert id="hyview_insert" parameterType="hyView">
+    	INSERT INTO hy_view (type, userId, figure, articleId, videoId, createTime) VALUES 
+    	(#{type}, #{userId}, #{figure}, #{articleId}, #{videoId}, NOW())
+    </insert>
+</mapper>

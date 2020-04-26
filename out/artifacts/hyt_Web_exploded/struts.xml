@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<!-- 指定默认编码集 ，作用于HttpServletRequest的setCharacterEncoding（）和freemarker，vilocity的输出 -->
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+	<!-- 当struts配置文件修改时是否自动加载 -->
+	<constant name="struts.configuration.xml.reload" value="true"/>
+	<!--配置Convention 插件自动重加载映射 -->
+    <constant name="struts.convention.classes.reload" value="true"/>
+    <constant name="struts.multipart.maxSize" value="100000000"/> 
+    <!-- 开发模式下打印详细的错误信息 -->
+<!--	<constant name="struts.devMode" value="false"/>
+	<constant name="struts.ui.theme" value="xhtml"/>
+	<constant name="struts.action.extension" value=","/>-->
+	
+	<!-- 拦截器 -->
+	<package name="all-interceptors" extends="json-default">
+		<interceptors>
+			<!--判断是否登录 和 是否有访问权限 -->
+			<interceptor name="auth" class="com.xuri.system.action.LogonInterceptor" />
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="auth"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="myStack"></default-interceptor-ref>
+		<!-- 全局结果 -->
+		<global-results>
+			<!-- 拦截没有权限返回结果 -->
+			<!-- <result name="login" type="redirect">showLogin</result> -->
+			<result name="error">/WEB-INF/jsp/404.jsp</result>
+			<result name="messageVo" type="json">
+				<param name="root">messageVo</param>
+			</result>
+			<result name="page" type="json">
+				<param name="root">page</param>
+			</result>
+		</global-results>
+		<action name="notFound">
+			<result name="messageVo" type="json">
+				<param name="root">messageVo</param>
+			</result>
+		</action>
+	</package>
+	
+	<!-- ckeditor -->
+	<package name="ckeditor" namespace="/ckeditor" extends="json-default">
+		<action name="*" class="com.xuri.util.CkeditorAction" method="{1}">
+		</action>
+	</package>
+	
+	<!-- 文件上传 -->
+	<package name="fileupload" namespace="" extends="all-interceptors">
+		<action name="*" class="com.xuri.util.FileUploadAction" method="{1}">
+			<result name="path" type="json">
+				<param name="contentType">text/html</param>
+				<param name="includeProperties">path</param>
+			</result>
+			<result name="fileVo" type="json">
+				<param name="contentType">text/html</param>
+				<param name="root">fileVo</param>
+			</result>
+		</action>
+	</package>
+	
+	<include file="struts/struts-LunimgAction.xml" />
+	<include file="struts/struts-PayAction.xml" />
+	<include file="struts/struts-HyUserAction.xml" />
+	<include file="struts/struts-HelpAction.xml" />
+	<include file="struts/struts-UserAction.xml" />
+	<include file="struts/struts-RoleAction.xml" />
+	<include file="struts/struts-TypeAction.xml" />
+	<include file="struts/struts-UtilAction.xml" />
+	<include file="struts/struts-VideoAction.xml" />
+	<include file="struts/struts-WxAction.xml" />
+	<include file="struts/struts-AdviceAction.xml" />
+	<include file="struts/struts-NoticeAction.xml" />
+	<include file="struts/struts-AdvAction.xml" />
+	<include file="struts/struts-ShareAction.xml" />
+	<include file="struts/struts-WxMobileSaleAction.xml" />
+
+</struts>

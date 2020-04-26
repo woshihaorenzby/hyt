@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="syuser">
+	<resultMap type="syuser" id="syuserResult">
+        <result property="id" column="id" javaType="String" jdbcType="VARCHAR" typeHandler="com.xuri.util.EmptyStringIfNull"/>
+        <result property="userName" column="userName" javaType="String" jdbcType="VARCHAR" typeHandler="com.xuri.util.EmptyStringIfNull"/>
+        <result property="password" column="password" javaType="String" jdbcType="VARCHAR" typeHandler="com.xuri.util.EmptyStringIfNull"/>
+        <result property="roleId" column="roleId" javaType="String" jdbcType="VARCHAR" typeHandler="com.xuri.util.EmptyStringIfNull"/>
+        <result property="roleName" column="roleName" javaType="String" jdbcType="VARCHAR" typeHandler="com.xuri.util.EmptyStringIfNull"/>
+        <result property="loginTime" column="loginTime" javaType="String" jdbcType="VARCHAR" typeHandler="com.xuri.util.EmptyStringIfNull"/>
+        <result property="createTime" column="createTime" javaType="String" jdbcType="VARCHAR" typeHandler="com.xuri.util.EmptyStringIfNull"/>
+    </resultMap>
+	<select id="syuser_count" parameterType="searchPageUtil" resultType="int">
+    	SELECT count(*) FROM sy_user
+    </select>
+    <select id="syuser_pageList" parameterType="searchPageUtil" resultMap="syuserResult">
+    	SELECT S.id, S.userName, S.password, S.roleId, date_format(S.loginTime, '%Y-%m-%d') as loginTime, date_format(S.createTime, '%Y-%m-%d') as createTime, R.roleName FROM sy_user S 
+    	LEFT JOIN sy_role R ON R.id=s.roleId ORDER BY id DESC LIMIT ${startRow},${page.pageRecordCount}
+    </select>
+	<select id="syuserdetail_select" parameterType="syuser" resultType="syuser">
+    	SELECT id, userName, roleId, createTime FROM sy_user 
+    	<where>
+    		<if test="password !=null and password != ''">
+				userName=#{userName} AND password=#{password}
+			</if>
+    	</where>
+    </select>
+    <insert id="syuser_insert" parameterType="syuser">
+    	INSERT INTO sy_user (userName, password, roleId, createTime) VALUES (#{userName}, 'Vr7bCv0gjVpU0UjD0sBQLEibUzrA57x5', #{roleId}, NOW())
+    </insert>
+    <update id="syuser_update" parameterType="syuser">
+    	UPDATE sy_user SET userName=#{userName}, roleId=#{roleId} WHERE id=#{id}
+    </update>
+    <delete id="syuser_delete" parameterType="syuser">
+    	DELETE FROM sy_user WHERE id=#{id}
+    </delete>
+    <update id="syuserpas_update" parameterType="syuser">
+    	UPDATE sy_user SET password=#{password} WHERE id=#{id}
+    </update>
+    <update id="wxsyuserpas_update" parameterType="syuser">
+    	UPDATE hy_user SET password=#{password} WHERE id=#{id}
+    </update>
+    <select id="syusertree_select" parameterType="syuser" resultType="tree">
+    	SELECT T.* FROM sy_role R 
+    	LEFT JOIN sy_role_tree E ON E.roleId=R.id
+    	LEFT JOIN sy_tree T ON T.id=E.treeId WHERE roleId=#{roleId}
+    </select>
+
+    <select id="syuserlogin_select" parameterType="syuser" resultType="syuser">
+        SELECT S.* FROM sy_user S
+        <where>
+            <if test="password !=null and password != ''">
+                userName=#{userName} AND password=#{password}
+            </if>
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="user" namespace="/admin" extends="all-interceptors">
+		<action name="*" class="com.xuri.system.action.UserAction" method="{1}">
+			<result name="showLogin">/WEB-INF/jsp/login.jsp</result>
+			<result name="index">/WEB-INF/jsp/index.jsp</result>
+			<result name="left">/WEB-INF/jsp/left.jsp</result>
+			<result name="head">/WEB-INF/jsp/head.jsp</result>
+			<result name="show">/WEB-INF/jsp/system/userList.jsp</result>
+			<result name="changePasShow">/WEB-INF/jsp/system/userChangePas.jsp</result>
+			<result name="treeList" type="json">
+				<param name="root">treeList</param>
+			</result>
+		</action>
+	</package>
+</struts>

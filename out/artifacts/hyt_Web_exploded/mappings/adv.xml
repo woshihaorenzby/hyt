@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="adv">
+	<select id="adv_select" parameterType="adv" resultType="adv">
+    	SELECT * FROM hy_adv WHERE userId=#{userId} AND display='1' ORDER BY id DESC
+    </select>
+	<select id="advdetail_select" parameterType="adv" resultType="adv">
+    	SELECT * FROM hy_adv
+    	<where>
+    		1=1
+    		<if test="id !=null and id != ''">
+				AND id=#{id}
+			</if>
+    		<if test="userId !=null and userId != ''">
+				AND userId=#{userId}
+			</if>
+    		<if test="useTag !=null and useTag != ''">
+				AND useTag=#{useTag}
+			</if>
+    	</where>
+    </select>
+	<insert id="adv_insert" parameterType="adv">
+    	INSERT INTO hy_adv (advType, imagePath, urlType, url, des, userId, createTime, display, usName, usPhone, usAddress) VALUES
+    	(#{advType}, #{imagePath}, #{urlType}, #{url}, #{des}, #{userId}, NOW(), #{display}, #{usName}, #{usPhone}, #{usAddress})
+    </insert>
+    <update id="adv_update" parameterType="adv">
+    	UPDATE hy_adv
+    	<set>
+            <if test="imagePath != null and imagePath != ''">imagePath=#{imagePath},</if>
+            <if test="urlType != null and urlType != ''">urlType=#{urlType},</if>
+            <if test="url != null and url != ''">url=#{url},</if>
+            <if test="des != null and des != ''">des=#{des},</if>
+            <if test="clickNum != null and clickNum != ''">clickNum=clickNum+${clickNum},</if>
+            <if test="display != null and display != ''">display=#{display},</if>
+			<if test="usName != null and usName != ''">usName=#{usName},</if>
+			<if test="usPhone != null and usPhone != ''">usPhone=#{usPhone},</if>
+			<if test="usAddress != null and usAddress != ''">usAddress=#{usAddress},</if>
+    	</set>
+    	WHERE id=#{id} 
+    </update>
+    <update id="advtopusetag_update" parameterType="adv">
+    	UPDATE hy_adv SET useTag='1' WHERE id IN (SELECT id FROM (SELECT id FROM hy_adv WHERE userId=#{userId} ORDER BY id DESC LIMIT 0,1) AS t)
+    </update>
+    <update id="advtotusetag_update" parameterType="adv">
+    	UPDATE hy_adv SET useTag='0' WHERE userId=#{userId}
+    </update>
+    <update id="advusetag_update" parameterType="adv">
+    	UPDATE hy_adv SET useTag='1' WHERE id=#{id}
+    </update>
+    <delete id="adv_delete" parameterType="adv">
+    	DELETE FROM hy_adv WHERE id=#{id}
+    </delete>
+
+	<select id="advmod_select" parameterType="advMod" resultType="advMod">
+		SELECT h.*,t.typeName FROM hy_advmod h
+		LEFT JOIN sy_type t ON t.id=h.typeId
+		<where>
+			<if test="typeId != null and typeId != ''.toString()">
+				AND typeId=#{typeId}
+			</if>
+		</where>
+		ORDER BY rid
+	</select>
+	<insert id="advmod_insert" parameterType="advMod">
+    	INSERT INTO hy_advmod (typeId, imgUrl, rid) VALUES (#{typeId}, #{imgUrl}, #{rid})
+    </insert>
+	<update id="advmod_update" parameterType="advMod">
+    	UPDATE hy_advmod SET typeId=#{typeId},imgUrl=#{imgUrl},rid=#{rid} WHERE id=#{id}
+    </update>
+	<delete id="advmod_delete" parameterType="advMod">
+    	DELETE FROM hy_advmod WHERE id=#{id}
+    </delete>
+</mapper>

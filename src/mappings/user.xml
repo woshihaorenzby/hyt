@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="user">
+	<select id="user_count" parameterType="searchPageUtil" resultType="int">
+    	SELECT count(*) FROM hy_user
+    	<where>
+    		1=1
+    		<if test="object!=null and object.pid !=null and object.pid != ''">
+				AND pid IN (${object.pid})
+			</if>
+			<if test="object!=null and object.pcomId !=null and object.pcomId != ''">
+				AND pcomId=#{object.pcomId}
+			</if>
+			<if test="object!=null and object.joinCompany !=null and object.joinCompany != ''">
+				AND joinCompany=#{object.joinCompany}
+			</if>
+    	</where>
+    </select>
+    <select id="user_pageList" parameterType="searchPageUtil" resultType="user">
+    	SELECT * FROM hy_user
+    	<where>
+    		1=1
+    		<if test="object!=null and object.pid !=null and object.pid != ''">
+				AND pid IN (${object.pid})
+			</if>
+			<if test="object!=null and object.pcomId !=null and object.pcomId != ''">
+				AND pcomId=#{object.pcomId}
+			</if>
+			<if test="object!=null and object.joinCompany !=null and object.joinCompany != ''">
+				AND joinCompany=#{object.joinCompany}
+			</if>
+    	</where>
+    	ORDER BY id DESC LIMIT ${startRow},${page.pageRecordCount}
+    </select>
+    <select id="nextnextuser_count" parameterType="user" resultType="int">
+    	SELECT count(*) FROM hy_user WHERE pid IN (${pid})
+    </select>
+    <select id="nextnextuser_list" parameterType="user" resultType="user">
+    	SELECT * FROM hy_user WHERE pid IN (${pid})
+    </select>
+	<select id="userdetail_select" parameterType="user" resultType="user">
+    	SELECT id, pid, openId, userCode, niName, phone, headimgurl, point, advShow, advClick, totalMon, tiMon, 
+    	yueMon, memLevel, ischeck, memEndTime, companyName, joinCompany, mpNiName, mpJob, mpCompany, mpPhone, mpWxcode, mpEmail, mpTigong, mpNeed, mpUse, mpClick, mpShare FROM hy_user 
+    	<where>
+    		1=1
+    		<if test="id !=null and id != ''">
+				AND id=#{id}
+			</if>
+    		<if test="openId !=null and openId != ''">
+				AND openId=#{openId}
+			</if>
+			<if test="phone !=null and phone != ''">
+				AND phone=#{phone}
+			</if>
+    		<if test="password !=null and password != ''">
+				AND phone=#{phone} AND password=#{password}
+			</if>
+    	</where>
+    </select>
+    <insert id="user_insert" parameterType="user">
+    	INSERT INTO hy_user (pid, openId, pcomId, userCode, niName, password, headimgurl, sex, province, city, country, joinCompany, createTime, loginTime) VALUES 
+    	(#{pid}, #{openId}, #{pcomId}, #{userCode}, #{niName}, 'Vr7bCv0gjVpU0UjD0sBQLEibUzrA57x5', #{headimgurl}, #{sex}, #{province}, #{city}, #{country}, #{joinCompany}, NOW(), NOW())
+    </insert>
+    <update id="user_update" parameterType="user">
+    	UPDATE hy_user
+    	<set>
+            <if test="phone != null and phone != ''">phone=#{phone},</if>
+            <if test="ischeck != null and ischeck != ''">ischeck=#{ischeck},</if>
+            <if test="point != null and point != ''">point=point + ${point},</if>
+            <if test="advShow != null and advShow != ''">advShow=advShow + ${advShow},</if>
+            <if test="advClick != null and advClick != ''">advClick=advClick+${advClick},</if>
+            <if test="totalMon != null and totalMon != ''">totalMon=#{totalMon},</if>
+            <if test="tiMon != null and tiMon != ''">tiMon=tiMon + ${tiMon},</if>
+            <if test="yueMon != null and yueMon != ''">yueMon=#{yueMon},</if>
+            <if test="memLevel != null and memLevel != ''">memLevel=#{memLevel},</if>
+            <if test="memEndTime != null and memEndTime != ''">memEndTime=#{memEndTime},</if>
+            <if test="companyName != null and companyName != ''">companyName=#{companyName},</if>
+            <if test="joinCompany != null and joinCompany != ''">joinCompany=#{joinCompany},</if>
+            <if test="mpNiName != null and mpNiName != ''">mpNiName=#{mpNiName},</if>
+            <if test="mpJob != null and mpJob != ''">mpJob=#{mpJob},</if>
+            <if test="mpCompany != null and mpCompany != ''">mpCompany=#{mpCompany},</if>
+            <if test="mpPhone != null and mpPhone != ''">mpPhone=#{mpPhone},</if>
+            <if test="mpWxcode != null and mpWxcode != ''">mpWxcode=#{mpWxcode},</if>
+            <if test="mpEmail != null and mpEmail != ''">mpEmail=#{mpEmail},</if>
+            <if test="mpTigong != null and mpTigong != ''">mpTigong=#{mpTigong},</if>
+            <if test="mpNeed != null and mpNeed != ''">mpNeed=#{mpNeed},</if>
+            <if test="mpUse != null and mpUse != ''">mpUse=#{mpUse},</if>
+            <if test="mpClick != null and mpClick != ''">mpClick=mpClick+${mpClick},</if>
+        </set>
+    	WHERE id=#{id}
+    </update>
+	<update id="updateUserLogin" parameterType="user">
+		UPDATE hy_user
+		<set>
+			<if test="headimgurl != null and headimgurl != ''">headimgurl=#{headimgurl},</if>
+			<if test="niName != null and niName != ''">niName=#{niName},</if>
+			loginTime=NOW()
+		</set>
+		WHERE openId=#{openId}
+	</update>
+    <select id="hyuserstat_select" parameterType="hyUserStat" resultType="hyUserStat">
+    	<if test="statType != null and statType == '1'.toString()">
+	    	SELECT DATE_FORMAT(createTime,'%m') AS MONTH,COUNT(*) AS con FROM hy_user 
+			WHERE DATE_FORMAT(createTime,'%Y')=DATE_FORMAT(NOW(),'%Y') 
+			GROUP BY MONTH ORDER BY MONTH
+    	</if>
+    	<if test="statType != null and statType == '2'.toString()">
+	    	(SELECT DATE_FORMAT(createTime,'%m') AS MONTH,COUNT(*) AS nancon, '' AS nvcon   
+			FROM hy_user   
+			WHERE DATE_FORMAT(createTime,'%Y')=DATE_FORMAT(NOW(),'%Y') AND sex='男'
+			GROUP BY MONTH
+			ORDER BY MONTH)
+			UNION
+			(SELECT DATE_FORMAT(createTime,'%m') AS MONTH,'' AS nancon, COUNT(*) AS nvcon  
+			FROM hy_user   
+			WHERE DATE_FORMAT(createTime,'%Y')=DATE_FORMAT(NOW(),'%Y') AND sex='女'
+			GROUP BY MONTH
+			ORDER BY MONTH)
+    	</if>
+    	<if test="statType != null and statType == '3'.toString()">
+    		SELECT city,COUNT(*) AS con FROM hy_user 
+			GROUP BY city ORDER BY city
+    	</if>
+    </select>
+</mapper>

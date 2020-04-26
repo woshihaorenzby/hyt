@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="hyuser" namespace="/hyuser" extends="all-interceptors">
+		<action name="*" class="com.xuri.main.user.action.UserAction" method="{1}">
+			<result name="show">/WEB-INF/jsp/user/userList.jsp</result>
+			<result name="showXieYi">/WEB-INF/jsp/user/xieyi.jsp</result>
+			<result name="showOper">/WEB-INF/jsp/user/oper.jsp</result>
+			<result name="companyShow">/WEB-INF/jsp/user/companyShow.jsp</result>
+			<result name="companyMem">/WEB-INF/jsp/user/companyMem.jsp</result>
+			<result name="userStat">/WEB-INF/jsp/user/userStat.jsp</result>
+			<result name="wxIndex">/WEB-INF/jsp/wx/index.jsp</result>
+			<result name="wxMine">/WEB-INF/jsp/wx/mine.jsp</result>
+			<result name="wxBind">/WEB-INF/jsp/wx/mine/bind.jsp</result>
+			<result name="wxCard">/WEB-INF/jsp/wx/mine/card.jsp</result>
+			<result name="wxEditCard">/WEB-INF/jsp/wx/mine/editCard.jsp</result>
+			<result name="wxShowCard">/WEB-INF/jsp/wx/mine/showCard.jsp</result>
+			<result name="wxMemberup">/WEB-INF/jsp/wx/mine/memberup.jsp</result>
+			<result name="wxTuiGuang">/WEB-INF/jsp/wx/mine/tuiGuang.jsp</result>
+			<result name="wxFans">/WEB-INF/jsp/wx/mine/fans.jsp</result>
+			<result name="wxDeposit">/WEB-INF/jsp/wx/mine/deposit.jsp</result>
+			<result name="wxShareOrder">/WEB-INF/jsp/wx/mine/shareOrder.jsp</result>
+			<result name="wxCodeJi">/WEB-INF/jsp/wx/mine/codeJi.jsp</result>
+			<result name="wxCompanyGroup">/WEB-INF/jsp/wx/mine/companygroup.jsp</result>
+			<result name="wxCompanyShare">/WEB-INF/jsp/wx/mine/yaoSuccess.jsp</result>
+			<result name="wxUserXie">/WEB-INF/jsp/wx/mine/xieyi.jsp</result>
+			<result name="wxConShang">/WEB-INF/jsp/wx/mine/conShang.jsp</result>
+			<result name="wxUserRelease">/WEB-INF/jsp/wx/userRelease.jsp</result>
+			<result name="wxUserHuo">/WEB-INF/jsp/wx/userHuo.jsp</result>
+			<result name="wxOper">/WEB-INF/jsp/wx/mine/oper.jsp</result>
+			<result name="tiOrderList" type="json">
+				<param name="root">tiOrderList</param>
+			</result>
+			<result name="userStatList" type="json">
+				<param name="root">userStatList</param>
+			</result>
+			<result name="typeList" type="json">
+				<param name="root">typeList</param>
+			</result>
+			<result name="shareList" type="json">
+				<param name="root">shareList</param>
+			</result>
+		</action>
+	</package>
+</struts>

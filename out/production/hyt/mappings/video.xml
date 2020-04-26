@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="video">
+	<select id="video_count" parameterType="searchPageUtil" resultType="int">
+    	SELECT count(*) FROM hy_video
+    	<where>
+    		1=1
+    		<if test="object !=null and object.mainType != null and object.mainType != ''">
+				AND mainType=#{object.mainType}
+			</if>
+    		<if test="object !=null and object.typeName != null and object.typeName != ''">
+				AND typeName=#{object.typeName}
+			</if>
+    		<if test="object !=null and object.title != null and object.title != ''">
+				AND title LIKE '%${object.title}%'
+			</if>
+    		<if test="object !=null and object.auditTag != null and object.auditTag != ''">
+				AND auditTag=#{object.auditTag}
+			</if>
+    		<if test="object !=null and object.topShow != null and object.topShow != ''">
+				AND topShow=#{object.topShow}
+			</if>
+			<if test="object !=null and object.syInsert != null and object.syInsert != ''">
+				AND syInsert=#{object.syInsert}
+			</if>
+			<if test="object !=null and object.userId != null and object.userId != ''">
+				AND userId=#{object.userId}
+			</if>
+    	</where>
+    </select>
+	<select id="video_pageList" parameterType="searchPageUtil" resultType="video">
+		SELECT v.*, s.userName, h.niName FROM hy_video v
+		LEFT JOIN sy_user s ON s.id=v.userId
+		LEFT JOIN hy_user h ON h.id=v.userId
+		<where>
+			1=1
+			<if test="object !=null and object.mainType != null and object.mainType != ''">
+				AND v.mainType=#{object.mainType}
+			</if>
+			<if test="object !=null and object.typeName != null and object.typeName != ''">
+				AND v.typeName=#{object.typeName}
+			</if>
+			<if test="object !=null and object.title != null and object.title != ''">
+				AND v.title LIKE '%${object.title}%'
+			</if>
+			<if test="object !=null and object.auditTag != null and object.auditTag != ''">
+				AND v.auditTag=#{object.auditTag}
+			</if>
+			<if test="object !=null and object.topShow != null and object.topShow != ''">
+				AND v.topShow=#{object.topShow}
+			</if>
+			<if test="object !=null and object.syInsert != null and object.syInsert != ''">
+				AND v.syInsert=#{object.syInsert}
+			</if>
+			<if test="object !=null and object.userId != null and object.userId != ''">
+				AND v.userId=#{object.userId}
+			</if>
+		</where>
+		ORDER BY v.id DESC LIMIT ${startRow},${page.pageRecordCount}
+	</select>
+    <select id="videodetail_select" parameterType="video" resultType="video">
+    	SELECT v.*,t.needQiTy FROM hy_video v 
+    	LEFT JOIN (SELECT * FROM sy_type WHERE typeLei='1') t ON t.typeName=v.typeName WHERE v.id=#{id}
+    </select>
+     <insert id="video_insert" parameterType="video">
+    	INSERT INTO hy_video 
+    	(mainType, typeName, title, imagePath, videoUrl, articleContent, viewNum, shareNum, auditTag, topShow, syInsert, userId, createTime, pushTime)
+    	VALUES 
+    	(#{mainType}, #{typeName}, #{title}, #{imagePath}, #{videoUrl}, #{articleContent}, '0', '0', '0', '0', #{syInsert}, #{userId}, NOW(), #{pushTime})
+    </insert>
+    <update id="video_update" parameterType="video">
+    	UPDATE hy_video
+    	<set>
+            <if test="typeName != null and typeName != ''">typeName=#{typeName},</if>
+            <if test="title != null and title != ''">title=#{title},</if>
+            <if test="imagePath != null and imagePath != ''">imagePath=#{imagePath},</if>
+			<if test="articleContent != null and articleContent != ''">articleContent=#{articleContent},</if>
+            <if test="videoUrl != null and videoUrl != ''">videoUrl=#{videoUrl},</if>
+            <if test="viewNum != null and viewNum != ''">viewNum=viewNum+1,</if>
+            <if test="shareNum != null and shareNum != ''">shareNum=shareNum+${shareNum},</if>
+			<if test="pushTime != null and pushTime != ''">pushTime=#{pushTime},</if>
+        </set>
+		WHERE id=#{id}
+    </update>
+    <delete id="video_delete" parameterType="video">
+    	DELETE FROM hy_video WHERE id=#{id}
+    </delete>
+</mapper>

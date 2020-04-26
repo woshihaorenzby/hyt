@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="notice">
+	<select id="notice_count" parameterType="searchPageUtil" resultType="int">
+    	SELECT count(*) FROM bs_notice
+    </select>
+    <select id="notice_pageList" parameterType="searchPageUtil" resultType="notice">
+    	SELECT * FROM bs_notice  
+    	ORDER BY id DESC LIMIT ${startRow},${page.pageRecordCount}
+    </select>
+    <select id="notice_select" parameterType="notice" resultType="notice">
+    	SELECT id, title, content, DATE_FORMAT(createTime, '%Y-%m-%d %H:%i') AS createTime, display FROM bs_notice WHERE display='1' ORDER BY id DESC
+    </select>
+    <select id="noticedetail_select" parameterType="notice" resultType="notice">
+    	SELECT id, title, content, DATE_FORMAT(createTime, '%Y-%m-%d %H:%i') AS createTime, display FROM bs_notice WHERE id=#{id} AND display='1'
+    </select>
+    <select id="topnotice_select" parameterType="notice" resultType="notice">
+    	SELECT * FROM bs_notice WHERE display='1' ORDER BY id DESC LIMIT 0,1
+    </select>
+     <insert id="notice_insert" parameterType="notice">
+    	INSERT INTO bs_notice 
+    	(title, content, createTime, display) 
+    	VALUES 
+    	(#{title}, #{content}, NOW(), '0')
+    </insert>
+    <update id="notice_update" parameterType="notice">
+    	UPDATE bs_notice SET 
+    	title=#{title}, 
+    	content=#{content}
+		WHERE id=#{id} 
+    </update>
+    <delete id="notice_delete" parameterType="notice">
+    	DELETE FROM bs_notice WHERE id=#{id}
+    </delete>
+</mapper>

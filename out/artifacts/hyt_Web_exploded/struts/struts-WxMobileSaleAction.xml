@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="wxMobileSale" namespace="/wxMobileSale" extends="all-interceptors">
+		<action name="*" class="com.xuri.main.wxMobileSale.action.WxMobileSaleAction" method="{1}">
+			<result name="show">/WEB-INF/jsp/video/mobileSale.jsp</result>
+			<result name="editPage">/WEB-INF/jsp/video/mobileSaleEdit.jsp</result>
+			<result name="wxVideo">/WEB-INF/jsp/wx/video.jsp</result>
+			<result name="wxMobileSaleDetail">/WEB-INF/jsp/wx/video/wxMobileSaleDetail.jsp</result>
+			<result name="wxMobileSaleList" type="json">
+				<param name="root">mobileSaleList</param>
+			</result>
+		</action>
+	</package>
+</struts>

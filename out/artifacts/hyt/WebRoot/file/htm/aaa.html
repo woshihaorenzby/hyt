@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>多个input自动获取下一个input焦点</title>
+    <style>
+    #wrap {
+        margin: 50px auto;
+        width: 300px;
+        text-align: center;
+    }
+ 
+    #wrap div{
+        width: 206px;
+        margin: 10px auto;
+    }
+ 
+    #wrap div input[type=text] {
+        width: 30px;
+        height: 20px;
+        float: left;
+        text-align: center;
+    }
+    </style>
+</head>
+ 
+<body>
+    <div id="wrap">
+        <div>
+            <input type="text" />
+            <input type="text" />
+            <input type="text" />
+            <input type="text" />
+            <input type="text" />
+            <input type="text" />
+        </div>
+        <div>
+            <p>每个输入框只能输入一位 输入完成自动聚焦下一输入框</p>
+        </div>
+    </div>
+    <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        var txts = $("#wrap input");
+        for (var i = 0; i < txts.length; i++) {
+            var t = txts[i];
+            t.index = i;
+            t.setAttribute("readonly", true);
+            t.onkeyup = function() {
+                this.value = this.value.replace(/^(.).*$/, '$1');
+                var next = this.index + 1;
+                if (next > txts.length - 1) return;
+                txts[next].removeAttribute("readonly");
+                txts[next].focus();
+            }
+        }
+        txts[0].removeAttribute("readonly");
+    });
+    </script>
+</body>
+ 
+</html>

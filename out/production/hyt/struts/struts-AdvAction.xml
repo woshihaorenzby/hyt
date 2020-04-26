@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="adv" namespace="/adv" extends="all-interceptors">
+		<action name="*" class="com.xuri.main.adv.action.AdvAction" method="{1}">
+			<result name="showMod">/WEB-INF/jsp/video/advList.jsp</result>
+			<result name="advModList" type="json">
+				<param name="root">advModList</param>
+			</result>
+			<result name="wxAdv">/WEB-INF/jsp/wx/adv.jsp</result>
+			<result name="wxAdvEdit">/WEB-INF/jsp/wx/adv/advAdd.jsp</result>
+			<result name="wxCutImg">/WEB-INF/jsp/wx/adv/cartImg.jsp</result>
+		</action>
+	</package>
+</struts>

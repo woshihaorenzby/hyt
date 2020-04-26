@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="help" namespace="/help" extends="all-interceptors">
+		<action name="*" class="com.xuri.main.system.action.HelpAction" method="{1}">
+			<result name="show">/WEB-INF/jsp/hysystem/helpList.jsp</result>
+			<result name="editPage">/WEB-INF/jsp/hysystem/helpEdit.jsp</result>
+			<result name="wxHelp">/WEB-INF/jsp/wx/mine/help.jsp</result>
+		</action>
+	</package>
+</struts>

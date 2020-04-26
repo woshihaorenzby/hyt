@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="advice" namespace="/advice" extends="all-interceptors">
+		<action name="*" class="com.xuri.main.system.action.AdviceAction" method="{1}">
+			<result name="show">/WEB-INF/jsp/hysystem/adviceList.jsp</result>
+			<result name="wxAdvice">/WEB-INF/jsp/wx/mine/advice.jsp</result>
+		</action>
+	</package>
+</struts>

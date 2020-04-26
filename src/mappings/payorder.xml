@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="payorder">
+	<select id="payorder_count" parameterType="searchPageUtil" resultType="int">
+    	SELECT count(*) FROM hy_payorder
+    </select>
+    <select id="payorder_pageList" parameterType="searchPageUtil" resultType="payorder">
+    	SELECT h.*, u.niName FROM hy_payorder h 
+    	LEFT JOIN hy_user u ON u.id=h.userId ORDER BY id DESC LIMIT ${startRow},${page.pageRecordCount}
+    </select>
+    <insert id="payorder_insert" parameterType="payorder">
+    	INSERT INTO hy_payorder (prepayId, payMoney, memLevel, userId, createTime) 
+    	VALUES (#{prepayId}, #{payMoney}, #{memLevel}, #{userId}, NOW())
+	</insert>
+	<select id="fanorder_count" parameterType="searchPageUtil" resultType="int">
+    	SELECT count(*) FROM hy_fanorder
+    	<where>
+    		1=1
+    		<if test="object !=null and object.fanType != null and object.fanType != ''">
+				AND fanType=#{object.fanType}
+			</if>
+			<if test="object !=null and object.toUserId != null and object.toUserId != ''">
+				AND toUserId=#{object.toUserId}
+			</if>
+    	</where>
+    </select>
+    <select id="fanorder_pageList" parameterType="searchPageUtil" resultType="fanorder">
+    	SELECT * FROM hy_fanorder
+    	<where>
+    		1=1
+    		<if test="object !=null and object.fanType != null and object.fanType != ''">
+				AND fanType=#{object.fanType}
+			</if>
+			<if test="object !=null and object.toUserId != null and object.toUserId != ''">
+				AND toUserId=#{object.toUserId}
+			</if>
+    	</where>
+    	ORDER BY id DESC LIMIT ${startRow},${page.pageRecordCount}
+    </select>
+    <select id="totfanmoney_int" parameterType="user" resultType="int">
+    	 SELECT (CASE WHEN SUM(fanMoney) IS NULL THEN 0 ELSE SUM(fanMoney) END) AS CON FROM hy_fanorder WHERE fanType=#{fanType} AND toUserId=#{toUserId}
+    </select>
+	<insert id="fanorder_insert" parameterType="fanorder">
+    	INSERT INTO hy_fanorder (fanType, fanMoney, toUserId, userId, createTime) 
+    	VALUES (#{fanType}, #{fanMoney}, #{toUserId}, #{userId}, NOW())
+	</insert>
+</mapper>
