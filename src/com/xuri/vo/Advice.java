@@ -7,6 +7,9 @@ package com.xuri.vo;
 public class Advice {
 	private String id;
 	private String content;
+	private String saler;
+	private String needContent;
+	private String contactInformation;
 	private String userId;
 	private String createTime;
 	public String getId() {
@@ -32,5 +35,23 @@ public class Advice {
 	}
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
+	}
+	public String getSaler() {
+		return saler;
+	}
+	public void setSaler(String saler) {
+		this.saler = saler;
+	}
+	public String getNeedContent() {
+		return needContent;
+	}
+	public void setNeedContent(String needContent) {
+		this.needContent = needContent;
+	}
+	public String getContactInformation() {
+		return contactInformation;
+	}
+	public void setContactInformation(String contactInformation) {
+		this.contactInformation = contactInformation;
 	}
 }

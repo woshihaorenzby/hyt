@@ -46,7 +46,6 @@ public class AdviceAction extends BaseAction {
 	 */
 	public String save() {
 		try {
-			advice.setUserId(request.getSession().getAttribute("id").toString());
 			baseService.insert(advice);
 			messageVo.setCode("1");
 		} catch (Exception e) {

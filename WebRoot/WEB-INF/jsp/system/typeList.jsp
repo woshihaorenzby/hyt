@@ -145,11 +145,18 @@ function deleteOrder(obj) {
 }
 function updateOrder(obj) {
 	selId = $(obj).parent().parent().attr("id");
+	let typeImg = $(obj).parent().parent().attr("typeImg");
+	cxtPath+ typeImg
 	$("#typeName").val($(obj).parent().parent().children().eq(1).text());
-	$("#imagePath").attr("filePath", $(obj).parent().parent().attr("typeImg"));
-	$("#rid").val($(obj).parent().parent().children().eq(6).text());
+	$("#imagePath").attr("filePath",typeImg);
+	$("#imagePathImg").attr("src", cxtPath+typeImg);
+	$("#rid").val($(obj).parent().parent().children().eq(4).text());
 	$("#webUrl").val($(obj).parent().parent().children().eq(3).text());
+	var appStr = "<div class='delault-image' style='float:left;margin-left:10px;' imgfile='"+typeImg+"'><img src='"+ctxPath+typeImg+"' style='position:absolute;margin-top:0px;margin-left:180px;width:18px;cursor:pointer;' onclick='removeImg(this)'/><img src='"+ctxPath+typeImg+"' style='width:200px;' /></div>";
+	$(".delault-image").remove();
+	$(".form-group").append(appStr);
 	$("#dialog-edit").dialog("option", "title", "修改类别").dialog("open");
+
 }
 //上传图片
 
@@ -230,17 +237,15 @@ function uploadHtml(fileType, obj){
 			<td class="table_text" style="vertical-align : middle;">跳转外链：</td>
 			<td class="table_textright">
 				<form>
-					<div class="form-group">
-						<input id="htmlFile" name="file" class="form-control" type="file" style="width:300px;float:left;" value="<s:property value="type.webUrl"/>">
-						<input id="webUrl" name="file" type="hidden" value="<s:property value="type.webUrl" />">
-						<button id="htmlPath" filePath="" type="button" class="btn btn-info btn-sm" onclick="uploadHtml('html', this)" style="margin-left:10px;"><span class="glyphicon glyphicon-upload"></span>&nbsp;<strong>上传</strong></button>
+					<div >
+						<input id="webUrl" class="form-control" name="file" type="text" value="<s:property value="type.webUrl" />">
 					</div>
 				</form>
 			</td>
 		</tr>
 		<tr>
-			<td class="table_text">排序：</td>
-			<td><input id="rid" class="form-control" type="text" style="width:100px;float:left;" value="<s:property value="lunimg.rid" />" onkeyup="value=value.replace(/[^0-9]/g,'')" onblur="value=value.replace(/[^0-9]/g,'')" onpaste="value=value.replace(/[^0-9]/g,'')" oncontextmenu="return false"></td>
+			<td class="table_text"><s:property value="type.rid" />排序：</td>
+			<td><input id="rid" class="form-control" type="text" style="width:100px;float:left;"  value="<s:property value="type.rid" />"  onkeyup="value=value.replace(/[^0-9]/g,'')" onblur="value=value.replace(/[^0-9]/g,'')" onpaste="value=value.replace(/[^0-9]/g,'')" oncontextmenu="return false"></td>
 		</tr>
 	</table>
 </div>

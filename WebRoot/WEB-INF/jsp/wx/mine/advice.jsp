@@ -32,19 +32,42 @@ String path = request.getContextPath();
 </style>
 <script>
 function save() {
+	var saler = $("#saler").val();
 	var content = $("#content").val();
+	var needContent = $("#needContent").val();
+	var contactInformation = $("#contactInformation").val();
+	if(saler.length == 0) {
+		alert("请填写业务员");
+		return;
+	}
 	if(content.length == 0) {
-		alert("请填写反馈内容");
+		alert("请填写投诉内容或建议");
+		return;
+	}
+	if(needContent.length == 0) {
+		alert("请填写您的诉求");
+		return;
+	}
+	if(contactInformation.length == 0) {
+		alert("请留下您的联系方式");
 		return;
 	}
 	$.ajax({
 		type: "post",
 		url: "<%=path%>/advice/save",
 		dataType: "json",
-		data: "advice.content=" + content,
+		data: {
+			"advice.saler":saler,
+			"advice.content":content,
+			"advice.needContent":needContent,
+			"advice.contactInformation":contactInformation,
+		},
 		success: function(data){
 			if(data.code == "1"){
 				$("#content").val("");
+				$("#saler").val("");
+				$("#needContent").val("");
+				 $("#contactInformation").val("");
 				msgSuccess("反馈成功！");
 			}else{
 				msgError("反馈失败，请稍后重试！");
@@ -59,11 +82,25 @@ function save() {
 </head>
 <body style="background:#F3F3F3;padding:0px 15px 15px 15px;margin:0px;">
 	<div class="index_tou">
-	    <p>反馈意见<a href="javascript:history.go(-1)"><img src="<%=path%>/images/last_icon.png" class="index_tou_img3" /></a></p>
+	    <p>投诉建议<a href="javascript:history.go(-1)"><img src="<%=path%>/images/last_icon.png" class="index_tou_img3" /></a></p>
 	</div>
 	<div class="h60"></div>
-	<span style="font-size:1em;">内容描述</span>
+	<span style="font-size:1em; ">1、您是找哪个业务员购买的
+		<i style="font-size:1.5em; font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;color: #9c0009">*</i>
+	</span>
+	<textarea id="saler" style="margin-top:10px;width:98%;height:30px;border:1px solid #cbcbcb"></textarea>
+	<span style="font-size:1em; ">2、投诉内容或建议
+		<i style="font-size:1.5em; font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;color: #9c0009">*</i>
+	</span>
 	<textarea id="content" style="margin-top:10px;width:98%;height:100px;border:1px solid #cbcbcb"></textarea>
+	<span style="font-size:1em; ">3、您的诉求
+		<i style="font-size:1.5em; font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;color: #9c0009">*</i>
+	</span>
+	<textarea id="needContent" style="margin-top:10px;width:98%;height:100px;border:1px solid #cbcbcb"></textarea>
+	<span style="font-size:1em; ">4、留下您的联系方式
+		<i style="font-size:1.5em; font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;color: #9c0009">*</i>
+	</span>
+	<textarea id="contactInformation" style="margin-top:10px;width:98%;height:100px;border:1px solid #cbcbcb"></textarea>
 	<a href="javascript:void(0)" class="sub" onclick="save()">提交</a>
 </body>
 </html>

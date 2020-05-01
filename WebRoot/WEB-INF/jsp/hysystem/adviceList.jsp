@@ -44,8 +44,11 @@ function loadData(curPage, refTag){
 			var appStr = "";
 			for(var i=0; i<data.length; i++){
 				appStr += "<tr id='"+data[i].id+"' onmouseover='mouseon(this)' onmouseout='mouseout(this)'>";
-				appStr += "<td>"+((curPage-1)*pageRecordCount+i+1)+"</td>";
+				appStr += "<td>"+((curPage-1)*pageRecordCount+i+)+"</td>";
+				appStr += "<td>"+data[i].saler+"</td>";
 				appStr += "<td>"+data[i].content+"</td>";
+				appStr += "<td>"+data[i].needContent+"</td>";
+				appStr += "<td>"+data[i].contactInformation+"</td>";
 				appStr += "<td>"+data[i].createTime+"</td>";
 				appStr += "<td><button onclick='deleteOrder(this)' type='button' class='btn btn-info btn-xs'>删除</button></td></tr>";
 			}
@@ -107,9 +110,16 @@ function deleteOrder(obj) {
 	<table class="table" style="margin-top:5px;">
 		<thead class="table_th">
 			<tr>
+<%--				"advice.saler":saler,--%>
+<%--				"advice.content":content,--%>
+<%--				"advice.needContent":needContent,--%>
+<%--				"advice.contactInformation":contactInformation,--%>
 				<th style="width:5%;">编号</th>
-				<th style="width:60%;">反馈内容</th>
-				<th style="width:20%;">创建时间</th>
+				<th style="width:20%;">业务员</th>
+				<th style="width:20%;">投诉内容或建议</th>
+				<th style="width:20%;">诉求</th>
+				<th style="width:20%;">联系方式</th>
+				<th style="width:20%;">时间</th>
 				<th style="width:15%;">操作</th>
 			</tr>
 		</thead>

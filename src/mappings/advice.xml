@@ -10,7 +10,8 @@
     	SELECT * FROM bs_advice ORDER BY id DESC LIMIT ${startRow},${page.pageRecordCount}
     </select>
     <insert id="advice_insert" parameterType="advice">
-    	INSERT INTO bs_advice (content, userId, createTime) VALUES (#{content}, #{userId}, NOW())
+
+    	INSERT INTO bs_advice (content, userId, createTime,contactInformation,saler,needContent) VALUES (#{content}, #{userId}, NOW(), #{contactInformation}, #{saler}, #{needContent})
     </insert>
     <delete id="advice_delete" parameterType="advice">
     	DELETE FROM bs_advice WHERE id=#{id}

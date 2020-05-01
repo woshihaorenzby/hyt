@@ -80,7 +80,8 @@ $(function () {
                 var num = data.length/2;
                 num = num.toFixed(0);
                 itemnum = num;
-                $(".tuiguang_xuanxiang").css("width", (num*meiWid)+20+"px");
+                var w = ((num*meiWid)+20)>$(".tuiguang_xuanxiang").parent().width()?((num*meiWid)+20+"px"):"100%";
+                $(".tuiguang_xuanxiang").css("width",w);
                 var chw = ((pinWidth*100/num*meiWid)).toFixed(0);
                 if(chw<1){
                     chw = 1;
@@ -207,7 +208,7 @@ function showDetail(url) {
     window.open(url, "_self");
 }
 function gotoTypeUrl(typeName, webUrl) {
-    window.open("<%=path%>/wxMobileSale/wxGoToHtml?typeName="+webUrl, "_self");
+    window.open(webUrl, "_self");
     // if(webUrl=="") {
     // } else {
     //     window.open(webUrl, "_self");
