@@ -34,7 +34,7 @@ $(function(){
 function loadData(curPage, refTag){
 	$.ajax({
 		type:"post",
-		url: "<%=path%>/advice/list",
+		url: "<%=path%>/cooperation/list",
 		dataType:"json",
 		data:"page.curPage=" + curPage + "&page.pageRecordCount="+pageRecordCount,
 		success:function(json){
@@ -45,10 +45,10 @@ function loadData(curPage, refTag){
 			for(var i=0; i<data.length; i++){
 				appStr += "<tr id='"+data[i].id+"' onmouseover='mouseon(this)' onmouseout='mouseout(this)'>";
 				appStr += "<td>"+((curPage-1)*pageRecordCount+i+1)+"</td>";
-				appStr += "<td>"+data[i].saler+"</td>";
+				appStr += "<td>"+data[i].company+"</td>";
 				appStr += "<td>"+data[i].content+"</td>";
-				appStr += "<td>"+data[i].needContent+"</td>";
-				appStr += "<td>"+data[i].contactInformation+"</td>";
+				appStr += "<td>"+data[i].cooperationer+"</td>";
+				appStr += "<td>"+data[i].mobile+"</td>";
 				appStr += "<td>"+data[i].createTime+"</td>";
 				appStr += "<td><button onclick='deleteOrder(this)' type='button' class='btn btn-info btn-xs'>删除</button></td></tr>";
 			}
@@ -111,10 +111,10 @@ function deleteOrder(obj) {
 		<thead class="table_th">
 			<tr>
 				<th style="width:5%;">编号</th>
-				<th style="width:20%;">业务员</th>
-				<th style="width:20%;">投诉内容或建议</th>
-				<th style="width:20%;">诉求</th>
-				<th style="width:20%;">联系方式</th>
+				<th style="width:20%;">企业名称</th>
+				<th style="width:20%;">合作方案说明</th>
+				<th style="width:20%;">项目联系人</th>
+				<th style="width:20%;">项目联系方式</th>
 				<th style="width:20%;">时间</th>
 				<th style="width:15%;">操作</th>
 			</tr>
