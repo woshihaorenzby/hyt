@@ -78,5 +78,6 @@
 	<include file="struts/struts-AdvAction.xml" />
 	<include file="struts/struts-ShareAction.xml" />
 	<include file="struts/struts-WxMobileSaleAction.xml" />
+	<include file="struts/struts-CooperationAction.xml" />
 
 </struts>

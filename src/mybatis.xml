@@ -25,6 +25,7 @@
         <typeAlias alias="hyUserStat" type="com.xuri.vo.HyUserStat"/>
         <typeAlias alias="advMod" type="com.xuri.vo.AdvMod"/>
         <typeAlias alias="wxMobileSale" type="com.xuri.vo.WxMobileSale"/>
+        <typeAlias alias="cooperation" type="com.xuri.vo.Cooperation"/>
     </typeAliases>
     
 	<mappers>
@@ -46,5 +47,6 @@
 		<mapper resource="mappings/hyview.xml"/>
 		<mapper resource="mappings/tiorder.xml"/>
         <mapper resource="mappings/wxMobileSale.xml"/>
+        <mapper resource="mappings/cooperation.xml"/>
 	</mappers>
 </configuration>
