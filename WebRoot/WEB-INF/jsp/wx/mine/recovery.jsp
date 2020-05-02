@@ -32,26 +32,34 @@ String path = request.getContextPath();
 </style>
 <script>
 function save() {
-	var content = $("#content").val();
-	if(content.length == 0) {
-		alert("请填写反馈内容");
+	var saleNumber = $("#saleNumber").val();
+	var details = $("#details").val();
+	var contact = $("#contact").val();
+	if(contact.length == 0) {
+		alert("请留下您的联系方式");
 		return;
 	}
 	$.ajax({
 		type: "post",
-		url: "<%=path%>/advice/save",
+		url: "<%=path%>/recovery/wxSave",
 		dataType: "json",
-		data: "advice.content=" + content,
+		data: {
+			"recovery.saleNumber":saleNumber,
+			"recovery.details":details,
+			"recovery.contact":contact,
+		},
 		success: function(data){
 			if(data.code == "1"){
-				$("#content").val("");
-				msgSuccess("反馈成功！");
+				$("#saleNumber").val("");
+				$("#details").val("");
+				$("#contact").val("");
+				msgSuccess("提交成功！");
 			}else{
-				msgError("反馈失败，请稍后重试！");
+				msgError("提交失败，请稍后重试！");
 			}
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
-			msgError("反馈失败，请稍后重试！");
+			msgError("提交失败，请稍后重试！");
 		}
 	});
 }
@@ -59,11 +67,25 @@ function save() {
 </head>
 <body style="background:#F3F3F3;padding:0px 15px 15px 15px;margin:0px;">
 	<div class="index_tou">
-	    <p>反馈意见<a href="javascript:history.go(-1)"><img src="<%=path%>/images/last_icon.png" class="index_tou_img3" /></a></p>
+	    <p>靓号回收<a href="javascript:history.go(-1)"><img src="<%=path%>/images/last_icon.png" class="index_tou_img3" /></a></p>
 	</div>
 	<div class="h60"></div>
-	<span style="font-size:1em;">内容描述</span>
-	<textarea id="content" style="margin-top:10px;width:98%;height:100px;border:1px solid #cbcbcb"></textarea>
+	<span style="font-size:1em; ">手机号码
+	</span>
+	<input placeholder="请填写您要出售的手机号码" type="text" id="saleNumber" style="margin-top:10px;width:98%;height:30px;border:1px solid #cbcbcb">
+	<div style="height:18px"></div>
+	<span style="font-size:1em; ">号码详情
+	</span>
+	<textarea id="details" style="margin-top:10px;width:98%;height:100px;border:1px solid #cbcbcb">
+底消:
+开价:
+详情:
+	</textarea>
+	<div style="height:18px"></div>
+	<span style="font-size:1em; ">联系方式
+		<i style="font-size:1.5em; font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;color: #9c0009">*</i>
+	</span>
+	<input placeholder="请输入您的手机号码" type="text" id="contact" style="margin-top:10px;width:98%;height:30px;border:1px solid #cbcbcb">
 	<a href="javascript:void(0)" class="sub" onclick="save()">提交</a>
 </body>
 </html>

@@ -26,6 +26,7 @@
         <typeAlias alias="advMod" type="com.xuri.vo.AdvMod"/>
         <typeAlias alias="wxMobileSale" type="com.xuri.vo.WxMobileSale"/>
         <typeAlias alias="cooperation" type="com.xuri.vo.Cooperation"/>
+        <typeAlias alias="recovery" type="com.xuri.vo.Recovery"/>
     </typeAliases>
     
 	<mappers>
@@ -48,5 +49,6 @@
 		<mapper resource="mappings/tiorder.xml"/>
         <mapper resource="mappings/wxMobileSale.xml"/>
         <mapper resource="mappings/cooperation.xml"/>
+        <mapper resource="mappings/recovery.xml"/>
 	</mappers>
 </configuration>
