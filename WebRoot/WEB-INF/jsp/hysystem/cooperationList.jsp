@@ -88,8 +88,8 @@ function deleteOrder(obj) {
 	if(window.confirm("您确认要删除这1条信息吗？")) {
 		$.ajax({
 			type: "POST",
-			url: "<%=path%>/advice/delete",
-			data: "advice.id="+id,
+			url: "<%=path%>/cooperation/delete",
+			data: "cooperation.id="+id,
 			success: function(data){
 				if(data.code == "1"){
 					msgSuccessReload("删除成功！");

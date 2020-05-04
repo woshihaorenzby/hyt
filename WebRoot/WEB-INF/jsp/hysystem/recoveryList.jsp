@@ -34,7 +34,7 @@ $(function(){
 function loadData(curPage, refTag){
 	$.ajax({
 		type:"post",
-		url: "<%=path%>/advice/list",
+		url: "<%=path%>/recovery/list",
 		dataType:"json",
 		data:"page.curPage=" + curPage + "&page.pageRecordCount="+pageRecordCount,
 		success:function(json){
@@ -45,7 +45,9 @@ function loadData(curPage, refTag){
 			for(var i=0; i<data.length; i++){
 				appStr += "<tr id='"+data[i].id+"' onmouseover='mouseon(this)' onmouseout='mouseout(this)'>";
 				appStr += "<td>"+((curPage-1)*pageRecordCount+i+1)+"</td>";
-				appStr += "<td>"+data[i].content+"</td>";
+				appStr += "<td>"+data[i].saleNumber+"</td>";
+				appStr += "<td>"+data[i].details+"</td>";
+				appStr += "<td>"+data[i].contact+"</td>";
 				appStr += "<td>"+data[i].createTime+"</td>";
 				appStr += "<td><button onclick='deleteOrder(this)' type='button' class='btn btn-info btn-xs'>删除</button></td></tr>";
 			}
@@ -85,8 +87,8 @@ function deleteOrder(obj) {
 	if(window.confirm("您确认要删除这1条信息吗？")) {
 		$.ajax({
 			type: "POST",
-			url: "<%=path%>/advice/delete",
-			data: "advice.id="+id,
+			url: "<%=path%>/recovery/delete",
+			data: "recovery.id="+id,
 			success: function(data){
 				if(data.code == "1"){
 					msgSuccessReload("删除成功！");
@@ -108,8 +110,10 @@ function deleteOrder(obj) {
 		<thead class="table_th">
 			<tr>
 				<th style="width:5%;">编号</th>
-				<th style="width:60%;">反馈内容</th>
-				<th style="width:20%;">创建时间</th>
+				<th style="width:20%;">手机号码</th>
+				<th style="width:20%;">号码详情</th>
+				<th style="width:20%;">联系方式</th>
+				<th style="width:20%;">时间</th>
 				<th style="width:15%;">操作</th>
 			</tr>
 		</thead>
