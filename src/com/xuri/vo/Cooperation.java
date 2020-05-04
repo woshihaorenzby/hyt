@@ -1,5 +1,7 @@
 package com.xuri.vo;
 
+import java.util.Date;
+
 /**
  * @Title: Advice
  * @Description: TODO 意见反馈
@@ -7,7 +9,7 @@ package com.xuri.vo;
 public class Cooperation {
 	private String id;
 	private String content;
-	private String createTime;
+	private Date createTime;
 	private String company;
 	private String cooperationer;
 	private String mobile;
@@ -28,11 +30,11 @@ public class Cooperation {
 		this.content = content;
 	}
 
-	public String getCreateTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(String createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 

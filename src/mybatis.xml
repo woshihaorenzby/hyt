@@ -27,6 +27,7 @@
         <typeAlias alias="wxMobileSale" type="com.xuri.vo.WxMobileSale"/>
         <typeAlias alias="cooperation" type="com.xuri.vo.Cooperation"/>
         <typeAlias alias="recovery" type="com.xuri.vo.Recovery"/>
+        <typeAlias alias="customized" type="com.xuri.vo.Customized"/>
     </typeAliases>
     
 	<mappers>
@@ -50,5 +51,6 @@
         <mapper resource="mappings/wxMobileSale.xml"/>
         <mapper resource="mappings/cooperation.xml"/>
         <mapper resource="mappings/recovery.xml"/>
+        <mapper resource="mappings/customized.xml"/>
 	</mappers>
 </configuration>

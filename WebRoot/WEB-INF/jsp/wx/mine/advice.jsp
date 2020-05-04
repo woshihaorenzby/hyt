@@ -86,19 +86,19 @@ function save() {
 	</div>
 	<div class="h60"></div>
 	<span style="font-size:1em; ">1、您是找哪个业务员购买的
-		<i style="font-size:1.5em; font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;color: #9c0009">*</i>
+		<i class="notnull">*必填选项</i>
 	</span>
 	<textarea id="saler" style="margin-top:10px;width:98%;height:30px;border:1px solid #cbcbcb"></textarea>
 	<span style="font-size:1em; ">2、投诉内容或建议
-		<i style="font-size:1.5em; font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;color: #9c0009">*</i>
+		<i class="notnull">*必填选项</i>
 	</span>
 	<textarea id="content" style="margin-top:10px;width:98%;height:100px;border:1px solid #cbcbcb"></textarea>
 	<span style="font-size:1em; ">3、您的诉求
-		<i style="font-size:1.5em; font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;color: #9c0009">*</i>
+		<i class="notnull">*必填选项</i>
 	</span>
 	<textarea id="needContent" style="margin-top:10px;width:98%;height:100px;border:1px solid #cbcbcb"></textarea>
 	<span style="font-size:1em; ">4、留下您的联系方式
-		<i style="font-size:1.5em; font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;color: #9c0009">*</i>
+		<i class="notnull">*必填选项</i>
 	</span>
 	<textarea id="contactInformation" style="margin-top:10px;width:98%;height:100px;border:1px solid #cbcbcb"></textarea>
 	<a href="javascript:void(0)" class="sub" onclick="save()">提交</a>

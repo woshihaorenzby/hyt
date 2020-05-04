@@ -80,5 +80,6 @@
 	<include file="struts/struts-WxMobileSaleAction.xml" />
 	<include file="struts/struts-CooperationAction.xml" />
 	<include file="struts/struts-RecoveryAction.xml" />
+	<include file="struts/struts-CustomizedAction.xml" />
 
 </struts>

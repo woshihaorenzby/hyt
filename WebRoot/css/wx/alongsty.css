@@ -77,6 +77,13 @@ ul{ list-style:none;}
 .bg_gold{ background:#ffd700;}
 .bg_silver{ background:#c0c0c0; }
 .bg_gray{ background:#eeeeee;}
+.notnull{
+  font-family: "微软雅黑";
+  font-style: normal;
+  color: red;
+  float: right;
+  font-size: 12px;
+}
 
 
 

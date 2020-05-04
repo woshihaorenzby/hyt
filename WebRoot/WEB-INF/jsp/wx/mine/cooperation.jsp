@@ -87,15 +87,15 @@ function save() {
 	</span>
 		<textarea id="content" style="margin-top:10px;width:98%;height:30px;border:1px solid #cbcbcb"></textarea>
 		<span style="font-size:1em; ">项目简介及初步合作方案说明
-		<i style="font-size:1.5em; font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;color: #9c0009">*</i>
+		<i class="notnull">*必填选项</i>
 	</span>
 		<textarea id="company" style="margin-top:10px;width:98%;height:100px;border:1px solid #cbcbcb"></textarea>
 		<span style="font-size:1em; ">项目联系人姓名
-		<i style="font-size:1.5em; font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;color: #9c0009">*</i>
+		<i class="notnull">*必填选项</i>
 	</span>
 		<textarea id="cooperationer" style="margin-top:10px;width:98%;height:30px;border:1px solid #cbcbcb"></textarea>
 		<span style="font-size:1em; ">项目联系人手机
-		<i style="font-size:1.5em; font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;color: #9c0009">*</i>
+		<i class="notnull">*必填选项</i>
 	</span>
 		<textarea id="mobile" style="margin-top:10px;width:98%;height:30px;border:1px solid #cbcbcb"></textarea>
 		<a href="javascript:void(0)" class="sub" onclick="save()">提交</a>

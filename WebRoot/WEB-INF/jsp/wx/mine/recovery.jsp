@@ -83,7 +83,7 @@ function save() {
 	</textarea>
 	<div style="height:18px"></div>
 	<span style="font-size:1em; ">联系方式
-		<i style="font-size:1.5em; font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;color: #9c0009">*</i>
+		<i class="notnull">*必填选项</i>
 	</span>
 	<input placeholder="请输入您的手机号码" type="text" id="contact" style="margin-top:10px;width:98%;height:30px;border:1px solid #cbcbcb">
 	<a href="javascript:void(0)" class="sub" onclick="save()">提交</a>
