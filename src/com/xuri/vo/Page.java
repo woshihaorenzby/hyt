@@ -20,6 +20,10 @@ public class Page {
 	private int pageSize;
 	/** 查询的数据 */
 	private List<?> data;
+	/** 排序**/
+	private String order="desc";
+	/** 排序字段**/
+	private String orderBy = "id";
 
 	public int getPageRecordCount() {
 		return pageRecordCount;
@@ -61,5 +65,20 @@ public class Page {
 	public void setData(List<?> data) {
 		this.data = data;
 	}
-	
+
+	public String getOrder() {
+		return order;
+	}
+
+	public void setOrder(String order) {
+		this.order = order;
+	}
+
+	public String getOrderBy() {
+		return orderBy;
+	}
+
+	public void setOrderBy(String orderBy) {
+		this.orderBy = orderBy;
+	}
 }

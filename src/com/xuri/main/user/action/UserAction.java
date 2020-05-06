@@ -217,42 +217,9 @@ public class UserAction extends BaseAction {
      */
     public String wxIndex() {
         try {
-//            getSession().setAttribute("id", "62");
-//
-//            if (getSession().getAttribute("id") == null) {// 判断没有登录
-//                user = userService.selectWxLogin(request);
-//            } else {
-//                user = new User();
-//                user.setId(getSession().getAttribute("id").toString());
-//                user = baseService.selectById(user);
-//                baseService.updateCustom("updateUserLogin", user);
-//            }
-//            if (user != null) {
-//                getSession().setAttribute("id", user.getId());
-//                getSession().setAttribute("pid", user.getPid());
-//                getSession().setAttribute("openId", user.getOpenId());
-//                getSession().setAttribute("niName", user.getNiName());
-//                getSession().setAttribute("headimgurl", user.getHeadimgurl());
-//                getSession().setAttribute("point", user.getPoint());
-//                getSession().setAttribute("advShow", user.getAdvShow());
-//                getSession().setAttribute("advClick", user.getAdvClick());
-//            } else {
-//                user = userService.selectWxLogin(request);
-//
-//                getSession().setAttribute("id", user.getId());
-//                getSession().setAttribute("pid", user.getPid());
-//                getSession().setAttribute("openId", user.getOpenId());
-//                getSession().setAttribute("niName", user.getNiName());
-//                getSession().setAttribute("headimgurl", user.getHeadimgurl());
-//                getSession().setAttribute("point", user.getPoint());
-//                getSession().setAttribute("advShow", user.getAdvShow());
-//                getSession().setAttribute("advClick", user.getAdvClick());
-//            }
-//
             Lunimg lunimg = new Lunimg();
             lunimg.setDisplay("1");
             lunimgList = baseService.selectList(lunimg);
-            //notice = noticeService.selectTopNotice();
             Type ty = new Type();
             ty.setTypeLei("1");
             ty.setTopShow("1");
@@ -263,7 +230,25 @@ public class UserAction extends BaseAction {
         }
         return "wxIndex";
     }
-
+    /**
+     * @Description: TODO 微信用户登录跳转首页
+     * @author 王东
+     */
+    public String wxMobile() {
+        try {
+            Lunimg lunimg = new Lunimg();
+            lunimg.setDisplay("1");
+            lunimgList = baseService.selectList(lunimg);
+            Type ty = new Type();
+            ty.setTypeLei("1");
+            ty.setTopShow("1");
+            typeList = baseService.selectList(ty);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error";
+        }
+        return "wxMobile";
+    }
     /**
      * @Description: TODO 首页分类
      * @author 王东

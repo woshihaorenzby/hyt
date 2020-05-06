@@ -23,7 +23,6 @@ public class LogonInterceptor extends AbstractInterceptor {
 
 			}
 			String a = invocation.invoke();
-			System.out.println("a---------------"+a);
 			return a;
 		}catch(Exception e){
 			e.printStackTrace();

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -158,5 +159,16 @@ public class GetWxOrderno {
 	public static InputStream String2Inputstream(String str) {
 		return new ByteArrayInputStream(str.getBytes());
 	}
-
+	public static String extractEn(String s1) {
+		StringBuilder sb = new StringBuilder(s1);
+		IntStream.range(0, s1.length()).forEach(k -> {
+			char c = sb.charAt(k);
+			if (!isChineseChar(c))
+				sb.append(c);
+		});
+		return sb.toString().substring(s1.length(), sb.length());
+	}
+	public static boolean isChineseChar(char c) {
+		return String.valueOf(c).matches("[\u4e00-\u9fa5]");
+	}
 }

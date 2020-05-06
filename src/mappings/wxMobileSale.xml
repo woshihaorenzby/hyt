@@ -19,10 +19,30 @@
 			<if test="object.searchType !=null and object.searchType != '' and object.searchType == 'endNum' and object.mobileNum !=null and object.mobileNum != '' ">
 				AND mobileNum like "%"#{object.mobileNum}
 			</if>
+			<if test="object.operator !=null and object.operator != '' and object.operator != '-1' and object.operator !=-1 ">
+				AND operator = #{object.operator}
+			</if>
+			<if test="object.province !=null and object.province != '' ">
+				AND province = #{object.province}
+			</if>
+			<if test="object.city !=null and object.city != '' ">
+				AND city = #{object.city}
+			</if>
+			<if test="object.endPrice !=null and object.endPrice != '' ">
+				AND price <![CDATA[ < ]]> #{object.endPrice}
+			</if>
+			<if test="object.startPrice !=null and object.startPrice != '' ">
+				AND price <![CDATA[ >= ]]> #{object.startPrice}
+			</if>
 			<if test="object.ids !=null and object.ids != '' ">
 				AND id in
 				<foreach collection="object._ids" item="id" index="index" open="(" close=")" separator=",">
 					#{id}
+				</foreach>
+			</if>
+			<if test="object.preferenceStr !=null and object.preferenceStr != '' ">
+				<foreach collection="object.preference" item="preference" index="index" >
+					AND mobileNum not like	 "%"#{preference}"%"
 				</foreach>
 			</if>
 		</where>
@@ -43,10 +63,30 @@
 			<if test="object.searchType !=null and object.searchType != '' and object.searchType == 'endNum' and object.mobileNum !=null and object.mobileNum != '' ">
 				AND mobileNum like "%"#{object.mobileNum}
 			</if>
+			<if test="object.operator !=null and object.operator != '' and object.operator != '-1' and object.operator !=-1 ">
+				AND operator = #{object.operator}
+			</if>
+			<if test="object.province !=null and object.province != '' ">
+				AND province = #{object.province}
+			</if>
+			<if test="object.city !=null and object.city != '' ">
+				AND city = #{object.city}
+			</if>
+			<if test="object.endPrice !=null and object.endPrice != '' ">
+				AND price <![CDATA[ < ]]> #{object.endPrice}
+			</if>
+			<if test="object.startPrice !=null and object.startPrice != '' ">
+				AND price <![CDATA[ >= ]]> #{object.startPrice}
+			</if>
 			<if test="object.ids !=null and object.ids != '' ">
 				AND id in
 				<foreach collection="object._ids" item="id" index="index" open="(" close=")" separator=",">
 					#{id}
+				</foreach>
+			</if>
+			<if test="object.preferenceStr !=null and object.preferenceStr != '' ">
+				<foreach collection="object.preference" item="preference" index="index" >
+					AND mobileNum not like	 "%"#{preference}"%"
 				</foreach>
 			</if>
 		</where>
@@ -70,14 +110,37 @@
 			<if test="object.searchType !=null and object.searchType != '' and object.searchType == 'endNum' and object.mobileNum !=null and object.mobileNum != '' ">
 				AND mobileNum like "%"#{object.mobileNum}
 			</if>
+			<if test="object.operator !=null and object.operator != '' and object.operator != '-1' and object.operator !=-1 ">
+				AND operator = #{object.operator}
+			</if>
+			<if test="object.province !=null and object.province != '' ">
+				AND province = #{object.province}
+			</if>
+			<if test="object.city !=null and object.city != '' ">
+				AND city = #{object.city}
+			</if>
+			<if test="object.endPrice !=null and object.endPrice != '' ">
+				AND price <![CDATA[ < ]]> #{object.endPrice}
+			</if>
+			<if test="object.startPrice !=null and object.startPrice != '' ">
+				AND price <![CDATA[ >= ]]> #{object.startPrice}
+			</if>
 			<if test="object.ids !=null and object.ids != '' ">
 				AND id in
 				<foreach collection="object._ids" item="id" index="index" open="(" close=")" separator=",">
 					#{id}
 				</foreach>
 			</if>
+			<if test="object.preferenceStr !=null and object.preferenceStr != '' ">
+				<foreach collection="object.preference" item="preference" index="index" >
+					AND mobileNum not like	 "%"#{preference}"%"
+				</foreach>
+			</if>
 		</where>
-		ORDER BY s.id DESC LIMIT ${startRow},${page.pageRecordCount}
+		<if test="page.orderBy !=null and page.orderBy != '' and page.order !=null and page.order != '' ">
+			ORDER BY #{page.orderBy} #{page.order}
+		</if>
+		 LIMIT ${startRow},${page.pageRecordCount}
 	</select>
 	<select id="wxmobilesaledetail_select" parameterType="wxMobileSale" resultType="wxMobileSale">
     	SELECT * FROM sy_wx_mobile_sale
@@ -133,11 +196,12 @@
 			<if test="telephoneBill != null and telephoneBill != ''">telephoneBill=#{telephoneBill},</if>
 			<if test="minimumConsumption != null and minimumConsumption != ''">minimumConsumption=#{minimumConsumption},</if>
 			<if test="details != null and details != ''">details=#{details},</if>
+			<if test="operator != null and operator != ''">operator=#{operator},</if>
 		</set>
 		WHERE id=#{id}
 	</update>
 	<insert id="wxmobilesale_insert" parameterType="wxMobileSale">
-    	INSERT INTO sy_wx_mobile_sale (province,city,price,mobileNum,telephoneBill,minimumConsumption,hasSale,details) VALUES
-    	(#{province},#{city},#{price},#{mobileNum},#{telephoneBill},#{minimumConsumption},#{hasSale},#{details})
+    	INSERT INTO sy_wx_mobile_sale (province,city,price,mobileNum,telephoneBill,minimumConsumption,hasSale,details,operator) VALUES
+    	(#{province},#{city},#{price},#{mobileNum},#{telephoneBill},#{minimumConsumption},#{hasSale},#{details},#{operator})
     </insert>
 </mapper>

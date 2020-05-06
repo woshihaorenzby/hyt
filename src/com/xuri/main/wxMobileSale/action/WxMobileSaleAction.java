@@ -1,6 +1,7 @@
 package com.xuri.main.wxMobileSale.action;
 
 import com.xuri.main.video.service.VideoService;
+import com.xuri.main.wx.utils.GetWxOrderno;
 import com.xuri.system.service.BaseService;
 import com.xuri.util.*;
 import com.xuri.vo.*;
@@ -28,6 +29,7 @@ public class WxMobileSaleAction extends BaseAction {
     private String typeName;
     private String redirectURL;
 
+
     @Autowired
     private BaseService baseService;
     @Autowired
@@ -39,8 +41,7 @@ public class WxMobileSaleAction extends BaseAction {
 
     public String editPage() {
         try {
-//            type.setHasSale("1");
-//            wxMobileSale = baseService.selectList(type);
+
             if (mobileSale.getId() != null && mobileSale.getId().length() > 0) {
                 mobileSale = baseService.selectById(mobileSale);
             }
@@ -138,6 +139,15 @@ public class WxMobileSaleAction extends BaseAction {
                 page = new Page();
             if(mobileSale.getIds()!=null&mobileSale.getIds()!=""){
                 mobileSale.set_ids(Arrays.asList(mobileSale.getIds().split(",")));
+            }
+            mobileSale.getPreference();
+            String law = mobileSale.getLaw();
+            if(law!=null){
+                if(law.contains("中间")){
+
+                }
+                String l = GetWxOrderno.extractEn(law);
+
             }
             page = baseService.selectPageList(page, mobileSale);
             mobileSaleList = (List<WxMobileSale>) page.getData();
@@ -272,5 +282,6 @@ public class WxMobileSaleAction extends BaseAction {
     public void setRedirectURL(String redirectURL) {
         this.redirectURL = redirectURL;
     }
+
 }
 

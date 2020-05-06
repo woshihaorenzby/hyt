@@ -27,6 +27,15 @@ public class WxMobileSale {
     private List<String> _ids;
     //详细信息
     private String details;
+    //0移动，1联通，2电信，3虚商
+    private String operator;
+    private Double startPrice;
+    private Double endPrice;
+    private String preferenceStr;
+    private List<String> preference;
+    private List<String> dobleLikeLaw;
+    private List<String> startLikeLaw;
+    private String law;
     public String getId() {
         return id;
     }
@@ -99,6 +108,14 @@ public class WxMobileSale {
         this.searchType = searchType;
     }
 
+    public String getOperator() {
+        return operator;
+    }
+
+    public void setOperator(String operator) {
+        this.operator = operator;
+    }
+
     public String getIds() {
         return ids;
     }
@@ -124,5 +141,64 @@ public class WxMobileSale {
 
     public void setDetails(String details) {
         this.details = details;
+    }
+
+    public Double getStartPrice() {
+        return startPrice;
+    }
+
+    public void setStartPrice(Double startPrice) {
+        this.startPrice = startPrice;
+    }
+
+    public Double getEndPrice() {
+        return endPrice;
+    }
+
+    public void setEndPrice(Double endPrice) {
+        this.endPrice = endPrice;
+    }
+
+    public String getPreferenceStr() {
+        return preferenceStr;
+    }
+
+    public void setPreferenceStr(String preferenceStr) {
+        this.preferenceStr = preferenceStr;
+    }
+
+    public List<String> getPreference() {
+        if(preferenceStr!=null&&preferenceStr!=""){
+            preference = Arrays.asList(preferenceStr.split(","));
+        }
+        return preference;
+    }
+
+    public void setPreference(List<String> preference) {
+        this.preference = preference;
+    }
+
+    public List<String> getDobleLikeLaw() {
+        return dobleLikeLaw;
+    }
+
+    public void setDobleLikeLaw(List<String> dobleLikeLaw) {
+        this.dobleLikeLaw = dobleLikeLaw;
+    }
+
+    public List<String> getStartLikeLaw() {
+        return startLikeLaw;
+    }
+
+    public void setStartLikeLaw(List<String> startLikeLaw) {
+        this.startLikeLaw = startLikeLaw;
+    }
+
+    public String getLaw() {
+        return law;
+    }
+
+    public void setLaw(String law) {
+        this.law = law;
     }
 }

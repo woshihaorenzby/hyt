@@ -24,29 +24,6 @@
     body {
         background: #F3F3F3;
     }
-
-    .wode_p1 {
-        height: 30px;
-        max-height: 30px;
-        line-height: 30px;
-        margin-top: 5px;
-    }
-
-    .wode_p2 {
-        height: 30px;
-        max-height: 30px;
-        line-height: 30px;
-    }
-
-    #FontScroll {
-        width: 100%;
-        height: 40px;
-        line-height: 40px;
-        overflow: hidden;
-        margin: 0 auto;
-        color: #595959;
-        text-align: center;
-    }
 </style>
 <script type="text/javascript">
 var curPage = 1;
@@ -58,7 +35,6 @@ var itemnum = 0;
 var searchType = "scalNum";
 var number="";
 $(function () {
-    console.log("load------4")
     loadData();
     $(window).bind("scroll",col_scroll);
     $.ajax({
@@ -100,13 +76,11 @@ $(function () {
 function  searchNum(e) {
     console.log(e);
     curPage= 1;
-    console.log("load------1")
     loadData(number,searchType);
      $("#ulid").empty();
 }
 function  resetNum(e) {
     curPage= 1;
-    // $("input[type='tel']").val("");
     if(searchType=="scalNum"){
         var txts = $(".accurate input");
         for (var i = 1; i < txts.length; i++) {
@@ -121,7 +95,6 @@ function  resetNum(e) {
         txts.val("");
     }
     number = "";
-    console.log("load------2")
     loadData();
     $("#ulid").empty();
 }
@@ -129,7 +102,6 @@ function loadData() {
     if(searchType=="scalNum"){
         var txts = $(".accurate input");
         number = "1";
-        console.log("txts---------"+txts.length);
         for (var i = 1; i < txts.length; i++) {
             var t = $(txts[i]).val();
             if(t!=null&&t!=""){
@@ -164,9 +136,6 @@ function loadData() {
                     appStr += "<ul >";
                     appStr += "<a href=\"javascript:;\" onclick=\"showDetail('<%=path%>/wxMobileSale/wxMobileSaleDetail?mobileSale.id="+data[i].id+"')\">";
                     appStr += "<li style='height: 8.533vw'>";
-                    <%--appStr += "<img src=\"<%=path%>" + data[i].imagePath + "\" />";--%>
-                    /* appStr += "<p class=\"index_p1\">" + data[i].mobileNum + "</p>";
-                     appStr += "<p class=\"index_p1\">" + data[i].province+data[i].city + "</p>";*/
                     appStr += "<span class=\"index_p1\" style=\"left:23%;\">";
                     appStr += "<span style=\"margin-left:10px;\">" + data[i].mobileNum + "</span>";
                     appStr += "</span>";
@@ -183,9 +152,7 @@ function loadData() {
                     appStr += "</a>";
                     appStr += "</ul>";
                 }
-                // $("#ulid").empty();
                 $("#ulid").append(appStr);
-                //00000000000000000000000000000000
             }else{
                 var noMuch =   $("#noMuch");
                 if(noMuch==null){
@@ -201,7 +168,6 @@ function loadData() {
 function findData(){
     curPage++;
     upload = false;
-    console.log("load------3")
     loadData();
 }
 function showDetail(url) {
@@ -209,10 +175,6 @@ function showDetail(url) {
 }
 function gotoTypeUrl(typeName, webUrl) {
     window.open(webUrl, "_self");
-    // if(webUrl=="") {
-    // } else {
-    //     window.open(webUrl, "_self");
-    // }
 }
 var col_scroll = function(){
     if(($(document).height() -$(window).height()) == ($(window).scrollTop()-$(".index_di2").height())){
@@ -228,12 +190,6 @@ var col_scroll = function(){
 <body id="homeContent">
 <div class="tuiTitle">
     <div class="tuiTileCenter">选号网</div>
-<%--    <a href="<%=path%>/hyuser/wxMine">--%>
-<%--        <div class="tuiTileLeft" style="z-index: 10;font-size:13px;width:80px;"><img src="<%=path%>/images/yonghu.png?v=2"/><br/>个人中心</div>--%>
-<%--    </a>--%>
-<%--    <a href="<%=path%>/adv/wxAdv">--%>
-<%--        <div class="tuiTileRight" style="z-index: 10;font-size:13px;"><img src="<%=path%>/images/guangg.png?v=2"/><br/>广告制作</div>--%>
-<%--    </a>--%>
 </div>
 
 <div data-v-2a84ec57="" id="homeWrapper" class="home-wrapper child-view" style="top:2px">
@@ -250,14 +206,8 @@ var col_scroll = function(){
             </ul>
         </div>
     </div>
-    <%-- <div id="FontScroll" class="dian">
-        <ul>
-            <li><a href="<%=path%>/notice/wxNoticeDetail?notice.id=<s:property value="notice.id" />"><s:property value="notice.title" /></a></li>
-        </ul>
-    </div> --%>
     <div id="typediv" style="width: 100%;height:auto;overflow-x:scroll">
         <div class="tuiguang_xuanxiang">
-            <!-- <div><img src="<%=path%>/images/usercode.png"/><br/>热点推荐</div> -->
 
         </div>
     </div>
@@ -306,9 +256,6 @@ var col_scroll = function(){
                     <div class="content"><p>*11位手机号码任意位置匹配数字搜索</p>
                         <div class="mobile-input">
                             <div class="blurry"><label>
-                         <%--       <svg slot="icon-active" aria-hidden="true" class="icon serched">
-                                    <use xlink:href="#icon-serched"></use>
-                                </svg>--%>
                                 <input id="anyNumInp" type="tel" placeholder="请输入喜欢的数字" maxlength="11"> <!----></label></div>
                         </div> <!---->
                         <footer><label class="reset" onclick="resetNum(this)">
@@ -322,9 +269,6 @@ var col_scroll = function(){
                     <div class="content"><p>*11位手机号码末尾数字匹配搜索</p>
                         <div class="mobile-input">
                             <div class="blurry"><label>
-<%--                                <svg slot="icon-active" aria-hidden="true" class="icon serched">--%>
-<%--                                    <use xlink:href="#icon-serched"></use>--%>
-<%--                                </svg> <!---->--%>
                                 <input id="endNumInp" type="tel" placeholder="请输入喜欢的数字" maxlength="11"></label></div>
                         </div> <!---->
                         <footer><label class="reset" onclick="resetNum(this)">
@@ -338,7 +282,6 @@ var col_scroll = function(){
             <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div> <!---->
     </div>
 </div>
-<%--</div>--%>
 <div class="index_nr" style="padding-bottom:60px;">
     <dvi id="ulid"></dvi>
     <div class="w94" id="note" style="text-align:center;vertical-align:middle;display:none"><img src="<%=path%>/images/loader.gif" /></div>
@@ -410,13 +353,9 @@ var col_scroll = function(){
         searchType="endNum"
     });
 
-    // <div id="scalNum"  class="tab-item tab-selected">精准搜号</div>
-    //     <div id="anyNum" class="tab-item marginleft">任意搜号</div>
-    //     <div id="endNum" class="tab-item marginleft">末位搜号</div>
     function Allsc() {
         $("#homeContent").css("height", document.body.clientHeight);
         var $w = document.body.clientWidth;
-        //$(".bd li img").css("height", $w/3.069672131147541);
     }
 
     window.onload = function () {
@@ -432,26 +371,19 @@ var col_scroll = function(){
     }
     $(function () {
         var txts = $(".accurate input");
-        console.log("txts---------"+txts.length);
         for (var i = 1; i < txts.length; i++) {
-            console.log("1---------"+i);
             var t = txts[i];
             t.index = i;
-            // t.setAttribute("readonly", true);
             t.onClick = function(){
                 this.removeAttribute("readonly");
             }
             t.onkeyup = function() {
-                console.log("2---------"+i);
                 this.value = this.value.replace(/^(.).*$/, '$1');
                 var next = this.index + 1;
                 if (next > txts.length - 1) return;
-                // txts[next].removeAttribute("readonly");
                 txts[next].focus();
             }
         }
-        // txts[1].removeAttribute("readonly");
-        console.log("3---------"+i);
     });
 </script>
 </body>
