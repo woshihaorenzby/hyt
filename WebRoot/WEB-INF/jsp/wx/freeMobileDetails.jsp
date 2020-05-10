@@ -78,25 +78,41 @@ String path = request.getContextPath();
 			}
 			$.ajax({
 				type: "post",
-				url: "<%=path%>/recovery/wxSave",
+				url: "<%=path%>/freeOrder/wxSave",
 				dataType: "json",
 				data: {
-					"recovery.saleNumber":saleNumber,
-					"recovery.details":details,
-					"recovery.contact":contact,
+					"freeOrder.mobileId":mobileId,
+					"freeOrder.name":name,
+					"freeOrder.idNumber":idNumber,
+					"freeOrder.addressProvince":province,
+					"freeOrder.addressCity":city,
+					"freeOrder.addressArea":area,
+					"freeOrder.addressMobile":addressMobile,
+					"freeOrder.contact":contact,
+					"freeOrder.addressName":addressName,
+					"freeOrder.address":address,
+					"freeOrder.status":0
 				},
 				success: function(data){
 					if(data.code == "1"){
-						$("#saleNumber").val("");
-						$("#details").val("");
+						$("#idNumber").val("");
+						$("#name").val("");
+						$("#province").val("");
+						$("#city").val("");
+						$("#area").val("");
+						$("#addressMobile").val("");
 						$("#contact").val("");
-						msgSuccess("提交成功！");
+						$("#addressName").val("");
+						$("#address").val("");
+						alert("提交成功！请自行返回");
+					}else if(data.code == "100"){
+						alert("该号码已经被预定");
 					}else{
-						msgError("提交失败，请稍后重试！");
+						alert("提交失败，请稍后重试！");
 					}
 				},
 				error: function(XMLHttpRequest, textStatus, errorThrown) {
-					msgError("提交失败，请稍后重试！");
+					alert("提交失败，请稍后重试！");
 				}
 			});
 		}

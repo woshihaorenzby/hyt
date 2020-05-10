@@ -125,7 +125,7 @@ public class UserAction extends BaseAction {
 			List<Tree> list = userService.selectUserTree(syuser);
 			treeList= new ArrayList<>();
 			for (Tree tree: list) {
-				if(tree.getDisPlay()==0){
+				if(tree!=null&&tree.getDisPlay()==0){
 					treeList.add(tree);
 				}
 			}

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="freeOrder">
+	<resultMap type="com.xuri.vo.FreeOrder" id="oneFreeOrder">
+		<id column="o_id" property="id"/>
+		<result column="mobileId" property="mobileId"/>
+		<result column="name" property="name"/>
+		<result column="idNumber" property="idNumber"/>
+		<result column="addressProvince" property="addressProvince"/>
+		<result column="addressCity" property="addressCity"/>
+		<result column="addressArea" property="addressArea"/>
+		<result column="addressMobile" property="addressMobile"/>
+		<result column="contact" property="contact"/>
+		<result column="addressName" property="addressName"/>
+		<result column="address" property="address"/>
+		<result column="status" property="status"/>
+		<result column="createTime" property="createTime"/>
+		<!-- 关联对象 -->
+		<association property="mobileSale" javaType="com.xuri.vo.WxMobileSale">
+			<!-- 关联条件Employee的dept_id对应着Department的id -->
+			<id column="mobileId" property="id"/>
+			<result column="province" property="province"/>
+			<result column="city" property="city"/>
+			<result column="price" property="price"/>
+			<result column="mobileNum" property="mobileNum"/>
+			<result column="telephoneBill" property="telephoneBill"/>
+			<result column="minimumConsumption" property="minimumConsumption"/>
+			<result column="hasSale" property="hasSale"/>
+			<result column="details" property="details"/>
+			<result column="operator" property="operator"/>
+			<result column="free" property="free"/>
+		</association>
+	</resultMap>
+
+	<select id="freeorder_count" parameterType="searchPageUtil" resultType="int">
+		SELECT count(o.id) FROM sy_wx_mobile_sale as m,sy_wx_free_order as o
+		<where>
+			m.id=o.mobileId
+		</where>
+	</select>
+	<select id="freeorder_pageList" parameterType="searchPageUtil" resultType="freeOrder"  resultMap="oneFreeOrder">
+		SELECT o.id as o_id,o.*,m.*  FROM sy_wx_mobile_sale as m,sy_wx_free_order as o
+		<where>
+			m.id= o.mobileId
+			<if test="object.mobileSale.hasSale != -1">
+				AND hasSale=#{object.mobileSale.hasSale}
+			</if>
+			<if test="object.mobileSale.free != null and object.mobileSale.free != -1 ">
+				AND free=#{object.mobileSale.free}
+			</if>
+			<!--			<if test="object !=null and object.mobileSale.hasSale != null and object.mobileSale.hasSale != '' and  object.mobileSale.hasSale != '-1'.toString()">-->
+			<!--				AND hasSale=#{object.mobileSale.hasSale}-->
+			<!--			</if>-->
+			<if test="object.mobileSale.searchType !=null and object.mobileSale.searchType != '' and object.mobileSale.searchType == 'scalNum' and object.mobileSale.mobileNum !=null and object.mobileSale.mobileNum != ''">
+				AND mobileNum like "%"#{object.mobileSale.mobileSale.mobileNum}"%"
+			</if>
+			<if test="object.mobileSale.searchType !=null and object.mobileSale.searchType != '' and object.mobileSale.searchType == 'anyNum' and object.mobileSale.mobileNum !=null and object.mobileSale.mobileNum != '' ">
+				AND mobileNum like "%"#{object.mobileSale.mobileNum}"%"
+			</if>
+			<if test="object.mobileSale.searchType !=null and object.mobileSale.searchType != '' and object.mobileSale.searchType == 'endNum' and object.mobileSale.mobileNum !=null and object.mobileSale.mobileNum != '' ">
+				AND mobileNum like "%"#{object.mobileSale.mobileNum}
+			</if>
+			<if test="object.mobileSale.operator !=null and object.mobileSale.operator != '' and object.mobileSale.operator != '-1' and object.mobileSale.operator !=-1 ">
+				AND operator = #{object.mobileSale.operator}
+			</if>
+			<if test="object.mobileSale.province !=null and object.mobileSale.province != '' ">
+				AND province = #{object.mobileSale.province}
+			</if>
+			<if test="object.mobileSale.city !=null and object.mobileSale.city != '' ">
+				AND city = #{object.mobileSale.city}
+			</if>
+			<if test="object.mobileSale.endPrice !=null and object.mobileSale.endPrice != '' ">
+				AND price <![CDATA[ < ]]> #{object.mobileSale.endPrice}
+			</if>
+			<if test="object.mobileSale.startPrice !=null and object.mobileSale.startPrice != '' ">
+				AND price <![CDATA[ >= ]]> #{object.mobileSale.startPrice}
+			</if>
+			<if test="object.mobileSale.ids !=null and object.mobileSale.ids != '' ">
+				AND id in
+				<foreach collection="object.mobileSale._ids" item="id" index="index" open="(" close=")" separator=",">
+					#{id}
+				</foreach>
+			</if>
+			<if test="object.mobileSale.preferenceStr !=null and object.mobileSale.preferenceStr != '' ">
+				<foreach collection="object.mobileSale.preference" item="preference" index="index" >
+					AND mobileNum not like	 "%"#{preference}"%"
+				</foreach>
+			</if>
+			<if test="object.mobileSale.startLikeLaw !=null and object.mobileSale.startLikeLaw.size()>0 ">
+				AND
+				<foreach collection="object.mobileSale.startLikeLaw"  item="startLaw" index="index" open="(" close=")" separator="or" >
+					mobileNum  like "%"#{startLaw}
+				</foreach>
+			</if>
+			<if test="object.mobileSale.dobleLikeLaw !=null and object.mobileSale.dobleLikeLaw.size()>0 ">
+				AND
+				<foreach collection="object.mobileSale.dobleLikeLaw"  item="dobleLaw" index="index" open="(" close=")" separator="or" >
+					mobileNum  like "%"#{dobleLaw}"%"
+				</foreach>
+			</if>
+		</where>
+		ORDER BY o.id desc
+		 LIMIT ${startRow},${page.pageRecordCount}
+	</select>
+	<select id="freeorderdetail_select" parameterType="freeOrder" resultType="freeOrder"  resultMap="oneFreeOrder">
+		SELECT o.id as o_id,o.*,m.*  FROM sy_wx_mobile_sale as m,sy_wx_free_order as o
+    	<where>
+			m.id= o.mobileId
+    		<if test="id !=null and id != ''">
+				AND o.id=#{id}
+			</if>
+    	</where>
+    </select>
+
+
+	<delete id="freeorder_delete" parameterType="freeOrder">
+    	DELETE FROM sy_wx_free_order WHERE id=#{id}
+    </delete>
+	<update id="freeorder_update" parameterType="freeOrder">
+		UPDATE sy_wx_free_order
+		<set>
+			<if test="mobileId != null and mobileId != ''">mobileId=#{mobileId},</if>
+			<if test="name != null and name != ''">name=#{name},</if>
+			<if test="idNumber != null and idNumber != ''">idNumber=#{idNumber},</if>
+			<if test="addressProvince != null and addressProvince != ''">addressProvince=#{addressProvince},</if>
+			<if test="addressCity != null and addressCity != ''">addressCity=#{addressCity},</if>
+			<if test="addressArea != null and addressArea != ''">addressArea=#{addressArea},</if>
+			<if test="addressMobile != null and addressMobile != ''">addressMobile=#{addressMobile},</if>
+			<if test="contact != null and contact != ''">contact=#{contact},</if>
+			<if test="addressName != null and addressName != ''">addressName=#{addressName},</if>
+			<if test="address != null and address != ''">address=#{address},</if>
+			<if test="status != null and status != ''">status=#{status},</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+	<insert id="freeorder_insert" parameterType="freeOrder">
+    	INSERT INTO sy_wx_free_order (mobileId,name,idNumber,addressProvince,addressCity,addressArea,addressMobile,contact,addressName,address,status,createTime) VALUES
+    	(#{mobileId},#{name},#{idNumber},#{addressProvince},#{addressCity},#{addressArea},#{addressMobile},#{contact},#{addressName},#{address},#{status},NOW())
+    </insert>
+</mapper>

@@ -28,6 +28,7 @@
         <typeAlias alias="cooperation" type="com.xuri.vo.Cooperation"/>
         <typeAlias alias="recovery" type="com.xuri.vo.Recovery"/>
         <typeAlias alias="customized" type="com.xuri.vo.Customized"/>
+        <typeAlias alias="freeOrder" type="com.xuri.vo.FreeOrder"/>
     </typeAliases>
     
 	<mappers>
@@ -52,5 +53,6 @@
         <mapper resource="mappings/cooperation.xml"/>
         <mapper resource="mappings/recovery.xml"/>
         <mapper resource="mappings/customized.xml"/>
+        <mapper resource="mappings/freeOrder.xml"/>
 	</mappers>
 </configuration>

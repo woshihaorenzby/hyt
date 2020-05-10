@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="freeOrder" namespace="/freeOrder" extends="all-interceptors">
+		<action name="*" class="com.xuri.main.system.action.FreeOrderAction" method="{1}">
+			<result name="wxShow">/WEB-INF/jsp/video/freeOrder.jsp</result>
+			<result name="editPage">/WEB-INF/jsp/video/freeOrderEdit.jsp</result>
+		</action>
+	</package>
+</struts>

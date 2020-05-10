@@ -59,11 +59,19 @@
         function loadData(curPage, refTag) {
             var mobileNum = $("#mobileNum").val();
             var hasSale = $("#hasSale").find("option:selected").val();
+            var free = $("#free").find("option:selected").val();
             $.ajax({
                 type: "post",
                 url: "<%=path%>/wxMobileSale/list",
                 dataType: "json",
-                data: "page.curPage=" + curPage + "&page.pageRecordCount=" + pageRecordCount + "&mobileSale.hasSale="+hasSale+"&mobileSale.searchType=scalNum&mobileSale.mobileNum="+mobileNum,
+                data: {
+                    "page.curPage":curPage,
+                    "page.pageRecordCount":pageRecordCount,
+                    "mobileSale.hasSale":hasSale,
+                    "mobileSale.searchType":"scalNum",
+                    "mobileSale.mobileNum":mobileNum,
+                    "mobileSale.free":free
+                },
                 success: function (json) {
                     var totalRecord = json.totalRecord;
                     var data = json.data;
@@ -248,6 +256,14 @@
 ">
             <option value="0"  >未卖出 </option>
             <option value="1"  >已卖出</option>
+            <option value="-1" selected = "selected" >全部</option>
+        </select>
+        <select id="free" style="
+    height: 31px;
+    border-right-width: 8px;
+">
+            <option value="1"  >免费号码 </option>
+            <option value="0"  >靓号</option>
             <option value="-1" selected = "selected" >全部</option>
         </select>
     </div>

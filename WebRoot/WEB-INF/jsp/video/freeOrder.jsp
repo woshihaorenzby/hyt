@@ -59,58 +59,57 @@
         function loadData(curPage, refTag) {
             var mobileNum = $("#mobileNum").val();
             var hasSale = $("#hasSale").find("option:selected").val();
+            var free = $("#free").find("option:selected").val();
             $.ajax({
                 type: "post",
-                url: "<%=path%>/wxMobileSale/list",
+                url: "<%=path%>/freeOrder/list",
                 dataType: "json",
-                data: "page.curPage=" + curPage + "&page.pageRecordCount=" + pageRecordCount + "&mobileSale.hasSale="+hasSale+"&mobileSale.searchType=scalNum&mobileSale.mobileNum="+mobileNum,
+                data: {
+                    "page.curPage":curPage,
+                    "page.pageRecordCount":pageRecordCount,
+                    "freeOrder.mobileSale.hasSale":hasSale,
+                    "freeOrder.mobileSale.searchType":"scalNum",
+                    "freeOrder.mobileSale.mobileNum":mobileNum,
+                    "freeOrder.mobileSale.free":free
+                },
                 success: function (json) {
                     var totalRecord = json.totalRecord;
                     var data = json.data;
                     $("#table_tb").children().remove();
                     var appStr = "";
                     for (var i = 0; i < data.length; i++) {
-                        appStr += "<tr id='" + data[i].id + "' onmouseover='mouseon(this)' onmouseout='mouseout(this)'>";
+                        appStr += "<tr data-id='"+data[i].mobileId+"' id='" + data[i].id + "' onmouseover='mouseon(this)' onmouseout='mouseout(this)'>";
                         appStr += "<td><input type='checkbox' class='checkbox' value="+data[i].id+"></input></td>";
                         appStr += "<td>" + ((curPage - 1) * pageRecordCount + i + 1) + "</td>";
-                        appStr += "<td>" + data[i].mobileNum + "</td>";
-                        appStr += "<td>" + data[i].province + data[i].city + "</td>";
-                        appStr += "<td>" + data[i].price + "</td>";
-                        appStr += "<td>" + data[i].telephoneBill + "</td>";
-                        appStr += "<td>" + data[i].minimumConsumption + "</td>";
-                        if (data[i].hasSale == 1) {
+                        appStr += "<td>" + data[i].createTime + "</td>";
+                        appStr += "<td>" + data[i].mobileSale.mobileNum + "</td>";
+                        appStr += "<td>" + data[i].mobileSale.province + data[i].mobileSale.city + "</td>";
+                        appStr += "<td>" + data[i].mobileSale.price + "</td>";
+                        appStr += "<td>" + data[i].mobileSale.telephoneBill + "</td>";
+                        appStr += "<td>" + data[i].mobileSale.minimumConsumption + "</td>";
+                        if (data[i].mobileSale.hasSale == 1) {
                             appStr += "<td>是</td>";
                         } else {
                             appStr += "<td onclick='doSalse(this)'>否</td>";
                         }
-                        if (data[i].details == null||data[i].details == "") {
+                        if (data[i].mobileSale.details == null||data[i].mobileSale.details == "") {
                             appStr += "<td>无</td>";
                         } else {
-                            appStr += "<td>" + data[i].details + "</td>";
+                            appStr += "<td>" + data[i].mobileSale.details + "</td>";
                         }
-                        <%--				if(syInsert == "1") {--%>
-                        <%--					var videoSyInsert = data[i].syInsert;--%>
-                        <%--					var userName;--%>
-                        <%--					if(videoSyInsert == "1") {--%>
-                        <%--						userName = data[i].userName;--%>
-                        <%--					} else if(videoSyInsert == "0") {--%>
-                        <%--						userName = data[i].niName;--%>
-                        <%--					}--%>
-                        <%--					appStr += "<td>"+userName+"</td>";--%>
-                        <%--/*					if(auditTag=="0") {//控制审核是否显示--%>
-                        <%--						if(data[i].auditTag=="1"){--%>
-                        <%--							appStr += "<td><img src='<%=path%>/images/button/check_alt.png' width=18 style='cursor:pointer;' hidetag='1' onclick='updateTag(this, \"auditTag\", \"hy_video\")'/></td>";--%>
-                        <%--						}else{--%>
-                        <%--							appStr += "<td><img src='<%=path%>/images/button/x_alt.png' width=18 style='cursor:pointer;'  hidetag='0' onclick='updateTag(this, \"auditTag\", \"hy_video\")'/></td>";--%>
-                        <%--						}--%>
-                        <%--					}--%>
-                        <%--					if(data[i].topShow=="1"){--%>
-                        <%--						appStr += "<td><img src='<%=path%>/images/button/check_alt.png' width=18 style='cursor:pointer;' hidetag='1' onclick='updateTag(this, \"topShow\", \"hy_video\")'/></td>";--%>
-                        <%--					}else{--%>
-                        <%--						appStr += "<td><img src='<%=path%>/images/button/x_alt.png' width=18 style='cursor:pointer;'  hidetag='0' onclick='updateTag(this, \"topShow\", \"hy_video\")'/></td>";--%>
-                        <%--					}*/--%>
-                        <%--				}--%>
-                        appStr += "<td><button onclick='updateOrder(this)' type='button' class='btn btn-info btn-xs'>修改</button>&nbsp;<button onclick='deleteOrder(this)' type='button' class='btn btn-info btn-xs'>删除</button></td></tr>";
+                        appStr += "<td>" + data[i].name + "</td>";
+                        appStr += "<td>" + data[i].idNumber + "</td>";
+                        appStr += "<td>" + data[i].contact + "</td>";
+                        appStr += "<td>" + data[i].addressName + "</td>";
+                        appStr += "<td>" + data[i].addressMobile + "</td>";
+                        appStr += "<td>" + data[i].addressProvince + data[i].addressCity+data[i].addressArea+"</td>";
+                        appStr += "<td>" + data[i].address+"</td>";
+                        if (data[i].status == 1) {
+                            appStr += "<td>已发货</td>";
+                        } else {
+                            appStr += "<td onclick='doSend(this)'>未发货</td>";
+                        }
+                        appStr += "<td><button onclick='updateOrder(this)' type='button' class='btn btn-info btn-xs'>修改</button></td></tr>";
                     }
                     $("#table_tb").append(appStr);
                     nodata(0);
@@ -176,7 +175,7 @@
 
         function updateOrder(obj) {
             selId = $(obj).parent().parent().attr("id");
-            window.open("<%=path%>/wxMobileSale/editPage?&mobileSale.id=" + selId, "_self");
+            window.open("<%=path%>/freeOrder/editPage?&freeOrder.id=" + selId, "_self");
         }
 
         function deleteOrder(obj) {
@@ -190,11 +189,10 @@
                     }
                 });
             }
-            console.log("ids-----------"+ids);
             if (window.confirm("您确认要删除这些信息吗？")) {
                 $.ajax({
                     type: "POST",
-                    url: "<%=path%>/wxMobileSale/delete",
+                    url: "<%=path%>/freeOrder/delete",
                     data: "ids=" + ids,
                     success: function (data) {
                         if (data.code == "1") {
@@ -208,7 +206,7 @@
         }
 
         function doSalse(obj) {
-            var id = $(obj).parent().attr("id");
+            var id = $(obj).parent().attr("data-id");
             $.ajax({
                 type: "POST",
                 url: "<%=path%>/wxMobileSale/doSalse",
@@ -216,6 +214,24 @@
                 success: function (data) {
                     if (data.code == "1") {
                         msgSuccessReload("卖出成功！");
+                    } else {
+                        msgError("失败，请稍后重试！");
+                    }
+                }
+            });
+        }
+        function doSend(obj) {
+            var id = $(obj).parent().attr("id");
+            $.ajax({
+                type: "POST",
+                url: "<%=path%>/freeOrder/wxUpdate",
+                data: {
+                    "freeOrder.id": id,
+                    "freeOrder.status": 1,
+                },
+                success: function (data) {
+                    if (data.code == "1") {
+                        msgSuccessReload("发货成功");
                     } else {
                         msgError("失败，请稍后重试！");
                     }
@@ -250,23 +266,20 @@
             <option value="1"  >已卖出</option>
             <option value="-1" selected = "selected" >全部</option>
         </select>
+        <select id="free" style="
+    height: 31px;
+    border-right-width: 8px;
+">
+            <option value="1"  >免费号码 </option>
+            <option value="0"  >靓号</option>
+            <option value="-1" selected = "selected" >全部</option>
+        </select>
     </div>
     <div style="float:left;">
         <button type="button" class="btn btn-success btn-sm" onclick="loadData(1, true)"><span
                 class="glyphicon glyphicon-plus"></span>&nbsp;<strong>查询</strong></button>
     </div>
-    <div style="float:right;">
-        <button type="button" class="btn btn-success btn-sm" onclick="importMobileSale()"><span
-                class="glyphicon glyphicon-plus"></span>&nbsp;<strong>导入</strong></button>
-    </div>
-    <div style="float:right;">
-        <button type="button" class="btn btn-success btn-sm" onclick="add()"><span
-                class="glyphicon glyphicon-plus"></span>&nbsp;<strong>添加</strong></button>
-    </div>
-    <div style="float:right;">
-        <button type="button" class="btn btn-success btn-sm" onclick="deleteOrder()"><span
-                class="glyphicon glyphicon-minus"></span>&nbsp;<strong>删除</strong></button>
-    </div>
+
 </div>
 <div class="table_content" style="margin-top:10px;">
     <table class="table" style="margin-top:5px;">
@@ -274,13 +287,22 @@
         <tr>
             <th style="width:5%;"> <input type="checkbox" id="checkAll" /></th>
             <th style="width:5%;">序号</th>
-            <th style="width:15%;">手机号</th>
-            <th style="width:15%;">省-市</th>
+            <th style="width:5%;">下单时间</th>
+            <th style="width:5%;">手机号</th>
+            <th style="width:5%;">归属地</th>
             <th style="width:5%;">价格</th>
             <th id="thlink" style="width:5%;">内含话费</th>
             <th style="width:5%;">最低消费</th>
             <th style="width:5%;">是否已经卖出</th>
-            <th style="width:15%;">详情介绍</th>
+            <th style="width:5%;">详情介绍</th>
+            <th style="width:5%;">证件姓名</th>
+            <th style="width:10%;">证件编号</th>
+            <th style="width:5%;">联系方式</th>
+            <th style="width:5%;">收货姓名</th>
+            <th style="width:5%;">收货电话</th>
+            <th style="width:10%;">收货省市区</th>
+            <th style="width:10%;">收货地址</th>
+            <th style="width:10%;">订单状态</th>
             <th style="width:15%;">操作</th>
         </tr>
         </thead>
