@@ -10,6 +10,9 @@
 			<if test="object.hasSale != -1">
 				AND hasSale=#{object.hasSale}
 			</if>
+			<if test="object.free != null ">
+				AND free=#{object.free}
+			</if>
 			<if test="object.searchType !=null and object.searchType != '' and object.searchType == 'scalNum' and object.mobileNum !=null and object.mobileNum != '' ">
 				AND mobileNum like "%"#{object.mobileNum}"%"
 			</if>
@@ -43,6 +46,18 @@
 			<if test="object.preferenceStr !=null and object.preferenceStr != '' ">
 				<foreach collection="object.preference" item="preference" index="index" >
 					AND mobileNum not like	 "%"#{preference}"%"
+				</foreach>
+			</if>
+			<if test="object.startLikeLaw !=null and object.startLikeLaw.size()>0 ">
+				AND
+				<foreach collection="object.startLikeLaw"  item="startLaw" index="index" open="(" close=")" separator="or" >
+					mobileNum  like "%"#{startLaw}
+				</foreach>
+			</if>
+			<if test="object.dobleLikeLaw !=null and object.dobleLikeLaw.size()>0 ">
+				AND
+				<foreach collection="object.dobleLikeLaw"  item="dobleLaw" index="index" open="(" close=")" separator="or" >
+					mobileNum  like "%"#{dobleLaw}"%"
 				</foreach>
 			</if>
 		</where>
@@ -54,6 +69,9 @@
 			<if test="object.hasSale != -1">
 				AND hasSale=#{object.hasSale}
 			</if>
+			<if test="object.free != null ">
+				AND free=#{object.free}
+			</if>
 			<if test="object.searchType !=null and object.searchType != '' and object.searchType == 'scalNum' and object.mobileNum !=null and object.mobileNum != '' ">
 				AND mobileNum like "%"#{object.mobileNum}"%"
 			</if>
@@ -84,9 +102,16 @@
 					#{id}
 				</foreach>
 			</if>
-			<if test="object.preferenceStr !=null and object.preferenceStr != '' ">
-				<foreach collection="object.preference" item="preference" index="index" >
-					AND mobileNum not like	 "%"#{preference}"%"
+			<if test="object.startLikeLaw !=null and object.startLikeLaw.size()>0 ">
+				AND
+				<foreach collection="object.startLikeLaw"  item="startLaw" index="index" open="(" close=")" separator="or" >
+					 mobileNum  like "%"#{startLaw}
+				</foreach>
+			</if>
+			<if test="object.dobleLikeLaw !=null and object.dobleLikeLaw.size()>0 ">
+				AND
+				<foreach collection="object.dobleLikeLaw"  item="dobleLaw" index="index" open="(" close=")" separator="or" >
+					mobileNum  like "%"#{dobleLaw}"%"
 				</foreach>
 			</if>
 		</where>
@@ -97,6 +122,9 @@
 			1=1
 			<if test="object.hasSale != -1">
 				AND hasSale=#{object.hasSale}
+			</if>
+			<if test="object.free != null ">
+				AND free=#{object.free}
 			</if>
 <!--			<if test="object !=null and object.hasSale != null and object.hasSale != '' and  object.hasSale != '-1'.toString()">-->
 <!--				AND hasSale=#{object.hasSale}-->
@@ -134,6 +162,18 @@
 			<if test="object.preferenceStr !=null and object.preferenceStr != '' ">
 				<foreach collection="object.preference" item="preference" index="index" >
 					AND mobileNum not like	 "%"#{preference}"%"
+				</foreach>
+			</if>
+			<if test="object.startLikeLaw !=null and object.startLikeLaw.size()>0 ">
+				AND
+				<foreach collection="object.startLikeLaw"  item="startLaw" index="index" open="(" close=")" separator="or" >
+					mobileNum  like "%"#{startLaw}
+				</foreach>
+			</if>
+			<if test="object.dobleLikeLaw !=null and object.dobleLikeLaw.size()>0 ">
+				AND
+				<foreach collection="object.dobleLikeLaw"  item="dobleLaw" index="index" open="(" close=")" separator="or" >
+					mobileNum  like "%"#{dobleLaw}"%"
 				</foreach>
 			</if>
 		</where>

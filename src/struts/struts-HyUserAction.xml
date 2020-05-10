@@ -11,6 +11,8 @@
 			<result name="userStat">/WEB-INF/jsp/user/userStat.jsp</result>
 			<result name="wxIndex">/WEB-INF/jsp/wx/index.jsp</result>
 			<result name="wxMobile">/WEB-INF/jsp/wx/mobile.jsp</result>
+			<result name="wxFreeMobile">/WEB-INF/jsp/wx/freeMobile.jsp</result>
+			<result name="wxFreeMobileForm">/WEB-INF/jsp/wx/freeMobileDetails.jsp</result>
 			<result name="wxMine">/WEB-INF/jsp/wx/mine.jsp</result>
 			<result name="wxBind">/WEB-INF/jsp/wx/mine/bind.jsp</result>
 			<result name="wxCard">/WEB-INF/jsp/wx/mine/card.jsp</result>

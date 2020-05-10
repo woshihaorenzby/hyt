@@ -29,6 +29,8 @@ public class WxMobileSale {
     private String details;
     //0移动，1联通，2电信，3虚商
     private String operator;
+    //是否免费（0不免费，1免费）
+    private Integer free;
     private Double startPrice;
     private Double endPrice;
     private String preferenceStr;
@@ -200,5 +202,13 @@ public class WxMobileSale {
 
     public void setLaw(String law) {
         this.law = law;
+    }
+
+    public Integer getFree() {
+        return free;
+    }
+
+    public void setFree(Integer free) {
+        this.free = free;
     }
 }

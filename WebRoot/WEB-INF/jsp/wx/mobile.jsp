@@ -139,23 +139,7 @@ function  searchNum(e) {
      $("#ulid").empty();
 }
 function  resetNum(e) {
-    curPage= 1;
-    if(searchType=="scalNum"){
-        var txts = $(".accurate input");
-        for (var i = 1; i < txts.length; i++) {
-            var t = $(txts[i]);
-            t.val("");
-        }
-    }else if(searchType=="anyNum"){
-        var txts = $("#anyNumInp");
-        txts.val("");
-    }else if(searchType=="endNum"){
-        var txts = $("#endNumInp");
-        txts.val("");
-    }
-    number = "";
-    loadData();
-    $("#ulid").empty();
+    location.reload();
 }
 function loadData() {
     if(searchType=="scalNum"){
@@ -218,6 +202,7 @@ function loadData() {
             "page.order" : order,
             "page.orderBy" : orderBy,
             "mobileSale.hasSale":0,
+            "mobileSale.free":0,
             "mobileSale.mobileNum":number,
             "mobileSale.searchType":searchType,
             "mobileSale.operator":operator,

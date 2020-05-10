@@ -33,7 +33,7 @@ public class GetWxOrderno {
 
 	/**
 	 * description:获取预支付id
-	 * 
+	 *
 	 * @param url
 	 * @param xmlParam
 	 * @return
@@ -65,7 +65,7 @@ public class GetWxOrderno {
 
 	/**
 	 * description:获取扫码支付连接
-	 * 
+	 *
 	 * @param url
 	 * @param xmlParam
 	 * @return
@@ -91,7 +91,7 @@ public class GetWxOrderno {
 
 	/**
 	 * 解析xml,返回第一级元素键值对。如果第一级元素有子节点，则此节点的值是子节点的xml数据。
-	 * 
+	 *
 	 * @param strxml
 	 * @return
 	 * @throws JDOMException
@@ -131,7 +131,7 @@ public class GetWxOrderno {
 
 	/**
 	 * 获取子结点的xml
-	 * 
+	 *
 	 * @param children
 	 * @return String
 	 */
@@ -159,16 +159,18 @@ public class GetWxOrderno {
 	public static InputStream String2Inputstream(String str) {
 		return new ByteArrayInputStream(str.getBytes());
 	}
-	public static String extractEn(String s1) {
-		StringBuilder sb = new StringBuilder(s1);
-		IntStream.range(0, s1.length()).forEach(k -> {
-			char c = sb.charAt(k);
-			if (!isChineseChar(c))
+
+	public static String getLetter(String a) {
+		StringBuffer sb = new StringBuffer();
+		StringBuffer sb2 = new StringBuffer();
+		for (int i = 0; i < a.length(); i++) {
+			char c = a.charAt(i);
+			if ((c <= 'z' && c >= 'a') || (c <= 'Z' && c >= 'A')) {
 				sb.append(c);
-		});
-		return sb.toString().substring(s1.length(), sb.length());
+			}
+		}
+		System.out.println(sb.toString());
+		return sb.toString();
 	}
-	public static boolean isChineseChar(char c) {
-		return String.valueOf(c).matches("[\u4e00-\u9fa5]");
-	}
+
 }

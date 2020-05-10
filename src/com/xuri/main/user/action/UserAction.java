@@ -22,6 +22,7 @@ public class UserAction extends BaseAction {
     private User user;
     private Page page;
     private int companyMemCount;//公司成员数量
+    private WxMobileSale mobileSale;
     private WxQcTicket ticket;
     private List<Lunimg> lunimgList;
     private HyUserStat hyUserStat;
@@ -248,6 +249,37 @@ public class UserAction extends BaseAction {
             return "error";
         }
         return "wxMobile";
+    }
+    /**
+     * @Description: TODO 微信用户登录跳转首页
+     * @author 王东
+     */
+    public String wxFreeMobile() {
+        try {
+            Lunimg lunimg = new Lunimg();
+            lunimg.setDisplay("1");
+            lunimgList = baseService.selectList(lunimg);
+            Type ty = new Type();
+            ty.setTypeLei("1");
+            ty.setTopShow("1");
+            typeList = baseService.selectList(ty);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error";
+        }
+        return "wxFreeMobile";
+    }
+    /**
+     * @Description: TODO 显示视频详情
+     * @author 王东
+     */
+    public String wxFreeMobileForm() {
+        try {
+            mobileSale = baseService.selectById(mobileSale);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "wxFreeMobileForm";
     }
     /**
      * @Description: TODO 首页分类
@@ -888,5 +920,13 @@ public class UserAction extends BaseAction {
 
     public void setTotZhuan(int totZhuan) {
         this.totZhuan = totZhuan;
+    }
+
+    public WxMobileSale getMobileSale() {
+        return mobileSale;
+    }
+
+    public void setMobileSale(WxMobileSale mobileSale) {
+        this.mobileSale = mobileSale;
     }
 }

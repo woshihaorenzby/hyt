@@ -7,6 +7,7 @@ import com.xuri.util.*;
 import com.xuri.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class WxMobileSaleAction extends BaseAction {
     private VideoService videoService;
 
     public String wxShow() {
-        return "show";
+        return "wxShow";
     }
 
     public String editPage() {
@@ -143,11 +144,14 @@ public class WxMobileSaleAction extends BaseAction {
             mobileSale.getPreference();
             String law = mobileSale.getLaw();
             if(law!=null){
+                String l = GetWxOrderno.getLetter(law);
+
+                List<String> lawList = this.getLawList(l);
                 if(law.contains("中间")){
-
+                    mobileSale.setDobleLikeLaw(lawList);
+                }else{
+                    mobileSale.setStartLikeLaw(lawList);
                 }
-                String l = GetWxOrderno.extractEn(law);
-
             }
             page = baseService.selectPageList(page, mobileSale);
             mobileSaleList = (List<WxMobileSale>) page.getData();
@@ -167,12 +171,12 @@ public class WxMobileSaleAction extends BaseAction {
     public String wxMobileSaleDetail() {
         try {
             mobileSale = baseService.selectById(mobileSale);
-            System.out.println("我是好人");
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "wxMobileSaleDetail";
     }
+
 
     /**
      * 收藏夹
@@ -210,6 +214,61 @@ public class WxMobileSaleAction extends BaseAction {
         }
         messageVo.setCode("1");
         return "messageVo";
+    }
+
+    /**
+     * 获取规律数字集合
+     * @param str
+     * @return
+     */
+    public List<String> getLawList(String str){
+        List<String> list =new ArrayList<>();
+        Integer a = 0;
+        Integer[] arr = new Integer[]{a,a+1,a+2,a+3,a+4};
+        char x = 'B';
+        int flag = 1;
+        while (x<='E'){
+            if(str.indexOf(x)>0){
+                arr[flag] = arr[flag-1]+1;
+            }else{
+                arr[flag] = arr[flag-1];
+            }
+            flag++;
+            x++;
+        }
+        List<Integer> markers= new ArrayList<>();
+        for (char as:str.toCharArray()) {
+            int index = 0;
+            switch (as){
+                case 'A':
+                    index=0;
+                    break;
+                case 'B':
+                    index=1;
+                    break;
+                case 'C':
+                    index=2;
+                    break;
+                case 'D':
+                    index=3;
+                    break;
+                case 'E':
+                    index=4;
+                    break;
+            }
+            markers.add(index);
+        }
+        while (arr[arr.length-1]<=9){
+            StringBuffer sb = new StringBuffer();
+            for (Integer index : markers){
+                sb.append(arr[index]);
+            }
+            list.add(sb.toString());
+            for (int i=0;i<arr.length;i++){
+                arr[i] = arr[i]+1;
+            }
+        }
+        return list;
     }
     public Page getPage() {
         return page;
@@ -282,6 +341,8 @@ public class WxMobileSaleAction extends BaseAction {
     public void setRedirectURL(String redirectURL) {
         this.redirectURL = redirectURL;
     }
+
+
 
 }
 

@@ -52,8 +52,8 @@ var addressInit = function(_cmbProvince, _cmbCity, _cmbArea, defaultProvince, de
 }
 
 var provinceList = [
-{name:'请选择', cityList:[
-{name:'请选择', areaList:['请选择']}
+{name:'请选择所在省', cityList:[
+{name:'请选择所在市', areaList:['请选择区']}
 ]},
 {name:'北京', cityList:[
 {name:'请选择', areaList:['请选择']},
