@@ -9,7 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport"
           content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-    <title>选号网-微信推广神器</title>
+    <title>选号网</title>
     <link href="<%=path%>/css/wx/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="<%=path%>/css/wx/alongsty.css" rel="stylesheet" type="text/css"/>
     <link href="<%=path%>/css/wx/style.css?v=4" rel="stylesheet" type="text/css"/>
@@ -36,7 +36,7 @@
         var number = "";
         $(function () {
             loadData();
-            $(window).bind("scroll", col_scroll);
+            // $(window).bind("scroll", col_scroll);
             $.ajax({
                 type: "post",
                 url: "<%=path%>/hyuser/wxIndexType",
@@ -216,7 +216,7 @@
             <ul>
                 <s:iterator value="lunimgList" id="item">
                     <li><a href="<s:property value="url" />" target="_blank"><img
-                            src="http://www.haoyt168.com<s:property value="imagePath" />"/></a></li>
+                            src="<%=path%><s:property value="imagePath" />"/></a></li>
                 </s:iterator>
             </ul>
         </div>
@@ -336,21 +336,25 @@
         </a>
     </div>
     <script type="text/javascript">
-        //轮播
-        TouchSlide({
-            slideCell: "#focus",
-            titCell: ".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
-            mainCell: ".bd ul",
-            effect: "leftLoop",//“left”为不循环
-            autoPlay: true,//自动播放
-            autoPage: true, //自动分页
-            switchLoad: "_src" //切换加载，真实图片路径为"_src"
-        });
 
         $(function () {
             //time是时间间隔，num是行数（修改num时需要修改$('#FontScroll')对应css的高度）
             //$('#FontScroll').FontScroll({time: 3000,num: 1});
+
+                if($(".hd ul li").length>0){
+                    //轮播
+                    TouchSlide({
+                        slideCell: "#focus",
+                        titCell: ".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+                        mainCell: ".bd ul",
+                        effect: "leftLoop",//“left”为不循环
+                        autoPlay: true,//自动播放
+                        autoPage: true, //自动分页
+                        switchLoad: "_src" //切换加载，真实图片路径为"_src"
+                    });
+                }
         });
+
         $('#scalNum').click(function () {
             $('#scalNum').attr("class", "tab-item tab-selected");
             $('#anyNum').attr("class", "tab-item marginleft");
@@ -386,6 +390,7 @@
             $("#homeContent").css("height", document.body.clientHeight);
             var $w = document.body.clientWidth;
         }
+
 
         window.onload = function () {
             Allsc();

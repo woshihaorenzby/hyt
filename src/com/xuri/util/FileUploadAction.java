@@ -78,6 +78,25 @@ public class FileUploadAction extends BaseAction {
 					//是否已经卖出（0未卖出，1已卖出）
 					int hasSale = 0;
 					String details = str[6];
+					String opeerator ="0";
+					switch (str[7]){
+						case "移动":
+							opeerator="0";
+							break;
+						case "联通":
+							opeerator="1";
+							break;
+						case "电信":
+							opeerator="2";
+							break;
+						case "虚商":
+							opeerator="3";
+							break;
+					}
+					Integer free = 0;
+					if(str.length>7&&str[8]!=null&&""!=str[8]&&str[8]=="靓号"){
+						free =1;
+					}
 					wxMobileSale.setProvince(province);
 					wxMobileSale.setCity(city);
 					wxMobileSale.setMobileNum(mobileNum);
@@ -86,6 +105,8 @@ public class FileUploadAction extends BaseAction {
 					wxMobileSale.setTelephoneBill(telephoneBill);
 					wxMobileSale.setHasSale(hasSale);
 					wxMobileSale.setDetails(details);
+					wxMobileSale.setOperator(opeerator);
+					wxMobileSale.setFree(free);
 					this.wxMobileSaleService.saveWxMobileSale(wxMobileSale);
 				}
 			}
