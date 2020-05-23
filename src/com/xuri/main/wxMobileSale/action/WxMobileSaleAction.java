@@ -29,6 +29,8 @@ public class WxMobileSaleAction extends BaseAction {
     private String ids;
     private String typeName;
     private String redirectURL;
+    private Qr qr;
+
 
 
     @Autowired
@@ -192,6 +194,15 @@ public class WxMobileSaleAction extends BaseAction {
      * @author 周博宇
      */
     public String wxConsultation() {
+        List<Qr> qrs = null;
+        try {
+            qrs = baseService.selectList(qr);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(qrs!=null&&qrs.size()>0&&qrs.get(0)!=null){
+            this.qr = qrs.get(0);
+        }
         return "wxConsultation";
     }
     /**
@@ -342,7 +353,12 @@ public class WxMobileSaleAction extends BaseAction {
         this.redirectURL = redirectURL;
     }
 
+    public Qr getQr() {
+        return qr;
+    }
 
-
+    public void setQr(Qr qr) {
+        this.qr = qr;
+    }
 }
 

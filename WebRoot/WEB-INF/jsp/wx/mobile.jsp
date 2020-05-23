@@ -647,7 +647,7 @@ var col_scroll = function(){
     <a href="<%=path%>/wxMobileSale/wxCollectionNums" style="width: 33.3%">
         <div><img src="<%=path%>/images/ku.png"/><br/>收藏夹</div>
     </a>
-    <a href="<%=path%>/wxMobileSale/wxConsultation" style="width: 33.3%">
+    <a href="<%=path%>/wxMobileSale/wxConsultation?qr.type=2" style="width: 33.3%">
         <div style="position:relative"><img src="<%=path%>/images/mine.png"/><br/>咨询</div>
     </a>
 </div>

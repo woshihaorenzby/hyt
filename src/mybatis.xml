@@ -29,6 +29,7 @@
         <typeAlias alias="recovery" type="com.xuri.vo.Recovery"/>
         <typeAlias alias="customized" type="com.xuri.vo.Customized"/>
         <typeAlias alias="freeOrder" type="com.xuri.vo.FreeOrder"/>
+        <typeAlias alias="qr" type="com.xuri.vo.Qr"/>
     </typeAliases>
     
 	<mappers>
@@ -54,5 +55,6 @@
         <mapper resource="mappings/recovery.xml"/>
         <mapper resource="mappings/customized.xml"/>
         <mapper resource="mappings/freeOrder.xml"/>
+        <mapper resource="mappings/qr.xml"/>
 	</mappers>
 </configuration>

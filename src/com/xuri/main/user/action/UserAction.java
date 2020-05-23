@@ -231,6 +231,9 @@ public class UserAction extends BaseAction {
         }
         return "wxIndex";
     }
+    public String wxIndexFrame() {
+        return "wxIndexFrame";
+    }
     /**
      * @Description: TODO 微信用户登录跳转首页
      * @author 王东

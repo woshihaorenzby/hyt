@@ -10,6 +10,7 @@
 			<result name="companyMem">/WEB-INF/jsp/user/companyMem.jsp</result>
 			<result name="userStat">/WEB-INF/jsp/user/userStat.jsp</result>
 			<result name="wxIndex">/WEB-INF/jsp/wx/index.jsp</result>
+			<result name="wxIndexFrame">/WEB-INF/jsp/wx/indexFrame.jsp</result>
 			<result name="wxMobile">/WEB-INF/jsp/wx/mobile.jsp</result>
 			<result name="wxFreeMobile">/WEB-INF/jsp/wx/freeMobile.jsp</result>
 			<result name="wxFreeMobileForm">/WEB-INF/jsp/wx/freeMobileDetails.jsp</result>

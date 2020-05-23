@@ -36,7 +36,7 @@
         if(auditTag == "") auditTag = "0";
         var pushTime = "<s:property value="video.pushTime" />";
         function goConsulation(obj) {
-            window.open('<%=path%>/wxMobileSale/wxConsultation?mobileSale.mobileNum='+obj);
+            window.open('<%=path%>/wxMobileSale/wxConsultation?qr.type=2&mobileSale.mobileNum='+obj);
         }
         function goback() {
             window.open('<%=path%>/hyuser/wxIndex',"_self");
@@ -495,16 +495,4 @@
         </div>
     </div> <!---->
 </div>
-    <script>
-
-    </script>
-    <script type="text/javascript">
-
-    </script>
-    <script type="text/javascript" src="./static/js/vendor.ab79dbb9dd67f926df89.js">
-
-    </script>
-    <script type="text/javascript" src="./static/js/app.8f48683ac530519e1c5f.js">
-
-    </script>
 </body>

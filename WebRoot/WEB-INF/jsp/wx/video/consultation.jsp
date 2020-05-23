@@ -233,7 +233,7 @@
 				</div>
 			</div>
 			<div class="advisoryBodyMiddle"><img
-					src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1569270514665&di=12f5488c57b9fa15faf9b2b113440041&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F13%2F86%2F07%2F56g58PICmJY_1024.jpg">
+					src="<s:property value="qr.url" />">
 			</div>
 			<div class="advisoryBodyBottom">长按二维码咨询您的专属客服</div>
 		</div>

@@ -82,5 +82,6 @@
 	<include file="struts/struts-RecoveryAction.xml" />
 	<include file="struts/struts-CustomizedAction.xml" />
 	<include file="struts/struts-FreeOrder.xml" />
+	<include file="struts/struts-QrAction.xml" />
 
 </struts>

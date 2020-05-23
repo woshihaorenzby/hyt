@@ -1,0 +1,786 @@
+.m_nav{
+    background-color: #fff;
+}
+i {
+    font-style: normal;
+}
+.go_map{
+    background: none !important;
+    margin-right: 54px;
+    margin-top: 10px;
+}
+.esfClose{
+
+    width: 14px;
+
+    position: absolute;
+
+    right: 10px;
+
+    top: 15px;
+}
+.inner_top {
+    height: 42px;
+    width: 100%;
+    max-width: 640px;
+    z-index: 99;
+    border-bottom: 0px;
+    position: absolute;
+    top: 1px;
+    margin-left: 23px;
+    width: auto;
+}
+.map_icon{
+    width: 20px;
+    height: 24px;
+    background: url(https://static.fangxiaoer.com/m/static/images/secicon/map.png) no-repeat;
+    background-size: 100% 100%;
+    /* margin-right: 33px; */
+    margin-top: 0;
+}
+.return{
+    width: 10px;
+    height: 20px;
+    background: url(https://static.fangxiaoer.com/m/static/images/secicon/return.png) no-repeat !important;
+    background-size: 100% 100% !important;
+    left: 15px;
+
+}
+.catalog{
+    width: 20px;
+    height: 18px;
+    background: url(https://static.fangxiaoer.com/m/static/images/secicon/nav.png) no-repeat !important;
+    background-size: 100% 100% !important;
+    right: 21px;
+    top: 13px;
+}
+.seaicon{
+    width: 14px;
+    height: 12px;
+    background: url(https://static.fangxiaoer.com/m/static/images/secicon/search.png) no-repeat;
+    background-size: 100% 100% !important;
+    left: 10px;
+    position: absolute;
+    top: 17px;
+}
+.inner_top input{
+    height: 36px !important;
+    background-color: #f4f5f7;
+    border-radius: 25px;
+    border: 0;
+    margin-top: 4px;
+    padding-left: 28px;
+}
+.inner_top {
+    height: 44px;
+    top: 0px;
+    margin-left: 22px;
+}
+/*头部结束*/
+
+/*头部轮播  图片*/
+.topBanSwiperCont2{
+    width: 100%;
+    height: 75px;
+    position: relative;
+}
+.topBanSwiperCont2 img{
+    width: 100%;
+    height: 75px;
+}
+
+/*内容开始*/
+.topBannerSwiper {
+    margin: 16px auto 0 auto;
+}
+.listBanner {
+    margin-bottom:6px;
+}
+._item {
+    width: 75px;
+}
+._item:first-child{
+    margin-left:29px
+}
+/*.fillter_text {*/
+/*	padding: 0px;*/
+/*	background: url("/images/secicon/fillter_text.png") no-repeat 33px 19px;*/
+/*	background-size: 5px 4px;*/
+/*}*/
+.fillter1_text span:after {
+    border-color: #cccfd800;
+}
+._item:last-child{
+    margin-right: 0 !important;
+}
+.outside a{
+    /* margin: 0; */
+    width: 22%;
+    margin: 0 1.066%;
+    margin-top: -3px;
+    /* margin-right: 2.667%; */
+    /* float: left; */
+    border-radius: 25px;
+    line-height: 28px;
+    height: 28px;
+}
+.outside a:nth-child(4){
+    margin-right: 0;
+}
+.outside {
+    margin: auto;
+    padding: 0 0 0 0;
+}
+.total input::-webkit-input-placeholder {
+    color: #c8c8c8;
+    font-size: 12px;
+}
+.listBanner {
+    margin-bottom: -5px;
+}
+.zhuzhai {
+    padding: 15px 0 !important;
+    margin: 0 15px;
+    padding-bottom: 12px !important;
+}
+.fillter1_select {
+    top: 80px !important;
+}
+.left_tu {
+    width: 108px;
+    height: 82px;
+    border-radius: 5px;
+}
+.esfJx{
+    color: #919496;
+    font-size: 11px;
+    /* position: absolute; */
+    /* left: 15px; */
+    /* bottom: 15px; */
+    /* display: block; */
+    float: left;
+    margin-top: 9px;
+}
+.price {
+    color: #b4b4b4;
+    float: left;
+    font-size: 8pt;
+    text-align: right;
+    margin-top: 0;
+}
+.esfPrice{
+    float: left;
+    font-size: 16px;
+    color: #ff6f28;
+    font-weight: bold;
+    margin-top: 7px;
+    margin-right: 9px;
+}
+.esfPrice i{
+    font-weight: 400;
+    font-style: normal;
+    font-size: 12px;
+}
+.address_span {
+    font-size: 11px;
+    line-height: 11px;
+    height: 11px;
+    color: #545454;
+    margin-top: 12px;
+}
+.charact li {
+    color: #545454 !important;
+    border: 0px solid #ddd;
+    font-size: 10px;
+    background: #f4f5f7;
+    padding: 0px 3px;
+}
+.emIcon-good {
+    background: url(https://static.fangxiaoer.com/m/images/emIcon_god.png) top center;
+    width: 70px;
+    height: 18px;
+    background-size: 100% 100%;
+    display: inline-block;
+    float: left !important;
+    margin-right: 6px;
+}
+.right_info {
+    height: auto;
+    float: left;
+}
+.title {
+    font-size: 15px !important;
+    width: 64.8%;
+    height: auto;
+    font-weight: bold;
+    color: #000000;
+    margin-top: -3px;
+    line-height: 19px !important;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    margin-right: 0;
+}
+.address_span span{
+    float: left;
+    font-size: 11px;
+}
+.address_span span:last-child{
+    margin-left: 8px;
+}
+.address_left span{
+    display: inline-block;
+    margin-right: 3px;
+    margin-top: 9px;
+}
+.esfJcD{
+
+    float: left;
+
+    width: 118px;
+
+    overflow: hidden;
+}
+.ListIconVideo {
+    background: url(https://static.fangxiaoer.com/m/images/ListIconVideo.png);
+    width: 19px;
+    height: 19px;
+    display: block;
+    position: absolute;
+    left: 49px;
+    top: 36px;
+    background-size: 100% 100%;
+}
+.ListIconVr {
+    background: url(https://static.fangxiaoer.com/m/images/ListIconVr.png);
+    width: 18px;
+    height: 20px;
+    display: block;
+    position: absolute;
+    left: 49px;
+    top: 36px;
+    background-size: 100% 100%;
+}
+.listIconTwo {
+    position: absolute;
+    left: 5px;
+    top: 70px;
+    width: 72px;
+    overflow: hidden;
+}
+.listIconTwo .ListIconVideo {
+    position: initial;
+    float: left;
+    margin-left: 4px;
+}
+.listIconOne .ListIconVideo {
+    left: 5px;
+    top: 70px;
+}
+.listIconOne .ListIconVr {
+    left: 5px;
+    top: 70px;
+}
+.esfPrice2{
+    font-size: 14px;
+}
+.zhuzhai {
+
+    border-bottom: 1px solid #e8e8e8;
+
+}
+.fixTop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    background: #fff;
+    width: 100%;
+    padding-bottom: 10px;
+}
+.address_main {
+    color: #545454;
+}
+/*猜你喜欢*/
+.guessList .zz_info .zz_title {
+    font-size: 15px !important;
+    width: 100%;
+    height: auto;
+    font-weight: bold;
+    color: #000000;
+    margin-top: -3px;
+    line-height: 20px !important;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+.guessList .zz_info {
+    height: auto;
+    float: left;
+}
+.address_main {
+    color: #545454;
+    display: inline-block;
+    margin-right: 3px;
+}
+.guessList {
+    background: #fff;
+    padding: 15px;
+}
+.zhuzhais {
+    padding: 15px 0;
+    overflow: hidden;
+    display: block;
+    border-bottom: 1px solid #e8e8e8;
+    position: relative;
+    border-top: 0;
+}
+.charact_dist {
+    display: block;
+    margin-top: 7px;
+    overflow: hidden;
+}
+.guessList li {
+    color: #545454 !important;
+    border: 0px solid #ddd;
+    font-size: 10px;
+    background: #f4f5f7;
+    padding: 1px 3px;
+    margin-right: 4px;
+}
+
+/*二手房无数据列表页*/
+.list .no_info p {
+    background: none !important;
+    background-size: 37px !important;
+    padding-top: 42px !important;
+    color: #757575;
+    font-size: 12px;
+}
+.list .no_info .bnzfBtnNo {
+    display: block;
+    width: 95px;
+    margin: 10px auto;
+    line-height: 32px;
+    border: 1px solid #e2e2e2;
+    color: #ffffff !important;
+    background: url(https://static.fangxiaoer.com/m/static/images/secicon/esfbnzf.png) no-repeat 14px center;
+    margin-right: 0%;
+    background-size: 16px 13px;
+    float: none;
+    margin-left: 13%;
+    padding-left: 16px;
+    margin-top: 4px;
+    font-size: 13px;
+    color: #000;
+    height: 32px;
+    margin: auto;
+    border-radius: 25px;
+    background-color: #ff5200;
+    margin-top: 12px;
+}
+.list .no_info {
+    display: block;
+    margin: 5px auto 39px auto;
+    text-align: center;
+    font-size: 15px;
+    color: #c8c8c8;
+    overflow: hidden;
+}
+.esfFj{
+    height: 10px;
+    background: #f5f5f5;
+}
+.zjzd_title {
+    margin-top: 0;
+    padding-left: 0px;
+    overflow: hidden;
+    padding-bottom: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+/*走势图样式*/
+.esfCharts{
+    margin: 25px 15px;
+    border-radius: 3px;
+    height: 140px;
+    box-shadow: 0px 1px 4px 0px #99999996;
+    /* overflow: hidden; */
+}
+.subInfo ul{
+    overflow: hidden;
+}
+.subInfo li{
+    float: left;
+}
+.esfChart{
+
+}
+.esfChartName{
+
+    margin: 15px 0 15px 15px;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    color: #000000;
+}
+.esfChartXq{
+
+    float: right !important;
+
+    font-size: 12px;
+
+    margin-top: 18px;
+
+    margin-right: 15px;
+}
+.esfChartXq a{
+    color: #999999;
+}
+.esfChart2 li{
+    font-size: 12px;
+    color: #545454;
+}
+.eC2b{
+    margin-left: 15px;
+}
+.eC2b i{
+    color: #ff6f28;
+    /* border-bottom:1px solid #ff6f28 ; */
+    font-weight: bold;
+}
+.eC2S{
+    margin-left: 3.89%;
+}
+.eC2S i{
+    color: #51891b;
+    font-weight: bold;
+}
+.eC2Z{
+    float: right !important;
+    margin-right: 15px;
+}
+.eC2Z i{
+    color: #ff6f28;
+    font-weight: bold;
+}
+.eC2S .b1{
+    width:6px;
+    height: 9px;
+    background: url(https://static.fangxiaoer.com/m/static/images/secicon/esfDown.png) no-repeat;
+    background-size: 100% 100%;
+    display: inline-block;
+    margin: 0 2px;
+}
+.eC2S .b2{
+    width:6px;
+    height: 9px;
+    background: url(https://static.fangxiaoer.com/m/static/images/secicon/esfUp.png) no-repeat;
+    background-size: 100% 100%;
+    display: inline-block;
+    margin: 0 2px;
+}
+.eC2S .i2{
+    color: #f74448;
+}
+
+
+/*筛选项*/
+.more_block, .area_block {
+    height: 300px;
+    /* display: none; */
+    background-color: #f7f7f7;
+    z-index: 999;
+    position: relative;
+}
+.fillter1_select li.on {
+    color: #ff5200;
+    background: none;
+}
+.fillter_1 {
+    width: 50%;
+    float: left;
+    height: auto;
+    overflow: auto;
+    background-color: #fff;
+    z-index: 999;
+    border-right: 0px solid #e0e0e0;
+    margin-left: -1px;
+}
+.fillter1_text span.active:after {
+    background: url(https://static.fangxiaoer.com/m/static/images/secicon/esfUp.png) no-repeat;
+    margin-top: -6px;
+}
+.fillter1_text span {
+    display: inline-block;
+    padding-right: 9px;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-left: 25px;
+    margin-right: 25px;
+    color: #000;
+    background: url("https://static.fangxiaoer.com/m/static/images/secicon/fillter_text.png") no-repeat;
+    background-size: 5px 4px;
+    background-position: right;
+}
+
+/*.fillter_text i {*/
+/*    display: inline-block;*/
+/*    width: 5px;*/
+/*    height: 4px;*/
+/*    background: url(/images/secicon/fillter_text.png) no-repeat;*/
+/*    background-size: 100% 100%;*/
+/*    float: right;*/
+/*}*/
+.fillter1_text {
+    border-right: 0px solid #eaeaeb;
+    height: 40px;
+    line-height: 40px;
+    padding: 0;
+    text-align: left;
+}
+.fillter1_text span.active:after {
+    border-color: transparent transparent #ff520000 transparent;
+    margin-top: -6px;
+    border-color: none;
+}
+.fillter1 .active{
+    background: url(https://static.fangxiaoer.com/m/static/images/secicon/fillter_textUp.png) no-repeat right  !important;
+    background-size: 5px 4px !important;
+}
+.fillter_3 {
+    width: 50%;
+    float: left;
+    height: 300px;
+    overflow: auto;
+    background-color: #fff;
+    z-index: 999;
+}
+.fillter1{
+    display: flex;
+    flex-direction: row;
+}
+.area{
+    height: 300px;
+}
+.areaItems li{
+    text-align: left;
+    margin-left: 30px;
+}
+.areaItem li{
+    text-align: left;
+    margin-left: 30px;
+    border-bottom: 1px solid #e8e8e8;
+}
+.areaItem a:last-child li {
+    border-bottom: 0;
+}
+.wid3{
+    width: 33.33%;
+    float: left;
+    height: 300px;
+    overflow: auto;
+    background-color: #fff;
+    z-index: 999;
+    border-right: 0px solid #e0e0e0;
+    margin-left: -1px;
+}
+.fillter_2 {
+    width: 33.33%;
+    float: left;
+    height: 300px;
+    overflow: auto;
+    background-color: #fff;
+    z-index: 999;
+}
+.arealist li{
+    text-align: left;
+    margin-left: 30px;
+    border-bottom: 1px solid #e8e8e8;
+}
+.arealist a:last-child li{
+    border-bottom: 0;
+
+}
+.subwaylist li{
+    text-align: left;
+    margin-left: 30px;
+    border-bottom: 1px solid #e8e8e8;
+}
+.subwaylist a:last-child li{
+    border-bottom: 0px solid #e8e8e8;
+
+}
+.btn button {
+    width: 42%;
+    margin: 0 5.33%;
+    padding: 11px 0;
+    font-size: 16px;
+    border-radius: 5px;
+    font-family: "微软雅黑";
+    float: left;
+    outline: none;
+    border: none;
+    font-size: 14px;
+}
+.btn button:first-child{
+    margin-right: 0;
+}
+.btn .empty {
+    background: #f7f7f7;
+    color: #545454;
+}
+.btn {
+    display: block;
+    width: 100%;
+    max-width: 640px;
+    padding: 15px 0;
+    text-align: center;
+    background: #fff;
+    border-top: 1px solid #eee;
+    position: absolute;
+    top: 300px;
+    z-index: 99999;
+}
+.subway {
+    height: auto;
+}
+.areaItems{
+    height: auto;
+
+}
+.esfPriqj{
+
+    font-size: 14px;
+
+    color: #333333;
+}
+.esfPriqj i{
+
+    color: #999999;
+}
+.esfPrifw{
+
+    text-align: center;
+
+    margin-bottom: 8px;
+}
+.esfPrifw span{
+    display: inline-block;
+    width: 15px;
+    height: 1px;
+    background-color:  #999999;
+    margin: 0 12px;
+}
+.total input {
+    width: 42%;
+    padding: 12px 0;
+    border: 0;
+    border-bottom: 1px solid #e8e8e8;
+    margin: 0;
+    text-align: center;
+    font-size: 14px;
+    font-family: "微软雅黑";
+    color: #333333;
+    border-radius: 0;
+}
+.fillter1_select li {
+    line-height: 20px;
+    padding: 15px 0;
+    /* border-bottom: 1px solid #eaeaeb; */
+    /*text-align: center;*/
+    z-index: 9999;
+    cursor: pointer;
+}
+.total {
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    line-height: 20px;
+    padding: 10px 0;
+    padding-top: 2px;
+}
+.price_block a:first-child li{
+    padding-top: 2px;
+}
+.layout ul {
+    display: block;
+    padding: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dfdfdf;
+    overflow: hidden;
+}
+.layout ul h3 {
+    display: block;
+    margin: 0;
+    font-size: 14px;
+    color: #333333;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+.layout {
+    padding: 0 29px;
+}
+.layout li {
+    display: block;
+    float: left;
+    font-size: 12px;
+    width: 22%;
+    padding: 0;
+    margin: 5px 1.4%;
+    line-height: 25px;
+    border-bottom: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 7px 0 !important;
+    border: 0;
+    background: #f7f7f7;
+}
+.fillter1_select li.active {
+    color: #ff5200;
+    border: 1px solid #ff5200;
+    border: 0;
+    background: #fff0e9!important;
+}
+.layout ul {
+    display: block;
+    padding: 0;
+    padding-bottom: 10px;
+    border-bottom: 0px solid #dfdfdf;
+    overflow: hidden;
+}
+.more1 ul h3{
+    margin-top: 2px !important;
+}
+#main{
+    display: none;
+    /*margin-top: -14px;*/
+}
+
+.esfzst{
+
+    height: 63px;
+    margin: auto;
+    display: block;
+    margin-top: 10px;
+}
+.esfZwz{
+    display: none;
+}
+.outside a.active {
+    background: url(https://static.fangxiaoer.com/web/images/m/esfActive_03.jpg) no-repeat -11px 0px;
+    background-size: 100% 100%;
+    color: #ff5200;
+    background-color: #fff0e9;
+}

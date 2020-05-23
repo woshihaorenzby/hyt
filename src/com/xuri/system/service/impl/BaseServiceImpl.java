@@ -155,7 +155,9 @@ public class BaseServiceImpl implements BaseService {
 		searchPageUtil.setObject(t);
 		int count = baseDao.getCount(searchPageUtil);
 		page.setTotalRecord(count);
-		page.setPageSize((int)Math.ceil((double)count/(double)page.getPageRecordCount()));
+		if(page.getPageRecordCount()!=0){
+			page.setPageSize((int)Math.ceil((double)count/(double)page.getPageRecordCount()));
+		}
 		searchPageUtil.setPage(page);
 		List<T> list = baseDao.searchPageList(t, searchPageUtil);
 		page.setData(list);

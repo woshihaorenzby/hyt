@@ -155,7 +155,7 @@
             });
         }
         function goConsulation(obj) {
-            window.open('<%=path%>/wxMobileSale/wxConsultation?mobileSale.mobileNum='+obj);
+            window.open('<%=path%>/wxMobileSale/wxConsultation?qr.type=2&mobileSale.mobileNum='+obj);
         }
     </script>
 </head>

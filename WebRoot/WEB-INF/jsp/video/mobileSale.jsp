@@ -198,7 +198,6 @@
                     }
                 });
             }
-            console.log("ids-----------"+ids);
             if (window.confirm("您确认要删除这些信息吗？")) {
                 $.ajax({
                     type: "POST",

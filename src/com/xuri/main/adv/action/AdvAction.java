@@ -33,6 +33,7 @@ public class AdvAction extends BaseAction {
     private CutImg cutImg;
     private String advType;
     private MessageVo messageVo = new MessageVo();
+    private Page page;
 
     @Autowired
     private BaseService baseService;
@@ -348,4 +349,6 @@ public class AdvAction extends BaseAction {
     public void setAdvType(String advType) {
         this.advType = advType;
     }
+
+
 }

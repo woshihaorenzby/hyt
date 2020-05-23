@@ -14,6 +14,7 @@
     <link href="<%=path%>/css/wx/alongsty.css" rel="stylesheet" type="text/css"/>
     <link href="<%=path%>/css/wx/style.css?v=4" rel="stylesheet" type="text/css"/>
     <link href="<%=path%>/css/wx/app.css" rel="stylesheet" type="text/css"/>
+    <link href="<%=path%>/css/wx/secList.css" rel="stylesheet" type="text/css"/>
 
     <script type="text/javascript" src="<%=path%>/js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="<%=path%>/js/wx/kendo.core.min.js"></script>
@@ -23,6 +24,18 @@
     <style type="text/css">
         body {
             background: #F3F3F3;
+        }
+        .area_block{
+            display: none;
+        }
+        .price_block{
+            display: none;
+        }
+        .more_block{
+            display: none;
+        }
+        .type_block{
+            display: none;
         }
     </style>
     <script type="text/javascript">
@@ -50,14 +63,13 @@
                         $("#soldiv").css("display", "block");
                         var appStr = "";
                         for (var i = 0; i < data.length; i++) {
-                            appStr += "<div style='width:" + meiWid + "px;' onclick=\"gotoTypeUrl('" + data[i].webUrl + "', '" + data[i].webUrl + "')\"><img style=\"width:35px;height:35px;\" src=\"<%=path%>" + data[i].typeImg + "\"/><br/>" + data[i].typeName + "</div>";
+                            appStr += "<div  onclick=\"gotoTypeUrl('" + data[i].webUrl + "', '" + data[i].webUrl + "')\"><img style=\"width:35px;height:35px;\" src=\"<%=path%>" + data[i].typeImg + "\"/><br/>" + data[i].typeName + "</div>";
                         }
                         $(".tuiguang_xuanxiang").append(appStr);
                         var num = data.length / 2;
                         num = num.toFixed(0);
                         itemnum = num;
                         var w = ((num * meiWid) + 20) > $(".tuiguang_xuanxiang").parent().width() ? ((num * meiWid) + 20 + "px") : "100%";
-                        $(".tuiguang_xuanxiang").css("width", w);
                         var chw = ((pinWidth * 100 / num * meiWid)).toFixed(0);
                         if (chw < 1) {
                             chw = 1;
@@ -311,6 +323,45 @@
         </div>
     </div>
     <div class="index_nr" style="padding-bottom:60px;">
+        <div  id="fixBox">
+            <div class="fillter1">
+                <div class="fillter1_item">
+                    <div class="fillter1_text">
+                        <span id="selectRegin">区域</span>
+                    </div>
+                </div>
+                <div class="fillter1_item">
+                    <div class="fillter1_text">
+                        <span class="a">售价</span>
+                    </div>
+                </div>
+                <div class="fillter1_item">
+                    <div class="fillter1_text">
+                        <span>户型</span>
+                    </div>
+                </div>
+                <div class="fillter1_item">
+                    <div class="fillter1_text borderrn">
+                        <span>更多</span>
+                    </div>
+                </div>
+
+            </div>
+            <div data-v-70d1dd20="" data-v-3ebe8a19="" class="pullDown">
+                <div data-v-70d1dd20="" class="single">
+                    <div data-v-70d1dd20="" class="pullDown-group"
+                         style="transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1); transition-duration: 0ms; transform: translate(0px, 0px) scale(1) translateZ(0px);">
+                        <ul data-v-70d1dd20="" class="pull-ul" style="pointer-events: auto;">
+                            <li data-v-70d1dd20="" class="pull-li is-select">不限</li>
+                            <li data-v-70d1dd20="" class="pull-li">移动</li>
+                            <li data-v-70d1dd20="" class="pull-li">联通</li>
+                            <li data-v-70d1dd20="" class="pull-li">电信</li>
+                            <li data-v-70d1dd20="" class="pull-li">虚商</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
         <dvi id="ulid"></dvi>
         <div class="w94" id="note" style="text-align:center;vertical-align:middle;display:none"><img
                 src="<%=path%>/images/loader.gif"/></div>
@@ -324,14 +375,16 @@
     position: fixed;
     left: 0;
     right: 0;
-    bottom: 0;">
+    bottom: 0;
+    z-index: 999;
+">
         <a href="<%=path%>/hyuser/wxIndex" style="width: 33.3%">
             <div class="hong"><img src="<%=path%>/images/home_on.png"/><br/>首页</div>
         </a>
         <a href="<%=path%>/wxMobileSale/wxCollectionNums" style="width: 33.3%">
             <div><img src="<%=path%>/images/ku.png"/><br/>收藏夹</div>
         </a>
-        <a href="<%=path%>/wxMobileSale/wxConsultation" style="width: 33.3%">
+        <a href="<%=path%>/wxMobileSale/wxConsultation?qr.type=2" style="width: 33.3%">
             <div style="position:relative"><img src="<%=path%>/images/mine.png"/><br/>咨询</div>
         </a>
     </div>
@@ -385,7 +438,6 @@
             $('#endNumDiv').parent().attr("style", "transform: translate3d(-720px, 0px, 0px); transition-duration: 0ms;");
             searchType = "endNum"
         });
-
         function Allsc() {
             $("#homeContent").css("height", document.body.clientHeight);
             var $w = document.body.clientWidth;
