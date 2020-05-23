@@ -45,7 +45,11 @@ public class CooperationAction extends BaseAction {
 	 */
 	public String wxSave() {
 		try {
-			baseService.insert(cooperation);
+			if(cooperation.getId()==null){
+				baseService.insert(cooperation);
+			}else{
+				baseService.update(cooperation);
+			}
 			messageVo.setCode("1");
 		} catch (Exception e) {
 			e.printStackTrace();

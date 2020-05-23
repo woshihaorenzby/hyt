@@ -45,12 +45,12 @@ function loadData(curPage, refTag){
 			for(var i=0; i<data.length; i++){
 				appStr += "<tr id='"+data[i].id+"' onmouseover='mouseon(this)' onmouseout='mouseout(this)'>";
 				appStr += "<td>"+((curPage-1)*pageRecordCount+i+1)+"</td>";
-				appStr += "<td>"+data[i].company+"</td>";
-				appStr += "<td>"+data[i].content+"</td>";
-				appStr += "<td>"+data[i].cooperationer+"</td>";
-				appStr += "<td>"+data[i].mobile+"</td>";
-				appStr += "<td>"+data[i].createTime+"</td>";
-				appStr += "<td><button onclick='deleteOrder(this)' type='button' class='btn btn-info btn-xs'>删除</button></td></tr>";
+				appStr += "<td id='company"+data[i].id+"'>"+data[i].company+"</td>";
+				appStr += "<td id='content"+data[i].id+"'>"+data[i].content+"</td>";
+				appStr += "<td id='cooperationer"+data[i].id+"'>"+data[i].cooperationer+"</td>";
+				appStr += "<td id='mobile"+data[i].id+"'>"+data[i].mobile+"</td>";
+				appStr += "<td id='createTime"+data[i].id+"'>"+data[i].createTime+"</td>";
+				appStr += "<td><button onclick='updateOrder(this)' type='button' class='btn btn-info btn-xs'>修改</button>&nbsp;<button onclick='deleteOrder(this)' type='button' class='btn btn-info btn-xs'>删除</button></td></tr>";
 			}
 			$("#table_tb").append(appStr);
 			nodata(0);
@@ -82,6 +82,48 @@ function loadData(curPage, refTag){
 			}
 		},error: function(XMLHttpRequest, textStatus, errorThrown) { }
 	});
+	$("#dialog-edit").dialog({
+		autoOpen:false,
+		height:600,
+		width:600,
+		modal:true,
+		resizable:false,
+		buttons:{
+			"确定":function(){
+				let company = $("#company").val();
+				let content = $("#content").val();
+				let cooperationer = $("#cooperationer").val();
+				let mobile = $("#mobile").val();
+				let createTime = $("#createTime").val();
+				$.ajax({
+					type:"post",
+					url:"<%=path%>/cooperation/wxSave",
+					dataType:"json",
+					data: {
+						"cooperation.company" :company,
+						"cooperation.content" :content,
+						"cooperation.cooperationer" :cooperationer,
+						"cooperation.mobile" :mobile,
+						"cooperation.createTime" :createTime,
+						"cooperation.id" :selId,
+					},
+					success:function(data){
+						if(data.code=="1"){
+							msgSuccessReload("保存成功");
+						}else{
+							msgError("保存失败，请稍后重试");
+						}
+					}
+				});
+			},
+			"取消": function(){
+				$(this).dialog("close");
+			}
+		},
+		close:function(){
+			$(this).dialog("close");
+		}
+	});
 }
 function deleteOrder(obj) {
 	var id = $(obj).parent().parent().attr("id");
@@ -99,12 +141,28 @@ function deleteOrder(obj) {
 			}
 		});
 	}
-}
+};
+	function updateOrder(obj) {
+		selId = $(obj).parent().parent().attr("id");
+		let company = $("#company"+selId).text();
+		let content = $("#content"+selId).text();
+		let cooperationer = $("#cooperationer"+selId).text();
+		let mobile = $("#mobile"+selId).text();
+		let createTime = $("#createTime"+selId).text();
+		$("#company").val(company);
+		$("#content").val(content);
+		$("#cooperationer").val(cooperationer);
+		$("#mobile").val(mobile);
+		$("#createTime").val(createTime);
+		$("#dialog-edit").dialog("option", "title", "编辑商务合作").dialog("open");
+
+	}
+
 </script>
 </head>
 <body class="bodyst">
 <div class="content_head">
-	<font class="head_font">意见反馈</font>
+	<font class="head_font">商务合作</font>
 </div>
 <div class="table_content" style="margin-top:10px;">
 	<table class="table" style="margin-top:5px;">
@@ -125,4 +183,29 @@ function deleteOrder(obj) {
 	<div id="fenPaper" style="padding-right:20px;"></div>
 	<div id="noPaper" class="nodata">没有查询到任何数据</div>
 </div>
+<div id="dialog-edit" title="编辑商务合作">
+	<table class="form_table">
+		<tr>
+			<td class="table_text">企业名称：</td>
+			<td><input id="company" class="form-control" type="text" style="width:200px;"></td>
+		</tr>
+		<tr>
+			<td class="table_text">合作方案说明：</td>
+			<td><input id="content" class="form-control" type="text" style="width:200px;"></td>
+		</tr>
+		<tr>
+			<td class="table_text">项目联系人：</td>
+			<td><input id="cooperationer" class="form-control" type="text" style="width:200px;"></td>
+		</tr>
+		<tr>
+			<td class="table_text">项目联系方式：</td>
+			<td><input id="mobile" class="form-control" type="text" style="width:200px;"></td>
+		</tr>
+		<tr>
+			<td class="table_text">时间：</td>
+			<td><input id="createTime" readonly="readonly" class="form-control" type="text" style="width:200px;"></td>
+		</tr>
+	</table>
+</div>
+</body>
 </html>
