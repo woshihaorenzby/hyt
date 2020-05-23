@@ -45,7 +45,11 @@ public class RecoveryAction extends BaseAction {
 	 */
 	public String wxSave() {
 		try {
-			baseService.insert(recovery);
+			if(recovery.getId()==null){
+				baseService.insert(recovery);
+			}else{
+				baseService.update(recovery);
+			}
 			messageVo.setCode("1");
 		} catch (Exception e) {
 			e.printStackTrace();

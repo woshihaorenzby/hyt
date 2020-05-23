@@ -13,6 +13,9 @@
 
     	INSERT INTO bs_recovery (saleNumber, createTime,details,contact) VALUES (#{saleNumber}, NOW(), #{details}, #{contact})
     </insert>
+    <update id="recovery_update" parameterType="recovery">
+    	UPDATE bs_recovery SET saleNumber=#{saleNumber},createTime=#{createTime},details=#{details},contact=#{contact} WHERE id=#{id}
+    </update>
     <delete id="recovery_delete" parameterType="advice">
     	DELETE FROM bs_recovery WHERE id=#{id}
     </delete>
