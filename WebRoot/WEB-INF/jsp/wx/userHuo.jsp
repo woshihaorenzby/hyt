@@ -75,7 +75,7 @@
                             appStr += "<tr style='border-bottom:1px solid #e1e1e1;height:30px;'>";
                             appStr += "<td style='border-right:1px solid #e1e1e1;'>"+data[i].niName+"</td>";
                             appStr += "<td style='border-right:1px solid #e1e1e1;color:#018EE8;'>"+data[i].title+"</td>";
-                            appStr += "<td>"+data[i].createTime+"</td>";
+                            appStr += "<td>"+(data[i].createTime).replace("T0"," ")+"</td>";
                             appStr += "</tr>";
                         }
                         $("#huoBody").append(appStr);

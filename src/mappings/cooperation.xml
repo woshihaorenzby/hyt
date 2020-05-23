@@ -14,7 +14,7 @@
     	INSERT INTO bs_cooperation (content, createTime,company,cooperationer,mobile) VALUES (#{content}, NOW(), #{company}, #{cooperationer}, #{mobile})
     </insert>
     <update id="cooperation_update" parameterType="cooperation">
-    	UPDATE bs_cooperation SET content=#{content},createTime=#{createTime},company=#{company},cooperationer=#{cooperationer},mobile=#{mobile} WHERE id=#{id}
+    	UPDATE bs_cooperation SET content=#{content},company=#{company},cooperationer=#{cooperationer},mobile=#{mobile} WHERE id=#{id}
     </update>
     <delete id="cooperation_delete" parameterType="advice">
     	DELETE FROM bs_cooperation WHERE id=#{id}

@@ -46,7 +46,11 @@ public class AdviceAction extends BaseAction {
 	 */
 	public String save() {
 		try {
-			baseService.insert(advice);
+			if(advice.getId()==null){
+				baseService.insert(advice);
+			}else{
+				baseService.update(advice);
+			}
 			messageVo.setCode("1");
 		} catch (Exception e) {
 			e.printStackTrace();

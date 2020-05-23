@@ -45,7 +45,11 @@ public class CustomizedAction extends BaseAction {
 	 */
 	public String wxSave() {
 		try {
-			baseService.insert(customized);
+			if(customized.getId()==null){
+				baseService.insert(customized);
+			}else{
+				baseService.update(customized);
+			}
 			messageVo.setCode("1");
 		} catch (Exception e) {
 			e.printStackTrace();

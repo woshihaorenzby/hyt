@@ -13,6 +13,9 @@
 
     	INSERT INTO bs_customized (province, createTime,city,mobile,details,contact) VALUES (#{province}, NOW(), #{city}, #{mobile}, #{details}, #{contact})
     </insert>
+    <update id="customized_update" parameterType="customized">
+    	UPDATE bs_customized SET province=#{province}, city=#{city}, mobile=#{mobile} , details=#{details}, contact=#{contact} WHERE id=#{id}
+    </update>
     <delete id="customized_delete" parameterType="customized">
     	DELETE FROM bs_customized WHERE id=#{id}
     </delete>

@@ -49,7 +49,7 @@ function loadData(curPage, refTag){
 				appStr += "<td id='content"+data[i].id+"'>"+data[i].content+"</td>";
 				appStr += "<td id='cooperationer"+data[i].id+"'>"+data[i].cooperationer+"</td>";
 				appStr += "<td id='mobile"+data[i].id+"'>"+data[i].mobile+"</td>";
-				appStr += "<td id='createTime"+data[i].id+"'>"+data[i].createTime+"</td>";
+				appStr += "<td id='createTime"+data[i].id+"'>"+(data[i].createTime).replace("T0"," ")+"</td>";
 				appStr += "<td><button onclick='updateOrder(this)' type='button' class='btn btn-info btn-xs'>修改</button>&nbsp;<button onclick='deleteOrder(this)' type='button' class='btn btn-info btn-xs'>删除</button></td></tr>";
 			}
 			$("#table_tb").append(appStr);

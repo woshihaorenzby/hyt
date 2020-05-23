@@ -81,7 +81,7 @@
                         appStr += "<tr data-id='"+data[i].mobileId+"' id='" + data[i].id + "' onmouseover='mouseon(this)' onmouseout='mouseout(this)'>";
                         appStr += "<td><input type='checkbox' class='checkbox' value="+data[i].id+"></input></td>";
                         appStr += "<td>" + ((curPage - 1) * pageRecordCount + i + 1) + "</td>";
-                        appStr += "<td>" + data[i].createTime + "</td>";
+                        appStr += "<td>" + (data[i].createTime).replace("T0"," ") + "</td>";
                         appStr += "<td>" + data[i].mobileSale.mobileNum + "</td>";
                         appStr += "<td>" + data[i].mobileSale.province + data[i].mobileSale.city + "</td>";
                         appStr += "<td>" + data[i].mobileSale.price + "</td>";

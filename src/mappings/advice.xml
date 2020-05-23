@@ -13,6 +13,10 @@
 
     	INSERT INTO bs_advice (content, userId, createTime,contactInformation,saler,needContent) VALUES (#{content}, #{userId}, NOW(), #{contactInformation}, #{saler}, #{needContent})
     </insert>
+    <insert id="advice_update" parameterType="advice">
+
+    	update  bs_advice set  content = #{content}, contactInformation = #{contactInformation},saler = #{saler},needContent = #{needContent}  where id=#{id}
+    </insert>
     <delete id="advice_delete" parameterType="advice">
     	DELETE FROM bs_advice WHERE id=#{id}
     </delete>

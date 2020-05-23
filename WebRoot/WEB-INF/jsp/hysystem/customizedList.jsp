@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="<%=path%>/js/msgbox/msgbox.css"></link>
     <link rel="stylesheet" type="text/css" href="<%=path%>/css/smartpaginator.css"></link>
 	<link rel="stylesheet" type="text/css" href="<%=path%>/css/zTreeStyle/zTreeStyle.css">
+	<script type="text/javascript" src="<%=path%>/js/area.js"></script>
 	<script>
 		var cxtPath = "<%=path%>";
 	</script>
@@ -44,13 +45,13 @@ function loadData(curPage, refTag){
 			var appStr = "";
 			for(var i=0; i<data.length; i++){
 				appStr += "<tr id='"+data[i].id+"' onmouseover='mouseon(this)' onmouseout='mouseout(this)'>";
-				appStr += "<td>"+((curPage-1)*pageRecordCount+i+1)+"</td>";
-				appStr += "<td>"+data[i].province+"-"+data[i].city+"</td>";
-				appStr += "<td>"+data[i].mobile+"</td>";
-				appStr += "<td>"+data[i].details+"</td>";
-				appStr += "<td>"+data[i].contact+"</td>";
-				appStr += "<td>"+(data[i].createTime).replace("T0"," ")+"</td>";
-				appStr += "<td><button onclick='deleteOrder(this)' type='button' class='btn btn-info btn-xs'>删除</button></td></tr>";
+				appStr += "<td >"+((curPage-1)*pageRecordCount+i+1)+"</td>";
+				appStr += "<td id='provinceCity"+data[i].id+"'>"+data[i].province+"-"+data[i].city+"</td>";
+				appStr += "<td id='mobile"+data[i].id+"'>"+data[i].mobile+"</td>";
+				appStr += "<td id='details"+data[i].id+"'>"+data[i].details+"</td>";
+				appStr += "<td id='contact"+data[i].id+"'>"+data[i].contact+"</td>";
+				appStr += "<td id='createTime"+data[i].id+"'>"+(data[i].createTime).replace("T0"," ")+"</td>";
+				appStr += "<td><button onclick='updateOrder(this)' type='button' class='btn btn-info btn-xs'>修改</button>&nbsp;<button onclick='deleteOrder(this)' type='button' class='btn btn-info btn-xs'>删除</button></td></tr>";
 			}
 			$("#table_tb").append(appStr);
 			nodata(0);
@@ -82,6 +83,50 @@ function loadData(curPage, refTag){
 			}
 		},error: function(XMLHttpRequest, textStatus, errorThrown) { }
 	});
+	$("#dialog-edit").dialog({
+		autoOpen:false,
+		height:600,
+		width:600,
+		modal:true,
+		resizable:false,
+		buttons:{
+			"确定":function(){
+				let province = $("#province").val();
+				let mobile = $("#mobile").val();
+				let city = $("#city").val();
+				let details = $("#details").val();
+				let contact = $("#contact").val();
+				let createTime = $("#createTime").val();
+				$.ajax({
+					type:"post",
+					url:"<%=path%>/customized/wxSave",
+					dataType:"json",
+					data: {
+						"customized.province" :province,
+						"customized.mobile" :mobile,
+						"customized.city" :city,
+						"customized.details" :details,
+						"customized.contact" :contact,
+						"customized.createTime" :createTime,
+						"customized.id" :selId,
+					},
+					success:function(data){
+						if(data.code=="1"){
+							msgSuccessReload("保存成功");
+						}else{
+							msgError("保存失败，请稍后重试");
+						}
+					}
+				});
+			},
+			"取消": function(){
+				$(this).dialog("close");
+			}
+		},
+		close:function(){
+			$(this).dialog("close");
+		}
+	});
 }
 function deleteOrder(obj) {
 	var id = $(obj).parent().parent().attr("id");
@@ -100,11 +145,29 @@ function deleteOrder(obj) {
 		});
 	}
 }
+function updateOrder(obj) {
+	selId = $(obj).parent().parent().attr("id");
+	let province = $("#provinceCity"+selId).text().split("-")[0];
+	let mobile = $("#mobile"+selId).text();
+	let city =$("#provinceCity"+selId).text().split("-")[1];
+	let details = $("#details"+selId).text();
+	let contact = $("#contact"+selId).text();
+	let createTime = $("#createTime"+selId).text();
+	$("#province").val(province);
+	$("#mobile").val(mobile);
+	$("#city").val(city);
+	$("#details").val(details);
+	$("#contact").val(contact);
+	$("#createTime").val(createTime);
+	$("#dialog-edit").dialog("option", "title", "编辑靓号定制").dialog("open");
+	addressInit("province","city","",province!=null&&province!=undefined&&province!=''?province:'请选择',city!=null&&city!=undefined&&city!=''?city:'请选择');
+
+}
 </script>
 </head>
 <body class="bodyst">
 <div class="content_head">
-	<font class="head_font">意见反馈</font>
+	<font class="head_font">靓号定制</font>
 </div>
 <div class="table_content" style="margin-top:10px;">
 	<table class="table" style="margin-top:5px;">
@@ -125,4 +188,33 @@ function deleteOrder(obj) {
 	<div id="fenPaper" style="padding-right:20px;"></div>
 	<div id="noPaper" class="nodata">没有查询到任何数据</div>
 </div>
+<div id="dialog-edit" title="编辑靓号定制">
+	<table class="form_table">
+		<tr>
+			<td class="table_text">归属地-省：</td>
+			<td><select id="province" class="form-control" type="text" style="width:200px;"></select></td>
+		</tr>
+		<tr>
+			<td class="table_text">归属地-市：</td>
+			<td><select id="city" class="form-control" type="text" style="width:200px;"></select></td>
+		</tr>
+		<tr>
+			<td class="table_text">定制手机号：</td>
+			<td><input id="mobile" class="form-control" type="text" style="width:200px;"></td>
+		</tr>
+		<tr>
+			<td class="table_text">手机详情：</td>
+			<td><input id="details" class="form-control" type="text" style="width:200px;"></td>
+		</tr>
+		<tr>
+			<td class="table_text">联系方式：</td>
+			<td><input id="contact" class="form-control" type="text" style="width:200px;"></td>
+		</tr>
+		<tr>
+			<td class="table_text">时间：</td>
+			<td><input id="createTime" readonly="readonly" class="form-control" type="text" style="width:200px;"></td>
+		</tr>
+	</table>
+</div>
+</body>
 </html>
