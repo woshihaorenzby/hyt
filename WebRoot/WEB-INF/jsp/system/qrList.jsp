@@ -115,7 +115,7 @@ function add() {
 	$("#imagePath").attr("filePath", "");
 	$("#webUrl").val("");
 	$("#rid").val("");
-	$("#dialog-edit").dialog("option", "title", "添加类别").dialog("open");
+	$("#dialog-edit").dialog("option", "title", "添加二维码").dialog("open");
 }
 function deleteOrder(obj) {
 	var id = $(obj).parent().parent().attr("id");
@@ -143,7 +143,7 @@ function updateOrder(obj) {
 	var appStr = "<div class='delault-image' style='float:left;margin-left:10px;' imgfile='"+typeImg+"'><img src='"+typeImg+"' style='position:absolute;margin-top:0px;margin-left:180px;width:18px;cursor:pointer;' onclick='removeImg(this)'/><img src='"+typeImg+"' style='width:200px;' /></div>";
 	$(".delault-image").remove();
 	$(".form-group").append(appStr);
-	$("#dialog-edit").dialog("option", "title", "修改类别").dialog("open");
+	$("#dialog-edit").dialog("option", "title", "修改二维码").dialog("open");
 
 }
 //上传图片
@@ -201,7 +201,7 @@ function uploadHtml(fileType, obj){
 	</table>
 	<div id="noPaper" class="nodata">没有查询到任何数据</div>
 </div>
-<div id="dialog-edit" title="添加类别">
+<div id="dialog-edit" title="编辑二维码">
 	<table class="form_table">
 		<tr>
 			<td class="table_text" style="vertical-align : middle;">图片：</td>

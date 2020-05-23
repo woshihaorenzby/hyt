@@ -15,6 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="<%=path%>/css/zTreeStyle/zTreeStyle.css">
 	<script>
 		var cxtPath = "<%=path%>";
+		var ctxPath = "<%=path%>";
 	</script>
 	<script type="text/javascript" src="<%=path%>/js/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript" src="<%=path%>/js/jquery-ui-1.10.3.custom.min.js"></script>
@@ -28,6 +29,7 @@
 	<script type="text/javascript" src="<%=path%>/js/msgbox/alertmsg.js"></script>
 <script>
 var pageRecordCount = 15;
+var selId = "";
 $(function(){
 	loadData(1, true);
 });
@@ -45,12 +47,12 @@ function loadData(curPage, refTag){
 			for(var i=0; i<data.length; i++){
 				appStr += "<tr id='"+data[i].id+"' onmouseover='mouseon(this)' onmouseout='mouseout(this)'>";
 				appStr += "<td>"+((curPage-1)*pageRecordCount+i+1)+"</td>";
-				appStr += "<td>"+data[i].saler+"</td>";
-				appStr += "<td>"+data[i].content+"</td>";
-				appStr += "<td>"+data[i].needContent+"</td>";
-				appStr += "<td>"+data[i].contactInformation+"</td>";
-				appStr += "<td>"+data[i].createTime+"</td>";
-				appStr += "<td><button onclick='deleteOrder(this)' type='button' class='btn btn-info btn-xs'>删除</button></td></tr>";
+				appStr += "<td id='saler"+data[i].id+"'>"+data[i].saler+"</td>";
+				appStr += "<td id='content"+data[i].id+"'>"+data[i].content+"</td>";
+				appStr += "<td id='needContent"+data[i].id+"'>"+data[i].needContent+"</td>";
+				appStr += "<td id='contactInformation"+data[i].id+"'>"+data[i].contactInformation+"</td>";
+				appStr += "<td id='createTime"+data[i].id+"'>"+data[i].createTime+"</td>";
+				appStr += "<td><button onclick='updateOrder(this)' type='button' class='btn btn-info btn-xs'>修改</button>&nbsp;<button onclick='deleteOrder(this)' type='button' class='btn btn-info btn-xs'>删除</button></td></tr>";
 			}
 			$("#table_tb").append(appStr);
 			nodata(0);
@@ -82,6 +84,49 @@ function loadData(curPage, refTag){
 			}
 		},error: function(XMLHttpRequest, textStatus, errorThrown) { }
 	});
+
+	$("#dialog-edit").dialog({
+		autoOpen:false,
+		height:600,
+		width:600,
+		modal:true,
+		resizable:false,
+		buttons:{
+			"确定":function(){
+				let saler = $("#saler").val();
+				let content = $("#content").val();
+				let needContent = $("#needContent").val();
+				let contactInformation = $("#contactInformation").val();
+				let createTime = $("#createTime").val();
+				$.ajax({
+					type:"post",
+					url:"<%=path%>/advice/save",
+					dataType:"json",
+					data: {
+						"advice.saler" :saler,
+						"advice.content" :content,
+						"advice.needContent" :needContent,
+						"advice.contactInformation" :contactInformation,
+						"advice.createTime" :createTime,
+						"advice.id" :selId,
+					},
+					success:function(data){
+						if(data.code=="1"){
+							msgSuccessReload("保存成功");
+						}else{
+							msgError("保存失败，请稍后重试");
+						}
+					}
+				});
+			},
+			"取消": function(){
+				$(this).dialog("close");
+			}
+		},
+		close:function(){
+			$(this).dialog("close");
+		}
+	});
 }
 function deleteOrder(obj) {
 	var id = $(obj).parent().parent().attr("id");
@@ -99,6 +144,21 @@ function deleteOrder(obj) {
 			}
 		});
 	}
+}
+function updateOrder(obj) {
+	selId = $(obj).parent().parent().attr("id");
+	let saler = $("#saler"+selId).text();
+	let content = $("#content"+selId).text();
+	let needContent = $("#needContent"+selId).text();
+	let contactInformation = $("#contactInformation"+selId).text();
+	let createTime = $("#createTime"+selId).text();
+	$("#saler").val(saler);
+	$("#content").val(content);
+	$("#needContent").val(needContent);
+	$("#contactInformation").val(contactInformation);
+	$("#createTime").val(createTime);
+	$("#dialog-edit").dialog("option", "title", "编辑意见反馈").dialog("open");
+
 }
 </script>
 </head>
@@ -125,4 +185,29 @@ function deleteOrder(obj) {
 	<div id="fenPaper" style="padding-right:20px;"></div>
 	<div id="noPaper" class="nodata">没有查询到任何数据</div>
 </div>
+<div id="dialog-edit" title="编辑投诉意见">
+	<table class="form_table">
+		<tr>
+			<td class="table_text">业务员：</td>
+			<td><input id="saler" class="form-control" type="text" style="width:200px;"></td>
+		</tr>
+		<tr>
+			<td class="table_text">投诉内容或建议：</td>
+			<td><input id="content" class="form-control" type="text" style="width:200px;"></td>
+		</tr>
+		<tr>
+			<td class="table_text">诉求：</td>
+			<td><input id="needContent" class="form-control" type="text" style="width:200px;"></td>
+		</tr>
+		<tr>
+			<td class="table_text">联系方式：</td>
+			<td><input id="contactInformation" class="form-control" type="text" style="width:200px;"></td>
+		</tr>
+		<tr>
+			<td class="table_text">时间：</td>
+			<td><input id="createTime" readonly="readonly" class="form-control" type="text" style="width:200px;"></td>
+		</tr>
+	</table>
+</div>
+</body>
 </html>
