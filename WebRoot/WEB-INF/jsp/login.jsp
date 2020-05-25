@@ -8,7 +8,7 @@ String path = request.getContextPath();
 	<meta content="IE=11.0000" http-equiv="X-UA-Compatible" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="GENERATOR" content="MSHTML 11.00.9600.17496" />
-	<title>选号网后台管理系统</title>
+	<title>选卡网后台管理系统</title>
     <link rel="stylesheet" type="text/css" href="<%=path%>/js/msgbox/msgbox.css"></link>
 	<script type="text/javascript" src="<%=path%>/js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="<%=path%>/js/msgbox/msgbox.js"></script>
@@ -181,7 +181,7 @@ function login(){
 </head> 
 <body>
 	<div class="top_div" style="text-align:center;">
-		<h1 style="color:white;padding-top:100px;font-size:30px;">选号网后台管理系统</h1>
+		<h1 style="color:white;padding-top:100px;font-size:30px;">选卡网后台管理系统</h1>
 	</div>
 	<div style="background: rgb(255, 255, 255); margin: -100px auto auto; border: 1px solid rgb(231, 231, 231); border-image: none; width: 400px; height: 200px; text-align: center;">
 		<div style="width: 165px; height: 96px; position: absolute;">

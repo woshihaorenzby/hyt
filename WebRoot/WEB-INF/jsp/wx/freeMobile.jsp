@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="viewport"
       content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-<title>选号网-微信推广神器</title>
+<title>选卡网-微信推广神器</title>
 <link href="<%=path%>/css/wx/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <link href="<%=path%>/css/wx/alongsty.css" rel="stylesheet" type="text/css"/>
 <link href="<%=path%>/css/wx/style.css?v=4" rel="stylesheet" type="text/css"/>
@@ -196,7 +196,7 @@ function loadData() {
             "mobileSale.hasSale":0,
             "mobileSale.mobileNum":number,
             "mobileSale.searchType":searchType,
-            "mobileSale.free":1
+            "mobileSale.free":3
 
         },
         success: function (data) {

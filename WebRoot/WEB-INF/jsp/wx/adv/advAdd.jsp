@@ -10,7 +10,7 @@ String path = request.getContextPath();
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 	<meta http-equiv="Pragma" content="no-cache" />
 	<meta http-equiv="Expires" content="0" />
-	<title>选号网-微信推广神器</title>
+	<title>选卡网-微信推广神器</title>
     <link href="<%=path%>/css/wx/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="<%=path%>/css/wx/alongsty.css" rel="stylesheet" type="text/css" />
 	<link href="<%=path%>/css/wx/style.css" rel="stylesheet" type="text/css" />
@@ -216,7 +216,7 @@ $(document).ready(function(){
 	<!--新增广告协议-->
 	<p class="text-center h35 lanse">
 	    <input type="checkbox" id="tipId" checked="checked" />
-	    <a target="_blank" href="<%=path%>/hyuser/wxUserXie"><span class="m-left5 m-top-5" >同意选号网用户协议</span></a>
+	    <a target="_blank" href="<%=path%>/hyuser/wxUserXie"><span class="m-left5 m-top-5" >同意选卡网用户协议</span></a>
 	</p>
 </form>
 </body>

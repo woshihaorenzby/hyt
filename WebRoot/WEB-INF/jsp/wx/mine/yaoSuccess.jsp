@@ -38,7 +38,7 @@ function inPage() {
 <div style="text-align:center;">
 	<span style="margin-left:auto;margin-right:auto;font-size:18px;"><s:property value="messageVo.message" /></span>
 	<div onclick="inPage();" style="margin-left:auto;margin-right:auto;margin-top:50px;width:100px;padding-top:5px;padding-bottom:5px;border:1px solid #325f7e;border-radius:5px;color:#325f7e;">
-		进入选号网
+		进入选卡网
 	</div>
 </div>
 </body>

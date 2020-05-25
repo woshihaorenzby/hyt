@@ -202,7 +202,7 @@ function loadData() {
             "page.order" : order,
             "page.orderBy" : orderBy,
             "mobileSale.hasSale":0,
-            "mobileSale.free":1,
+            "mobileSale.free":2,
             "mobileSale.mobileNum":number,
             "mobileSale.searchType":searchType,
             "mobileSale.operator":operator,
@@ -288,7 +288,7 @@ var col_scroll = function(){
 </head>
 <body id="homeContent">
 <div class="tuiTitle">
-    <div class="tuiTileCenter">手机靓号</div>
+    <div class="tuiTileCenter">风水能量号</div>
 </div>
 
 <div data-v-2a84ec57="" id="homeWrapper" class="home-wrapper child-view" style="top:2px">

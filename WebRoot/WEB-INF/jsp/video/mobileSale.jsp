@@ -96,28 +96,19 @@
                         } else {
                             appStr += "<td>" + data[i].details + "</td>";
                         }
-                        <%--				if(syInsert == "1") {--%>
-                        <%--					var videoSyInsert = data[i].syInsert;--%>
-                        <%--					var userName;--%>
-                        <%--					if(videoSyInsert == "1") {--%>
-                        <%--						userName = data[i].userName;--%>
-                        <%--					} else if(videoSyInsert == "0") {--%>
-                        <%--						userName = data[i].niName;--%>
-                        <%--					}--%>
-                        <%--					appStr += "<td>"+userName+"</td>";--%>
-                        <%--/*					if(auditTag=="0") {//控制审核是否显示--%>
-                        <%--						if(data[i].auditTag=="1"){--%>
-                        <%--							appStr += "<td><img src='<%=path%>/images/button/check_alt.png' width=18 style='cursor:pointer;' hidetag='1' onclick='updateTag(this, \"auditTag\", \"hy_video\")'/></td>";--%>
-                        <%--						}else{--%>
-                        <%--							appStr += "<td><img src='<%=path%>/images/button/x_alt.png' width=18 style='cursor:pointer;'  hidetag='0' onclick='updateTag(this, \"auditTag\", \"hy_video\")'/></td>";--%>
-                        <%--						}--%>
-                        <%--					}--%>
-                        <%--					if(data[i].topShow=="1"){--%>
-                        <%--						appStr += "<td><img src='<%=path%>/images/button/check_alt.png' width=18 style='cursor:pointer;' hidetag='1' onclick='updateTag(this, \"topShow\", \"hy_video\")'/></td>";--%>
-                        <%--					}else{--%>
-                        <%--						appStr += "<td><img src='<%=path%>/images/button/x_alt.png' width=18 style='cursor:pointer;'  hidetag='0' onclick='updateTag(this, \"topShow\", \"hy_video\")'/></td>";--%>
-                        <%--					}*/--%>
-                        <%--				}--%>
+                        let freeStr = "普通";
+                        switch (data[i].free+'') {
+                            case '1':
+                                freeStr = "靓号";
+                                break;
+                            case '2':
+                                freeStr = "风水";
+                                break;
+                            case '3':
+                                freeStr = "免费";
+                                break;
+                        }
+                        appStr += "<td>" + freeStr + "</td>";
                         appStr += "<td><button onclick='updateOrder(this)' type='button' class='btn btn-info btn-xs'>修改</button>&nbsp;<button onclick='deleteOrder(this)' type='button' class='btn btn-info btn-xs'>删除</button></td></tr>";
                     }
                     $("#table_tb").append(appStr);
@@ -261,8 +252,10 @@
     height: 31px;
     border-right-width: 8px;
 ">
-            <option value="1"  >免费号码 </option>
-            <option value="0"  >靓号</option>
+            <option value="0"  >普通</option>
+            <option value="1"  >靓号 </option>
+            <option value="2"  >风水 </option>
+            <option value="3"  >免费 </option>
             <option value="-1" selected = "selected" >全部</option>
         </select>
     </div>
@@ -296,6 +289,7 @@
             <th style="width:5%;">最低消费</th>
             <th style="width:5%;">是否已经卖出</th>
             <th style="width:15%;">详情介绍</th>
+            <th style="width:15%;">类型</th>
             <th style="width:15%;">操作</th>
         </tr>
         </thead>
@@ -305,7 +299,7 @@
     <div id="fenPaper" style="padding-right:20px;"></div>
     <div id="noPaper" class="nodata">没有查询到任何数据</div>
 </div>
-<div id="dialog-edit" title="添加类别" style="width: auto; min-height: 0px; max-height: none; height: 300px;">
+<div id="dialog-edit" title="编辑手机号" style="width: auto; min-height: 0px; max-height: none; height: 300px;">
 	<table class="form_table" style ="height:300px;width:auto">
 		<%--		<tr>--%>
 		<%--			<td class="table_text">类别名称：</td>--%>

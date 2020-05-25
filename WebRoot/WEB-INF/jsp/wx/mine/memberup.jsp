@@ -133,7 +133,7 @@ $("#buyVip").click(function(){
 		}*/
 	}
 	if(!$('#agreeId').is(':checked')){
-		$("#error").html("您还未同意《选号网系统在线使用服务协议》！");
+		$("#error").html("您还未同意《选卡网系统在线使用服务协议》！");
  		$("#error").show();
   		return false;
   	}
@@ -240,7 +240,7 @@ $("#buyVip").click(function(){
 		    </ul>
 	    </div>
 		<div class="clear h20"></div>
-		<!--<div style="width:90%; margin:auto;">促销提示：2.6-2.28日春节期间，升级选号网的任意版本，只需一年费用，即可额外再获两年的免费使用权。</div>-->
+		<!--<div style="width:90%; margin:auto;">促销提示：2.6-2.28日春节期间，升级选卡网的任意版本，只需一年费用，即可额外再获两年的免费使用权。</div>-->
 
 		<div style="width:90%; margin:auto;height:3px; background-color:#FF0909"></div>
 		
@@ -289,7 +289,7 @@ $("#buyVip").click(function(){
 		<div style="width:90%; margin:auto; text-align:center;">
 			<div class="h15"></div>
 			<span><input id="agreeId" type="checkbox" checked="checked"/></span>
-			<a target="_blank" href="<%=path%>/hyuser/wxUserXie"><span style="padding-left:10px;color:#777;">我已经阅读并完全同意<span style="color:#eb3838">《选号网系统在线使用服务协议》</span></span></a>
+			<a target="_blank" href="<%=path%>/hyuser/wxUserXie"><span style="padding-left:10px;color:#777;">我已经阅读并完全同意<span style="color:#eb3838">《选卡网系统在线使用服务协议》</span></span></a>
 		</div>
 		<div class="h20"></div>
 		<button type="button" id="buyVip" class="btn btn-hong">

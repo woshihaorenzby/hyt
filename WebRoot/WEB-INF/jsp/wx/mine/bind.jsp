@@ -137,7 +137,7 @@ function subInf() {
 </div>
 <div class="h15"></div>
 <div style="padding-left:15px; line-height:30px;" class="w90 shuoming">
-	为了加强“选号网”平台用户数据安全管理，规避潜在的政策风险，即日起“选号网”所有未验证的用户需要先进行手机号码的验证，才能正常使用，给大家带来的不便，敬请谅解。 <br/><center>  选号网   2016.4.21</center>
+	为了加强“选卡网”平台用户数据安全管理，规避潜在的政策风险，即日起“选卡网”所有未验证的用户需要先进行手机号码的验证，才能正常使用，给大家带来的不便，敬请谅解。 <br/><center>  选卡网   2016.4.21</center>
 </div>
 </body>
 </html>

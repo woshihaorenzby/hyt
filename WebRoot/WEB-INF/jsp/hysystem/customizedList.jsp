@@ -91,9 +91,9 @@ function loadData(curPage, refTag){
 		resizable:false,
 		buttons:{
 			"确定":function(){
-				let province = $("#province").val();
+				let province =  $("#province").val()!="请选择所在省"?$("#province").val():"";
+				let city =  $("#city").val()!="请选择所在市"?$("#province").val():"";
 				let mobile = $("#mobile").val();
-				let city = $("#city").val();
 				let details = $("#details").val();
 				let contact = $("#contact").val();
 				let createTime = $("#createTime").val();

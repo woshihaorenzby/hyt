@@ -192,36 +192,9 @@
     	</where>
     </select>
 
-	<!--
-        <update id="advtopusetag_update" parameterType="adv">
-            UPDATE hy_adv SET useTag='1' WHERE id IN (SELECT id FROM (SELECT id FROM hy_adv WHERE userId=#{userId} ORDER BY id DESC LIMIT 0,1) AS t)
-        </update>
-        <update id="advtotusetag_update" parameterType="adv">
-            UPDATE hy_adv SET useTag='0' WHERE userId=#{userId}
-        </update>
-        <update id="advusetag_update" parameterType="adv">
-            UPDATE hy_adv SET useTag='1' WHERE id=#{id}
-        </update>
-        <delete id="adv_delete" parameterType="adv">
-            DELETE FROM hy_adv WHERE id=#{id}
-        </delete>
-
-        <select id="advmod_select" parameterType="advMod" resultType="advMod">
-            SELECT h.*,t.typeName FROM hy_advmod h
-            LEFT JOIN sy_type t ON t.id=h.typeId
-            <where>
-                <if test="typeId != null and typeId != ''.toString()">
-                    AND typeId=#{typeId}
-                </if>
-            </where>
-            ORDER BY rid
-        </select>-->
 	<insert id="advmod_insert" parameterType="advMod">
     	INSERT INTO hy_advmod (typeId, imgUrl, rid) VALUES (#{typeId}, #{imgUrl}, #{rid})
     </insert>
-<!--	<update id="_update" parameterType="wxmobilesale">-->
-<!--    	UPDATE hy_advmod SET hasSale=#{hasSale},imgUrl=#{imgUrl},rid=#{rid} WHERE id=#{id}-->
-<!--    </update>-->
 	<delete id="wxmobilesale_delete" parameterType="wxMobileSale">
     	DELETE FROM sy_wx_mobile_sale WHERE id=#{id}
     </delete>
@@ -237,11 +210,12 @@
 			<if test="minimumConsumption != null and minimumConsumption != ''">minimumConsumption=#{minimumConsumption},</if>
 			<if test="details != null and details != ''">details=#{details},</if>
 			<if test="operator != null and operator != ''">operator=#{operator},</if>
+			<if test="free != null and free != ''">free=#{free},</if>
 		</set>
 		WHERE id=#{id}
 	</update>
 	<insert id="wxmobilesale_insert" parameterType="wxMobileSale">
-    	INSERT INTO sy_wx_mobile_sale (province,city,price,mobileNum,telephoneBill,minimumConsumption,hasSale,details,operator) VALUES
-    	(#{province},#{city},#{price},#{mobileNum},#{telephoneBill},#{minimumConsumption},#{hasSale},#{details},#{operator})
+    	INSERT INTO sy_wx_mobile_sale (province,city,price,mobileNum,telephoneBill,minimumConsumption,hasSale,details,operator,free) VALUES
+    	(#{province},#{city},#{price},#{mobileNum},#{telephoneBill},#{minimumConsumption},#{hasSale},#{details},#{operator},#{free})
     </insert>
 </mapper>

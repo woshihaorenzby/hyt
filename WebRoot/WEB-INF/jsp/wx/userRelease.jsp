@@ -93,7 +93,7 @@ function gotoArt(id) {
 </div>
 <div id="focus" class="focus" style="text-align: center;">
     <p style="font-weight: bolder;font-style:italic;letter-spacing:4px;font-size:20px;margin:10px 0 6px 0;">
-        选号网广告效果的流量来源?</p>
+        选卡网广告效果的流量来源?</p>
     <p style="color:#9a9a9a">—— 阅读量 点击量 转发量及常见问题解释 ——</p>
 </div>
 <div style="position: relative;width: 100%;height:65px;margin-top: 60px;background-color: #f3f3f3;border-bottom: 1px solid #ddd;text-align: center;">

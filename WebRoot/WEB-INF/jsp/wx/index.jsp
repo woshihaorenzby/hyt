@@ -9,7 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport"
           content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
-    <title>选号网</title>
+    <title>选卡网</title>
     <link href="<%=path%>/css/wx/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="<%=path%>/css/wx/alongsty.css" rel="stylesheet" type="text/css"/>
     <link href="<%=path%>/css/wx/style.css?v=4" rel="stylesheet" type="text/css"/>
@@ -25,18 +25,26 @@
         body {
             background: #F3F3F3;
         }
-        .area_block{
+        .fillter1_item{
+            width: 20%;
+
+        }
+        .on{
+            color: #ff5200 !important;
+        }
+        .pullDown{
             display: none;
         }
-        .price_block{
-            display: none;
+        .home-wrapper{
+            height: 700px;
         }
-        .more_block{
-            display: none;
+        .fillter_content{
+            position:absolute ;
+            z-index: 999;
+            width: 100%;
+            background-color: #fff;
         }
-        .type_block{
-            display: none;
-        }
+        .w94{ position:absolute;}
     </style>
     <script type="text/javascript">
         var curPage = 1;
@@ -84,6 +92,114 @@
                 var chw = 1 - (gun * 100 / (itemnum * meiWid)).toFixed(0) / (window.screen.availWidth);
                 $("#soldivnei").css("left", chw + "%");
             });
+
+            var txts = $(".accurate input");
+            for (var i = 1; i < txts.length; i++) {
+                var t = txts[i];
+                t.index = i;
+                t.onClick = function () {
+                    this.removeAttribute("readonly");
+                }
+                t.onkeyup = function () {
+                    this.value = this.value.replace(/^(.).*$/, '$1');
+                    var next = this.index + 1;
+                    if (next > txts.length - 1) return;
+                    txts[next].focus();
+                }
+            };
+            $(".fillter1_item").on("click",function() {
+                let index =$('.fillter1_item').index(this);
+                if($(".pullDown :eq("+index+")").is(":hidden")){
+                    $(".pullDown").hide();
+                    $(".pullDown :eq("+index+")").show();
+                }else{
+                    $(".pullDown").hide();
+                }
+            });
+            $(".operators-ul li").on("click",function () {
+                $(".operators-ul li").removeClass("on");
+                $(this).addClass("on");
+                $("#operators").addClass("on");
+                $("#operators").html($(this).text());
+                $(".pullDown").hide();
+                loadData();
+            });
+
+            function loadData() {
+                if (searchType == "scalNum") {
+                    var txts = $(".accurate input");
+                    number = "1";
+                    for (var i = 1; i < txts.length; i++) {
+                        var t = $(txts[i]).val();
+                        if (t != null && t != "") {
+                            number = number + t;
+                        } else {
+                            number = number + "_";
+                        }
+                    }
+                } else if (searchType == "anyNum") {
+                    var txts = $("#anyNumInp");
+                    number = txts.val();
+                } else if (searchType == "endNum") {
+                    var txts = $("#endNumInp");
+                    number = txts.val();
+                }
+                if (number != null && number != "") {
+                    if (number == "undefined") {
+                        number = "";
+                    }
+                }
+                //运营商
+                let operator = $(".operators-ul li.on").attr("data-id");
+                $("#note").show();
+                $.ajax({
+                    type: "post",
+                    url: "<%=path%>/wxMobileSale/wxMobileSaleMainList",
+                    dataType: "json",
+                    data: {
+                        "page.curPage": curPage,
+                        "page.pageRecordCount": pageRecordCount,
+                        "mobileSale.hasSale": 0,
+                        "mobileSale.mobileNum": number,
+                        "mobileSale.searchType": searchType,
+                        "mobileSale.operator":operator
+                    },
+                    success: function (data) {
+                        $("#ulid").empty();
+                        $("#note").hide();
+                        if (data != null && data.length > 0) {
+                            var appStr = "";
+                            for (var i = 0; i < data.length; i++) {
+                                appStr += "<ul >";
+                                appStr += "<a href=\"javascript:;\" onclick=\"showDetail('<%=path%>/wxMobileSale/wxMobileSaleDetail?mobileSale.id=" + data[i].id + "')\">";
+                                appStr += "<li style='height: 8.533vw'>";
+                                appStr += "<span class=\"index_p1\" style=\"left:23%;\">";
+                                appStr += "<span style=\"margin-left:10px;\">" + data[i].mobileNum + "</span>";
+                                appStr += "</span>";
+                                appStr += "<span class=\"index_p1\" style=\"left:23%;\">";
+                                appStr += "<span style=\"margin-left:30px;\">" + data[i].province + data[i].city + "</span>";
+                                appStr += "</span>";
+                                appStr += "<span class=\"index_p1\" style=\"left:23%;\">";
+                                appStr += "<span style=\"margin-left:30px;\">" + "联通" + "</span>";
+                                appStr += "</span>";
+                                appStr += "<span class=\"index_p1\" style=\"left:23%;\">";
+                                appStr += "<span style=\"margin-left:20px;color: #e54c3f\" >" + "￥" + data[i].price + "</span>";
+                                appStr += "</span>";
+                                appStr += "</li>";
+                                appStr += "</a>";
+                                appStr += "</ul>";
+                            }
+                            $("#ulid").append(appStr);
+                        } else {
+                            var noMuch = $("#noMuch");
+                            if (noMuch == null) {
+                                appStr = "<span id= 'noMuch'>没有更多数据了</span>";
+                                $("#ulid").append(appStr);
+                            }
+                        }
+                    }
+                });
+            }
         });
 
         function searchNum(e) {
@@ -113,79 +229,7 @@
             $("#ulid").empty();
         }
 
-        function loadData() {
-            if (searchType == "scalNum") {
-                var txts = $(".accurate input");
-                number = "1";
-                for (var i = 1; i < txts.length; i++) {
-                    var t = $(txts[i]).val();
-                    if (t != null && t != "") {
-                        number = number + t;
-                    } else {
-                        number = number + "_";
-                    }
-                }
-            } else if (searchType == "anyNum") {
-                var txts = $("#anyNumInp");
-                number = txts.val();
-            } else if (searchType == "endNum") {
-                var txts = $("#endNumInp");
-                number = txts.val();
-            }
-            if (number != null && number != "") {
-                if (number == "undefined") {
-                    number = "";
-                }
-            }
-            $("#note").show();
-            $.ajax({
-                type: "post",
-                url: "<%=path%>/wxMobileSale/wxMobileSaleMainList",
-                dataType: "json",
-                data: {
-                    "page.curPage": curPage,
-                    "page.pageRecordCount": pageRecordCount,
-                    "mobileSale.hasSale": 0,
-                    "mobileSale.mobileNum": number,
-                    "mobileSale.searchType": searchType,
-                    "mobileSale.free":0
 
-                },
-                success: function (data) {
-                    $("#note").hide();
-                    if (data != null && data.length > 0) {
-                        var appStr = "";
-                        for (var i = 0; i < data.length; i++) {
-                            appStr += "<ul >";
-                            appStr += "<a href=\"javascript:;\" onclick=\"showDetail('<%=path%>/wxMobileSale/wxMobileSaleDetail?mobileSale.id=" + data[i].id + "')\">";
-                            appStr += "<li style='height: 8.533vw'>";
-                            appStr += "<span class=\"index_p1\" style=\"left:23%;\">";
-                            appStr += "<span style=\"margin-left:10px;\">" + data[i].mobileNum + "</span>";
-                            appStr += "</span>";
-                            appStr += "<span class=\"index_p1\" style=\"left:23%;\">";
-                            appStr += "<span style=\"margin-left:30px;\">" + data[i].province + data[i].city + "</span>";
-                            appStr += "</span>";
-                            appStr += "<span class=\"index_p1\" style=\"left:23%;\">";
-                            appStr += "<span style=\"margin-left:30px;\">" + "联通" + "</span>";
-                            appStr += "</span>";
-                            appStr += "<span class=\"index_p1\" style=\"left:23%;\">";
-                            appStr += "<span style=\"margin-left:20px;color: #e54c3f\" >" + "￥" + data[i].price + "</span>";
-                            appStr += "</span>";
-                            appStr += "</li>";
-                            appStr += "</a>";
-                            appStr += "</ul>";
-                        }
-                        $("#ulid").append(appStr);
-                    } else {
-                        var noMuch = $("#noMuch");
-                        if (noMuch == null) {
-                            appStr = "<span id= 'noMuch'>没有更多数据了</span>";
-                            $("#ulid").append(appStr);
-                        }
-                    }
-                }
-            });
-        }
 
         //下拉到底部加载更多数据
         //加载函数
@@ -216,7 +260,7 @@
 </head>
 <body id="homeContent">
 <div class="tuiTitle">
-    <div class="tuiTileCenter">选号网</div>
+    <div class="tuiTileCenter">选卡网</div>
 </div>
 
 <div data-v-2a84ec57="" id="homeWrapper" class="home-wrapper child-view" style="top:2px">
@@ -324,45 +368,105 @@
     </div>
     <div class="index_nr" style="padding-bottom:60px;">
         <div  id="fixBox">
-            <div class="fillter1">
-                <div class="fillter1_item">
-                    <div class="fillter1_text">
-                        <span id="selectRegin">区域</span>
+            <div class="fillter_title">
+                <div class="fillter1">
+                    <div class="fillter1_item">
+                        <div class="fillter1_text">
+                            <span id="operators">运营商</span>
+                        </div>
+                    </div>
+                    <div class="fillter1_item">
+                        <div class="fillter1_text">
+                            <span class="a">归属地</span>
+                        </div>
+                    </div>
+                    <div class="fillter1_item">
+                        <div class="fillter1_text">
+                            <span>规律</span>
+                        </div>
+                    </div>
+                    <div class="fillter1_item">
+                        <div class="fillter1_text borderrn">
+                            <span>更多</span>
+                        </div>
+                    </div>
+                    <div class="fillter1_item">
+                        <div class="fillter1_text borderrn">
+                            <span>排序</span>
+                        </div>
                     </div>
                 </div>
-                <div class="fillter1_item">
-                    <div class="fillter1_text">
-                        <span class="a">售价</span>
-                    </div>
-                </div>
-                <div class="fillter1_item">
-                    <div class="fillter1_text">
-                        <span>户型</span>
-                    </div>
-                </div>
-                <div class="fillter1_item">
-                    <div class="fillter1_text borderrn">
-                        <span>更多</span>
-                    </div>
-                </div>
-
             </div>
-            <div data-v-70d1dd20="" data-v-3ebe8a19="" class="pullDown">
-                <div data-v-70d1dd20="" class="single">
-                    <div data-v-70d1dd20="" class="pullDown-group"
+            <div class="fillter_content">
+            <div  class="pullDown">
+                <div class="single">
+                    <div  class="pullDown-group operators"
                          style="transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1); transition-duration: 0ms; transform: translate(0px, 0px) scale(1) translateZ(0px);">
-                        <ul data-v-70d1dd20="" class="pull-ul" style="pointer-events: auto;">
-                            <li data-v-70d1dd20="" class="pull-li is-select">不限</li>
-                            <li data-v-70d1dd20="" class="pull-li">移动</li>
-                            <li data-v-70d1dd20="" class="pull-li">联通</li>
-                            <li data-v-70d1dd20="" class="pull-li">电信</li>
-                            <li data-v-70d1dd20="" class="pull-li">虚商</li>
+                        <ul  class="pull-ul operators-ul" style="pointer-events: auto;">
+                            <li class="pull-li on" data-id="-1">不限</li>
+                            <li class="pull-li" data-id="0">移动</li>
+                            <li class="pull-li" data-id="1">联通</li>
+                            <li class="pull-li" data-id="2">电信</li>
+                            <li class="pull-li" data-id="3">虚商</li>
                         </ul>
                     </div>
                 </div>
             </div>
+                <div class="pullDown">
+                    <div class="single">
+                        <div  class="pullDown-group"
+                              style="transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1); transition-duration: 0ms; transform: translate(0px, 0px) scale(1) translateZ(0px);">
+                            <ul  class="pull-ul" style="pointer-events: auto;">
+                                <li class="pull-li is-select">不</li>
+                                <li class="pull-li">移动</li>
+                                <li class="pull-li">联通</li>
+                                <li class="pull-li">电信</li>
+                                <li class="pull-li">虚商</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="pullDown">
+                    <div class="single">
+                        <div  class="pullDown-group"
+                              style="transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1); transition-duration: 0ms; transform: translate(0px, 0px) scale(1) translateZ(0px);">
+                            <ul  class="pull-ul province" style="pointer-events: auto;">
+                            </ul>
+                            <ul  class="pull-ul city" style="pointer-events: auto;">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="pullDown">
+                    <div class="single">
+                        <div  class="pullDown-group"
+                              style="transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1); transition-duration: 0ms; transform: translate(0px, 0px) scale(1) translateZ(0px);">
+                            <ul  class="pull-ul" style="pointer-events: auto;">
+                                <li class="pull-li is-select">不</li>
+                                <li class="pull-li">移</li>
+                                <li class="pull-li">联</li>
+                                <li class="pull-li">电信</li>
+                                <li class="pull-li">虚商</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="pullDown">
+                    <div class="single">
+                        <div  class="pullDown-group"
+                              style="transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1); transition-duration: 0ms; transform: translate(0px, 0px) scale(1) translateZ(0px);">
+                            <ul  class="pull-ul" style="pointer-events: auto;">
+                                <li class="pull-li is-select">不</li>
+                                <li class="pull-li">移</li>
+                                <li class="pull-li">联</li>
+                                <li class="pull-li">电</li>
+                                <li class="pull-li">虚商</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
         </div>
-        <dvi id="ulid"></dvi>
+        <dvi id="ulid" ></dvi>
         <div class="w94" id="note" style="text-align:center;vertical-align:middle;display:none"><img
                 src="<%=path%>/images/loader.gif"/></div>
     </div>
@@ -458,21 +562,9 @@
         }
 
         $(function () {
-            var txts = $(".accurate input");
-            for (var i = 1; i < txts.length; i++) {
-                var t = txts[i];
-                t.index = i;
-                t.onClick = function () {
-                    this.removeAttribute("readonly");
-                }
-                t.onkeyup = function () {
-                    this.value = this.value.replace(/^(.).*$/, '$1');
-                    var next = this.index + 1;
-                    if (next > txts.length - 1) return;
-                    txts[next].focus();
-                }
-            }
+
         });
+
     </script>
 </body>
 </html>

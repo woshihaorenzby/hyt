@@ -77,9 +77,9 @@ public class FileUploadAction extends BaseAction {
 					double minimumConsumption = (double)(Long.valueOf(str[5]));
 					//是否已经卖出（0未卖出，1已卖出）
 					int hasSale = 0;
-					String details = str[6];
+					String details = str[5];
 					String opeerator ="0";
-					switch (str[7]){
+					switch (str[6]){
 						case "移动":
 							opeerator="0";
 							break;
@@ -94,8 +94,19 @@ public class FileUploadAction extends BaseAction {
 							break;
 					}
 					Integer free = 0;
-					if(str.length>7&&str[8]!=null&&""!=str[8]&&str[8]=="靓号"){
-						free =1;
+					switch (str[7]){
+						case "普通":
+							free=0;
+							break;
+						case "靓号":
+							free=1;
+							break;
+						case "风水":
+							free=2;
+							break;
+						case "免费":
+							free=3;
+							break;
 					}
 					wxMobileSale.setProvince(province);
 					wxMobileSale.setCity(city);

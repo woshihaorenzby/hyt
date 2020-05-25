@@ -7,7 +7,7 @@
 <head>
 	<meta http-equiv="x-ua-compatible" content="ie=9" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
-	<title>选号网后台管理系统</title>
+	<title>选卡网后台管理系统</title>
 </head>
 <frameset frameSpacing="0" name="indexFrameSet" border="0" frameBorder="no" rows="70,*">
 	<frame id="topFrame" noResize="" src="<%=path%>/admin/head" name="topFrame" scrolling="no">

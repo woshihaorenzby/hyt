@@ -26,7 +26,7 @@ String host = request.getServerName();
 </head>
 <body>
 	<div class="index_tou">
-	    <p>选号网用户服务协议<a href="javascript:window.history.go(-1)"><img src="<%=path%>/images/last_icon.png" class="index_tou_img3" /></a></p>
+	    <p>选卡网用户服务协议<a href="javascript:window.history.go(-1)"><img src="<%=path%>/images/last_icon.png" class="index_tou_img3" /></a></p>
 	</div>
 	<div class="h60"></div>
 	<div class="w90">

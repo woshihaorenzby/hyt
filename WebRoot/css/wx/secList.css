@@ -526,8 +526,7 @@ i {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    margin-left: 25px;
-    margin-right: 25px;
+    margin-left: 20px;
     color: #000;
     background: url("https://static.fangxiaoer.com/m/static/images/secicon/fillter_text.png") no-repeat;
     background-size: 5px 4px;

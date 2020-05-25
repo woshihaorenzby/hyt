@@ -8,7 +8,7 @@
 <head>
 	<meta http-equiv="x-ua-compatible" content="ie=9" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
-	<title>选号网</title>
+	<title>选卡网</title>
 	<style>
 		.box{ position:absolute;}
 	</style>

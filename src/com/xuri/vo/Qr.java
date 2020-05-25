@@ -4,6 +4,7 @@ public class Qr {
     private Integer id ;
     private String url;
     private String type;
+    private String typeTitle;
 
     public Integer getId() {
         return id;
@@ -27,5 +28,13 @@ public class Qr {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getTypeTitle() {
+        return typeTitle;
+    }
+
+    public void setTypeTitle(String typeTitle) {
+        this.typeTitle = typeTitle;
     }
 }

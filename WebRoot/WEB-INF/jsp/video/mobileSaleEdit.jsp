@@ -58,6 +58,7 @@ function save() {
 	var hasSale = $("#hasSale").find("option:selected").val();
 	var minimumConsumption = Number($("#minimumConsumption").val()); //最低消费
 	var details = $("#details").val(); //详情介绍
+	var free = $("#free").find("option:selected").val();; //类型
 	$.ajax({
 		type: "post",
 		url: "<%=path%>/wxMobileSale/save",
@@ -70,7 +71,8 @@ function save() {
                 "mobileSale.telephoneBill": telephoneBill ,
                 "mobileSale.minimumConsumption":minimumConsumption ,
                 "mobileSale.hasSale" :hasSale,
-                "mobileSale.details" :details
+                "mobileSale.details" :details,
+                "mobileSale.free" :free
         },
 		success: function(data){
 			if(data.code == "1"){
@@ -86,26 +88,6 @@ function save() {
 </script>
 </head>
 <body class="bodyst">
-<%--<div class="content_head">--%>
-<%--	<font class="head_font">--%>
-<%--		<s:if test="video.id != null and video.id != ''">--%>
-<%--			<s:if test="video.mainType == '1'.toString()">--%>
-<%--				修改视频--%>
-<%--			</s:if>--%>
-<%--	    	<s:elseif test="video.mainType == '2'.toString()">--%>
-<%--	    		修改文章--%>
-<%--			</s:elseif>--%>
-<%--	    </s:if>--%>
-<%--	    <s:else>--%>
-<%--			<s:if test="video.mainType == '1'.toString()">--%>
-<%--				添加视频--%>
-<%--			</s:if>--%>
-<%--	    	<s:elseif test="video.mainType == '2'.toString()">--%>
-<%--	    		添加文章--%>
-<%--			</s:elseif>--%>
-<%--	    </s:else>--%>
-<%--	</font>--%>
-<%--</div>--%>
 <div class="table_content" style="margin-top:10px;">
 	<table class="form_table">
 		<tr>
@@ -183,51 +165,20 @@ function save() {
 				</div>
 			</td>
 		</tr>
-<%--		<tr>--%>
-<%--			<td class="table_text" style="vertical-align : middle;"><span style="color:red;">*</span>省：</td>--%>
-<%--			<td class="table_textright">--%>
-<%--				<form>--%>
-<%--					<div class="form-group">--%>
-<%--						<input name="file" class="form-control" type="file" style="width:300px;float:left;">--%>
-<%--						<button id="imagePath" filepath="<s:property value="video.imagePath" />" type="button" class="btn btn-info btn-sm" onclick="uploadExcel('excel', this)" style="margin-left:10px;"><span class="glyphicon glyphicon-upload"></span>&nbsp;<strong>上传</strong></button>--%>
-<%--						<div id="imgerror" class="errormsg">&nbsp;&nbsp;请上传缩略图！</div>--%>
-<%--					</div>--%>
-<%--					<s:if test="video.imagePath != null and video.imagePath != ''">--%>
-<%--						<div style="float:left;margin-left:10px;" imgfile="<s:property value="video.imagePath" />">--%>
-<%--							<img src="<%=path%>/images/button/minusred_alt.png" style="position:absolute;margin-top:0px;margin-left:180px;width:18px;cursor:pointer;" onclick="removeImg(this)">--%>
-<%--							<img src="<%=path%><s:property value="video.imagePath" />" style="width:200px;">--%>
-<%--						</div>--%>
-<%--				    </s:if>--%>
-<%--				</form>--%>
-<%--			</td>--%>
-<%--		</tr>--%>
-<%--		<tr <s:if test="video.mainType == '2'.toString()">style="display:none;"</s:if>>--%>
-<%--			<td class="table_text" style="vertical-align : middle;"><span style="color:red;">*</span>链接：</td>--%>
-<%--			<td class="table_textright">--%>
-<%--				<div class="form-group" style="margin:0px;">--%>
-<%--					<input id="videoUrl" class="form-control" type="text" style="width:600px;float:left;" value="<s:property value="video.videoUrl" />" />--%>
-<%--					<div class="errormsg">&nbsp;&nbsp;请填写链接！</div>--%>
-<%--				</div>--%>
-<%--			</td>--%>
-<%--		</tr>--%>
-<%--		<tr <s:if test="video.mainType == '1'.toString()">style="display:none;"</s:if>>--%>
-<%--			<td class="table_text" style="vertical-align : middle;"><span style="color:red;">*</span>内容：</td>--%>
-<%--			<td class="table_textright">--%>
-<%--				<div class="form-group" style="margin:0px;">--%>
-<%--					<textarea id="articleContent" name="articleContent" style="float:left;"></textarea>--%>
-<%--					<div class="errormsg">&nbsp;&nbsp;请填写内容！</div>--%>
-<%--				</div>--%>
-<%--			</td>--%>
-<%--		</tr>--%>
-<%--		<tr>--%>
-<%--			<td class="table_text" style="vertical-align : middle;"><span style="color:red;">*</span>发布时间：</td>--%>
-<%--			<td class="table_textright">--%>
-<%--				<div class="form-group" style="margin:0px;">--%>
-<%--					<input id="pushTime" class="form-control" type="text" style="width:200px;float:left;"/>--%>
-<%--					<div class="errormsg">&nbsp;&nbsp;请填写发布时间！</div>--%>
-<%--				</div>--%>
-<%--			</td>--%>
-<%--		</tr>--%>
+		<tr>
+			<td class="table_text"><span style="color:red;">*</span>类型：</td>
+			<td class="table_textright">
+				<div class="form-group" style="margin:0px;">
+					<select id="free" class="form-control" style="width:130px;float:left;">
+						<option value="0" <s:if test="mobileSale.free==0">selected = "selected"</s:if>>普通</option>
+						<option value="1" <s:if test="mobileSale.free==1">selected = "selected"</s:if>>靓号</option>
+						<option value="2" <s:if test="mobileSale.free==2">selected = "selected"</s:if>>风水</option>
+						<option value="3" <s:if test="mobileSale.free==3">selected = "selected"</s:if>>免费</option>
+					</select>
+					<div class="errormsg">&nbsp;&nbsp类型</div>
+				</div>
+			</td>
+		</tr>
 		<tr>
 			<td colspan="2" style="text-align:center;">
 				<button type="button" class="btn btn-success btn-sm" onclick="save()"><span class="glyphicon glyphicon-saved"></span>&nbsp;<strong>保存</strong></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

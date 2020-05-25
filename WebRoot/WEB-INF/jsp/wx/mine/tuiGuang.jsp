@@ -116,7 +116,7 @@ wx.ready(function(){
 			<img src="<s:property value="user.headimgurl" />" style="width:60px;height:60px;border-radius:60px;float:left;">
 			<div style="float:left;">
 				<p style="font-size:18px;font-weight:bold;margin-left:20px;">我是<s:property value="user.niName" /></p>
-				<p style="font-size:18px;font-weight:bold;margin-left:50px;">推荐你使用“选号网”</p>
+				<p style="font-size:18px;font-weight:bold;margin-left:50px;">推荐你使用“选卡网”</p>
 			</div>
 		</div>
 		<div style="position:absolute;top:270px;width:100%;height:150px;">

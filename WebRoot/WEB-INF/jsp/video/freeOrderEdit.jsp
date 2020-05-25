@@ -60,7 +60,7 @@ function save() {
 	var stutus = $("#stutus").val();//市
 	$.ajax({
 		type: "post",
-		url: "<%=path%>/freeOrder/save",
+		url: "<%=path%>/freeOrder/wxSave",
 		dataType: "json",
 		data: {"freeOrder.id":id ,
                 "freeOrder.name" : name ,

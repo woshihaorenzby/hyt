@@ -254,6 +254,24 @@ public class UserAction extends BaseAction {
         return "wxMobile";
     }
     /**
+     * 风水能量号
+     */
+    public String wxFSMobile() {
+        try {
+            Lunimg lunimg = new Lunimg();
+            lunimg.setDisplay("1");
+            lunimgList = baseService.selectList(lunimg);
+            Type ty = new Type();
+            ty.setTypeLei("1");
+            ty.setTopShow("1");
+            typeList = baseService.selectList(ty);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error";
+        }
+        return "wxFSMobile";
+    }
+    /**
      * @Description: TODO 微信用户登录跳转首页
      * @author 王东
      */

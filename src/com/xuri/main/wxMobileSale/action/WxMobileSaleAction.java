@@ -201,7 +201,19 @@ public class WxMobileSaleAction extends BaseAction {
             e.printStackTrace();
         }
         if(qrs!=null&&qrs.size()>0&&qrs.get(0)!=null){
+//            1为车牌定制，2靓号咨询，3名表回收
             this.qr = qrs.get(0);
+            switch (this.qr.getType()){
+                case "1":
+                    this.qr.setTypeTitle("车牌定制");
+                    break;
+                case "2":
+                    this.qr.setTypeTitle("靓号咨询");
+                    break;
+                case "3":
+                    this.qr.setTypeTitle("名表收售");
+                    break;
+            }
         }
         return "wxConsultation";
     }
@@ -219,11 +231,14 @@ public class WxMobileSaleAction extends BaseAction {
      * @return
      */
     public String mobileSale_import() {
+        String msg = "导入成功";
         try {
         } catch (Exception e) {
             e.printStackTrace();
+            msg = "导入失败，请联系管理员："+e.getMessage();
         }
         messageVo.setCode("1");
+        messageVo.setMessage(msg);
         return "messageVo";
     }
 

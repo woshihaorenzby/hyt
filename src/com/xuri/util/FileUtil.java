@@ -175,9 +175,6 @@ public class FileUtil {
 						}
 						if (str != null && ret) {
 							list.add(str);
-							for (String s :str){
-								System.out.println("sddddddddddddddddddd" + s);
-							}
 						}
 					}
 				}
