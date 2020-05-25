@@ -57,7 +57,7 @@
         var number = "";
         $(function () {
             loadData();
-            // $(window).bind("scroll", col_scroll);
+            $(window).bind("scroll", col_scroll);
             $.ajax({
                 type: "post",
                 url: "<%=path%>/hyuser/wxIndexType",
@@ -87,6 +87,7 @@
                     }
                 }
             });
+        });
             $("#typediv").scroll(function () {
                 var gun = $(this).scrollLeft();
                 var chw = 1 - (gun * 100 / (itemnum * meiWid)).toFixed(0) / (window.screen.availWidth);
@@ -123,8 +124,15 @@
                 $("#operators").html($(this).text());
                 $(".pullDown").hide();
                 loadData();
+                $("#ulid").empty();
+
             });
 
+            function searchNum(e) {
+                curPage = 1;
+                loadData(number, searchType);
+                $("#ulid").empty();
+            }
             function loadData() {
                 if (searchType == "scalNum") {
                     var txts = $(".accurate input");
@@ -165,25 +173,37 @@
                         "mobileSale.operator":operator
                     },
                     success: function (data) {
-                        $("#ulid").empty();
                         $("#note").hide();
                         if (data != null && data.length > 0) {
                             var appStr = "";
                             for (var i = 0; i < data.length; i++) {
+                                let operatorStr= "联通";
+                                let operator = data[i].operator+'';
+                                switch (operator) {
+                                    case '0':
+                                        operatorStr= "移动";
+                                        break;
+                                    case '2':
+                                        operatorStr= "电信";
+                                        break;
+                                    case '3':
+                                        operatorStr= "虚商";
+                                        break;
+                                }
                                 appStr += "<ul >";
                                 appStr += "<a href=\"javascript:;\" onclick=\"showDetail('<%=path%>/wxMobileSale/wxMobileSaleDetail?mobileSale.id=" + data[i].id + "')\">";
                                 appStr += "<li style='height: 8.533vw'>";
-                                appStr += "<span class=\"index_p1\" style=\"left:23%;\">";
+                                appStr += "<span class=\"index_p1\" style=\"left:23%;width:30%;\">";
                                 appStr += "<span style=\"margin-left:10px;\">" + data[i].mobileNum + "</span>";
                                 appStr += "</span>";
                                 appStr += "<span class=\"index_p1\" style=\"left:23%;\">";
                                 appStr += "<span style=\"margin-left:30px;\">" + data[i].province + data[i].city + "</span>";
                                 appStr += "</span>";
                                 appStr += "<span class=\"index_p1\" style=\"left:23%;\">";
-                                appStr += "<span style=\"margin-left:30px;\">" + "联通" + "</span>";
+                                appStr += "<span style=\"margin-left:30px;\">" + operatorStr + "</span>";
                                 appStr += "</span>";
                                 appStr += "<span class=\"index_p1\" style=\"left:23%;\">";
-                                appStr += "<span style=\"margin-left:20px;color: #e54c3f\" >" + "￥" + data[i].price + "</span>";
+                                appStr += "<span style=\"margin-left:20px; width:20%;color: #e54c3f\" >" + "￥" + data[i].price + "</span>";
                                 appStr += "</span>";
                                 appStr += "</li>";
                                 appStr += "</a>";
@@ -191,71 +211,65 @@
                             }
                             $("#ulid").append(appStr);
                         } else {
-                            var noMuch = $("#noMuch");
-                            if (noMuch == null) {
-                                appStr = "<span id= 'noMuch'>没有更多数据了</span>";
+                            var noMuch = $("#noMuch").text();
+                            if (noMuch == null||noMuch=='') {
+                                appStr = "<span id= 'noMuch' style=\"text-align: center;display:block;margin-top:20px;color: #949494;\">没有更多数据了</span>";
                                 $("#ulid").append(appStr);
                             }
                         }
                     }
                 });
             }
-        });
-
-        function searchNum(e) {
-            console.log(e);
-            curPage = 1;
-            loadData(number, searchType);
-            $("#ulid").empty();
-        }
-
-        function resetNum(e) {
-            curPage = 1;
-            if (searchType == "scalNum") {
-                var txts = $(".accurate input");
-                for (var i = 1; i < txts.length; i++) {
-                    var t = $(txts[i]);
-                    t.val("");
+            function resetNum(e) {
+                curPage = 1;
+                if (searchType == "scalNum") {
+                    var txts = $(".accurate input");
+                    for (var i = 1; i < txts.length; i++) {
+                        var t = $(txts[i]);
+                        t.val("");
+                    }
+                } else if (searchType == "anyNum") {
+                    var txts = $("#anyNumInp");
+                    txts.val("");
+                } else if (searchType == "endNum") {
+                    var txts = $("#endNumInp");
+                    txts.val("");
                 }
-            } else if (searchType == "anyNum") {
-                var txts = $("#anyNumInp");
-                txts.val("");
-            } else if (searchType == "endNum") {
-                var txts = $("#endNumInp");
-                txts.val("");
+                number = "";
+                loadData();
+                $("#ulid").empty();
             }
-            number = "";
-            loadData();
-            $("#ulid").empty();
-        }
 
 
 
-        //下拉到底部加载更多数据
-        //加载函数
-        function findData() {
-            curPage++;
-            upload = false;
-            loadData();
-        }
+            //下拉到底部加载更多数据
+            //加载函数
+            function findData() {
+                curPage++;
+                upload = false;
+                loadData();
+            }
 
-        function showDetail(url) {
-            window.open(url, "_self");
-        }
+            function showDetail(url) {
+                window.open(url, "_self");
+            }
 
-        function gotoTypeUrl(typeName, webUrl) {
-            window.open(webUrl, "_self");
-        }
+            function gotoTypeUrl(typeName, webUrl) {
+                window.open(webUrl, "_self");
+            }
 
-        var col_scroll = function () {
-            if (($(document).height() - $(window).height()) == ($(window).scrollTop() - $(".index_di2").height())) {
-                if (!uploadSuc && !upload) {
-                    upload = true;
-                    //调用加载中样式
-                    findData();
+            let col_scroll = function () {
+                if ($(document).height() - $(this).scrollTop() - $(this).height() < 300 &&!upload) {
+                    if (!uploadSuc && !upload) {
+                        upload = true;
+                        //调用加载中样式
+                        findData();
+                    }
                 }
             }
-        }
+
+
+
     </script>
 </head>
 <body id="homeContent">
@@ -300,7 +314,7 @@
             <div class="swiper-container swiper-container-horizontal">
                 <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
                     <div id="scalNumDiv" class="swiper-no-swiping swiper-slide swiper-slide-active"
-                         style="width: 360px;">
+                         style="width: 100%;">
                         <div class="content"><p>*请在指定位置上填写数字，无要求的位置可留空</p>
                             <div class="mobile-input">
                                 <div class="accurate">
@@ -334,7 +348,7 @@
                             </label></footer>
                         </div>
                     </div>
-                    <div id="anyNumDiv" class="swiper-no-swiping swiper-slide swiper-slide-next" style="width: 360px;">
+                    <div id="anyNumDiv" class="swiper-no-swiping swiper-slide swiper-slide-next" style="width: 100%;">
                         <div class="content"><p>*11位手机号码任意位置匹配数字搜索</p>
                             <div class="mobile-input">
                                 <div class="blurry"><label>
@@ -348,7 +362,7 @@
                             </label></footer>
                         </div>
                     </div>
-                    <div id="endNumDiv" class="swiper-no-swiping swiper-slide" style="width: 360px;">
+                    <div id="endNumDiv" class="swiper-no-swiping swiper-slide" style="width: 100%;">
                         <div class="content"><p>*11位手机号码末尾数字匹配搜索</p>
                             <div class="mobile-input">
                                 <div class="blurry"><label>
@@ -466,11 +480,11 @@
                     </div>
                 </div>
         </div>
+    </div>
         <dvi id="ulid" ></dvi>
         <div class="w94" id="note" style="text-align:center;vertical-align:middle;display:none"><img
                 src="<%=path%>/images/loader.gif"/></div>
-    </div>
-    <!--底部导航-->
+        <!--底部导航-->
     <div class="index_di2" style="
     width: 100%;
     height: 52px;
@@ -529,7 +543,7 @@
             $('#scalNumDiv').attr("class", "swiper-no-swiping swiper-slide");
             $('#anyNumDiv').attr("class", "swiper-no-swiping swiper-slide swiper-slide-active");
             $('#endNumDiv').attr("class", "swiper-no-swiping swiper-slide swiper-slide-next");
-            $('#anyNumDiv').parent().attr("style", "transform: translate3d(-360px, 0px, 0px); transition-duration: 0ms;");
+            $('#anyNumDiv').parent().attr("style", "transform: translate3d(-100%, 0px, 0px); transition-duration: 0ms;");
             searchType = "anyNum"
         });
         $('#endNum').click(function () {
@@ -539,11 +553,11 @@
             $('#scalNumDiv').attr("class", "swiper-no-swiping swiper-slide swiper-slide-next");
             $('#anyNumDiv').attr("class", "swiper-no-swiping swiper-slide");
             $('#endNumDiv').attr("class", "swiper-no-swiping swiper-slide swiper-slide-active");
-            $('#endNumDiv').parent().attr("style", "transform: translate3d(-720px, 0px, 0px); transition-duration: 0ms;");
+            $('#endNumDiv').parent().attr("style", "transform: translate3d(-200%, 0px, 0px); transition-duration: 0ms;");
             searchType = "endNum"
         });
         function Allsc() {
-            $("#homeContent").css("height", document.body.clientHeight);
+            $("#homeContent").css("height", (document.body.clientHeight+10));
             var $w = document.body.clientWidth;
         }
 

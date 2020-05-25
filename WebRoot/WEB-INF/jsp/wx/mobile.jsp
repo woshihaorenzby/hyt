@@ -168,9 +168,14 @@ function loadData() {
     let operator =  $("input[name='operate']:radio:checked").val();
     let province =  $("#province").val()!="请选择所在省"?$("#province").val():"";
     let city =  $("#city").val()!="请选择所在市"?$("#province").val():"";
-    let p = $("#price").find("option:selected").val().split("-");
-    let startPrice = p[0]!=null&&p[0]!=''&&p[0]!='不限'?p[0]:null;
-    let endPrice = p[1]!=null&&p[1]!=''&&p[1]!='不限'?p[1]:null;
+    let val = $("#price").find("option:selected").val();
+    let startPrice = null;
+    let endPrice = null;
+    if(val!=null&&val!=undefined){
+        let p = val.split("-");
+        startPrice= p[0]!=null&&p[0]!=''&&p[0]!='不限'?p[0]:null;
+        endPrice= p[1]!=null&&p[1]!=''&&p[1]!='不限'?p[1]:null;
+    }
     let order = "";
     let orderBy = "";
     let order_by = $("#order_by").find("option:selected").val()+'';
@@ -184,13 +189,16 @@ function loadData() {
     }
     let preference = [];
     let preferenceStr ="";
-    $("input[name='preference']:checkbox").each(function(index) {       
-         if ($(this).prop("checked") === true) {
+    $("input[name='preference']:checkbox").each(function(index) {
+        if ($(this).prop("checked") === true) {
             preference.push($(this).val());
-    }
+        }
     });
     preferenceStr = preference.join(",");
-    let law = $("#law").val()+'';
+    let law = null;
+    if($("#law").val()!=null&&$("#law").val()!=undefined){
+        law = $("#law").val();
+    }
     $("#note").show();
     $.ajax({
         type: "post",
@@ -253,15 +261,25 @@ function loadData() {
                 }
                 $("#ulid").append(appStr);
             }else{
-                var noMuch =   $("#noMuch");
-                if(noMuch==null){
-                    appStr = "<span id= 'noMuch'>没有更多数据了</span>";
+                var noMuch = $("#noMuch").text();
+                if (noMuch == null||noMuch=='') {
+                    appStr = "<span id= 'noMuch' style=\"text-align: center;display:block;margin-top:20px;color: #949494;\">没有更多数据了</span>";
                     $("#ulid").append(appStr);
                 }
             }
         }
     });
 }
+function  searchNum(e) {
+    console.log(e);
+    curPage= 1;
+    loadData(number,searchType);
+     $("#ulid").empty();
+}
+function  resetNum(e) {
+    location.reload();
+}
+
 //下拉到底部加载更多数据
 //加载函数
 function findData(){
@@ -276,7 +294,7 @@ function gotoTypeUrl(typeName, webUrl) {
     window.open(webUrl, "_self");
 }
 var col_scroll = function(){
-    if(($(document).height() -$(window).height()) == ($(window).scrollTop()-$(".index_di2").height())){
+    if($(document).height() - $(this).scrollTop() - $(this).height() < 300 &&!upload){
         if(!uploadSuc && !upload){
             upload = true;
             //调用加载中样式
@@ -301,7 +319,7 @@ var col_scroll = function(){
         </div>
         <div class="swiper-container swiper-container-horizontal">
             <div  class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;">
-                <div id="scalNumDiv" class="swiper-no-swiping swiper-slide swiper-slide-active" style="width: 360px;">
+                <div id="scalNumDiv" class="swiper-no-swiping swiper-slide swiper-slide-active" style="width:100%;">
                     <div class="content searchContent" style="margin-top:-15px"><p>*请在指定位置上填写数字，无要求的位置可留空</p>
                         <div class="mobile-input" style="margin-top:10px">
                             <div class="accurate">
@@ -320,7 +338,7 @@ var col_scroll = function(){
                         </div>
                     </div>
                 </div>
-                <div id="anyNumDiv" class="swiper-no-swiping swiper-slide swiper-slide-next" style="width: 360px;">
+                <div id="anyNumDiv" class="swiper-no-swiping swiper-slide swiper-slide-next" style="width:100%;">
                     <div class="content searchContent"><p>*11位手机号码任意位置匹配数字搜索</p>
                         <div class="mobile-input">
                             <div class="blurry"><label>
@@ -328,7 +346,7 @@ var col_scroll = function(){
                         </div>
                     </div>
                 </div>
-                <div id="endNumDiv" class="swiper-no-swiping swiper-slide" style="width: 360px;">
+                <div id="endNumDiv" class="swiper-no-swiping swiper-slide" style="width: 100%;">
                     <div class="content searchContent"><p>*11位手机号码末尾数字匹配搜索</p>
                         <div class="mobile-input">
                             <div class="blurry"><label>
@@ -627,7 +645,7 @@ var col_scroll = function(){
     </div>
 
 </div>
-<div class="index_nr" style="padding-bottom:100%;">
+<div class="index_nr" >
     <dvi id="ulid"></dvi>
     <div class="w94" id="note" style="text-align:center;vertical-align:middle;display:none"><img src="<%=path%>/images/loader.gif" /></div>
 </div>
@@ -685,7 +703,7 @@ var col_scroll = function(){
         $('#scalNumDiv').attr("class","swiper-no-swiping swiper-slide");
         $('#anyNumDiv').attr("class","swiper-no-swiping swiper-slide swiper-slide-active");
         $('#endNumDiv').attr("class","swiper-no-swiping swiper-slide swiper-slide-next");
-        $('#anyNumDiv').parent().attr("style","transform: translate3d(-360px, 0px, 0px); transition-duration: 0ms;");
+        $('#anyNumDiv').parent().attr("style","transform: translate3d(-100%, 0px, 0px); transition-duration: 0ms;");
         searchType="anyNum"
     });
     $('#endNum').click(function () {
@@ -695,12 +713,12 @@ var col_scroll = function(){
         $('#scalNumDiv').attr("class","swiper-no-swiping swiper-slide swiper-slide-next");
         $('#anyNumDiv').attr("class","swiper-no-swiping swiper-slide");
         $('#endNumDiv').attr("class","swiper-no-swiping swiper-slide swiper-slide-active");
-        $('#endNumDiv').parent().attr("style","transform: translate3d(-720px, 0px, 0px); transition-duration: 0ms;");
+        $('#endNumDiv').parent().attr("style","transform: translate3d(-200%, 0px, 0px); transition-duration: 0ms;");
         searchType="endNum"
     });
 
     function Allsc() {
-        $("#homeContent").css("height", document.body.clientHeight);
+        $("#homeContent").css("height", document.body.clientHeight+10);
         var $w = document.body.clientWidth;
     }
 
