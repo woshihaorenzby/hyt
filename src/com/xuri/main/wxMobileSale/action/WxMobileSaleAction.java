@@ -128,12 +128,9 @@ public class WxMobileSaleAction extends BaseAction {
 
 
     /**
-     * @Author wangd
-     * @Description TODO 微信首页显示列表
-     * @Date 2019/5/23 22:45
-     * @Param video.typeName 分类名称
-     * @Return java.lang.String
-     **/
+     * 手机号列表
+     * @return
+     */
     public String wxMobileSaleMainList() {
         try {
             if (mobileSale == null)
@@ -145,7 +142,7 @@ public class WxMobileSaleAction extends BaseAction {
             }
             mobileSale.getPreference();
             String law = mobileSale.getLaw();
-            if(law!=null){
+            if(law!=null&&!"不限".equals(law)){
                 String l = GetWxOrderno.getLetter(law);
 
                 List<String> lawList = this.getLawList(l);
@@ -154,6 +151,9 @@ public class WxMobileSaleAction extends BaseAction {
                 }else{
                     mobileSale.setStartLikeLaw(lawList);
                 }
+            }
+            if(mobileSale.getMobileNum().equals("1__________")&&mobileSale.getSearchType().equals("scalNum")){
+                mobileSale.setMobileNum(null);
             }
             page = baseService.selectPageList(page, mobileSale);
             mobileSaleList = (List<WxMobileSale>) page.getData();

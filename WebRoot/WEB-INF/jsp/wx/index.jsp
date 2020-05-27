@@ -48,7 +48,7 @@
     </style>
     <script type="text/javascript">
         var curPage = 1;
-        var pageRecordCount = 20;
+        var pageRecordCount = 5;
         var uploadSuc = false;
         var upload = false;
         var meiWid = 0;
@@ -93,7 +93,11 @@
                 var chw = 1 - (gun * 100 / (itemnum * meiWid)).toFixed(0) / (window.screen.availWidth);
                 $("#soldivnei").css("left", chw + "%");
             });
-
+        $("#typediv").scroll(function() {
+            var gun = $(this).scrollLeft();
+            var chw = 1-(gun*100/(itemnum*meiWid)).toFixed(0)/(window.screen.availWidth);
+            $("#soldivnei").css("left", chw + "%");
+        });
             var txts = $(".accurate input");
             for (var i = 1; i < txts.length; i++) {
                 var t = txts[i];
@@ -381,106 +385,106 @@
         </div>
     </div>
     <div class="index_nr" style="padding-bottom:60px;">
-        <div  id="fixBox">
-            <div class="fillter_title">
-                <div class="fillter1">
-                    <div class="fillter1_item">
-                        <div class="fillter1_text">
-                            <span id="operators">运营商</span>
-                        </div>
-                    </div>
-                    <div class="fillter1_item">
-                        <div class="fillter1_text">
-                            <span class="a">归属地</span>
-                        </div>
-                    </div>
-                    <div class="fillter1_item">
-                        <div class="fillter1_text">
-                            <span>规律</span>
-                        </div>
-                    </div>
-                    <div class="fillter1_item">
-                        <div class="fillter1_text borderrn">
-                            <span>更多</span>
-                        </div>
-                    </div>
-                    <div class="fillter1_item">
-                        <div class="fillter1_text borderrn">
-                            <span>排序</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="fillter_content">
-            <div  class="pullDown">
-                <div class="single">
-                    <div  class="pullDown-group operators"
-                         style="transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1); transition-duration: 0ms; transform: translate(0px, 0px) scale(1) translateZ(0px);">
-                        <ul  class="pull-ul operators-ul" style="pointer-events: auto;">
-                            <li class="pull-li on" data-id="-1">不限</li>
-                            <li class="pull-li" data-id="0">移动</li>
-                            <li class="pull-li" data-id="1">联通</li>
-                            <li class="pull-li" data-id="2">电信</li>
-                            <li class="pull-li" data-id="3">虚商</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-                <div class="pullDown">
-                    <div class="single">
-                        <div  class="pullDown-group"
-                              style="transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1); transition-duration: 0ms; transform: translate(0px, 0px) scale(1) translateZ(0px);">
-                            <ul  class="pull-ul" style="pointer-events: auto;">
-                                <li class="pull-li is-select">不</li>
-                                <li class="pull-li">移动</li>
-                                <li class="pull-li">联通</li>
-                                <li class="pull-li">电信</li>
-                                <li class="pull-li">虚商</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="pullDown">
-                    <div class="single">
-                        <div  class="pullDown-group"
-                              style="transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1); transition-duration: 0ms; transform: translate(0px, 0px) scale(1) translateZ(0px);">
-                            <ul  class="pull-ul province" style="pointer-events: auto;">
-                            </ul>
-                            <ul  class="pull-ul city" style="pointer-events: auto;">
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="pullDown">
-                    <div class="single">
-                        <div  class="pullDown-group"
-                              style="transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1); transition-duration: 0ms; transform: translate(0px, 0px) scale(1) translateZ(0px);">
-                            <ul  class="pull-ul" style="pointer-events: auto;">
-                                <li class="pull-li is-select">不</li>
-                                <li class="pull-li">移</li>
-                                <li class="pull-li">联</li>
-                                <li class="pull-li">电信</li>
-                                <li class="pull-li">虚商</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="pullDown">
-                    <div class="single">
-                        <div  class="pullDown-group"
-                              style="transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1); transition-duration: 0ms; transform: translate(0px, 0px) scale(1) translateZ(0px);">
-                            <ul  class="pull-ul" style="pointer-events: auto;">
-                                <li class="pull-li is-select">不</li>
-                                <li class="pull-li">移</li>
-                                <li class="pull-li">联</li>
-                                <li class="pull-li">电</li>
-                                <li class="pull-li">虚商</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-        </div>
-    </div>
+<%--        <div  id="fixBox">--%>
+<%--            <div class="fillter_title">--%>
+<%--                <div class="fillter1">--%>
+<%--                    <div class="fillter1_item">--%>
+<%--                        <div class="fillter1_text">--%>
+<%--                            <span id="operators">运营商</span>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="fillter1_item">--%>
+<%--                        <div class="fillter1_text">--%>
+<%--                            <span class="a">归属地</span>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="fillter1_item">--%>
+<%--                        <div class="fillter1_text">--%>
+<%--                            <span>规律</span>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="fillter1_item">--%>
+<%--                        <div class="fillter1_text borderrn">--%>
+<%--                            <span>更多</span>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <div class="fillter1_item">--%>
+<%--                        <div class="fillter1_text borderrn">--%>
+<%--                            <span>排序</span>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="fillter_content">--%>
+<%--            <div  class="pullDown">--%>
+<%--                <div class="single">--%>
+<%--                    <div  class="pullDown-group operators"--%>
+<%--                         style="transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1); transition-duration: 0ms; transform: translate(0px, 0px) scale(1) translateZ(0px);">--%>
+<%--                        <ul  class="pull-ul operators-ul" style="pointer-events: auto;">--%>
+<%--                            <li class="pull-li on" data-id="-1">不限</li>--%>
+<%--                            <li class="pull-li" data-id="0">移动</li>--%>
+<%--                            <li class="pull-li" data-id="1">联通</li>--%>
+<%--                            <li class="pull-li" data-id="2">电信</li>--%>
+<%--                            <li class="pull-li" data-id="3">虚商</li>--%>
+<%--                        </ul>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--                <div class="pullDown">--%>
+<%--                    <div class="single">--%>
+<%--                        <div  class="pullDown-group"--%>
+<%--                              style="transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1); transition-duration: 0ms; transform: translate(0px, 0px) scale(1) translateZ(0px);">--%>
+<%--                            <ul  class="pull-ul" style="pointer-events: auto;">--%>
+<%--                                <li class="pull-li is-select">不</li>--%>
+<%--                                <li class="pull-li">移动</li>--%>
+<%--                                <li class="pull-li">联通</li>--%>
+<%--                                <li class="pull-li">电信</li>--%>
+<%--                                <li class="pull-li">虚商</li>--%>
+<%--                            </ul>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="pullDown">--%>
+<%--                    <div class="single">--%>
+<%--                        <div  class="pullDown-group"--%>
+<%--                              style="transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1); transition-duration: 0ms; transform: translate(0px, 0px) scale(1) translateZ(0px);">--%>
+<%--                            <ul  class="pull-ul province" style="pointer-events: auto;">--%>
+<%--                            </ul>--%>
+<%--                            <ul  class="pull-ul city" style="pointer-events: auto;">--%>
+<%--                            </ul>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="pullDown">--%>
+<%--                    <div class="single">--%>
+<%--                        <div  class="pullDown-group"--%>
+<%--                              style="transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1); transition-duration: 0ms; transform: translate(0px, 0px) scale(1) translateZ(0px);">--%>
+<%--                            <ul  class="pull-ul" style="pointer-events: auto;">--%>
+<%--                                <li class="pull-li is-select">不</li>--%>
+<%--                                <li class="pull-li">移</li>--%>
+<%--                                <li class="pull-li">联</li>--%>
+<%--                                <li class="pull-li">电信</li>--%>
+<%--                                <li class="pull-li">虚商</li>--%>
+<%--                            </ul>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div class="pullDown">--%>
+<%--                    <div class="single">--%>
+<%--                        <div  class="pullDown-group"--%>
+<%--                              style="transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1); transition-duration: 0ms; transform: translate(0px, 0px) scale(1) translateZ(0px);">--%>
+<%--                            <ul  class="pull-ul" style="pointer-events: auto;">--%>
+<%--                                <li class="pull-li is-select">不</li>--%>
+<%--                                <li class="pull-li">移</li>--%>
+<%--                                <li class="pull-li">联</li>--%>
+<%--                                <li class="pull-li">电</li>--%>
+<%--                                <li class="pull-li">虚商</li>--%>
+<%--                            </ul>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
         <dvi id="ulid" ></dvi>
         <div class="w94" id="note" style="text-align:center;vertical-align:middle;display:none"><img
                 src="<%=path%>/images/loader.gif"/></div>

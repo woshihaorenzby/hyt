@@ -235,18 +235,17 @@ public class UserAction extends BaseAction {
         return "wxIndexFrame";
     }
     /**
-     * @Description: TODO 微信用户登录跳转首页
-     * @author 王东
+     * 手机靓号
      */
     public String wxMobile() {
         try {
-            Lunimg lunimg = new Lunimg();
-            lunimg.setDisplay("1");
-            lunimgList = baseService.selectList(lunimg);
-            Type ty = new Type();
-            ty.setTypeLei("1");
-            ty.setTopShow("1");
-            typeList = baseService.selectList(ty);
+//            Lunimg lunimg = new Lunimg();
+//            lunimg.setDisplay("1");
+//            lunimgList = baseService.selectList(lunimg);
+//            Type ty = new Type();
+//            ty.setTypeLei("1");
+//            ty.setTopShow("1");
+//            typeList = baseService.selectList(ty);
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
@@ -258,13 +257,13 @@ public class UserAction extends BaseAction {
      */
     public String wxFSMobile() {
         try {
-            Lunimg lunimg = new Lunimg();
-            lunimg.setDisplay("1");
-            lunimgList = baseService.selectList(lunimg);
-            Type ty = new Type();
-            ty.setTypeLei("1");
-            ty.setTopShow("1");
-            typeList = baseService.selectList(ty);
+//            Lunimg lunimg = new Lunimg();
+//            lunimg.setDisplay("1");
+//            lunimgList = baseService.selectList(lunimg);
+//            Type ty = new Type();
+//            ty.setTypeLei("1");
+//            ty.setTopShow("1");
+//            typeList = baseService.selectList(ty);
         } catch (Exception e) {
             e.printStackTrace();
             return "error";
@@ -272,18 +271,17 @@ public class UserAction extends BaseAction {
         return "wxFSMobile";
     }
     /**
-     * @Description: TODO 微信用户登录跳转首页
-     * @author 王东
+     * 免费靓号
      */
     public String wxFreeMobile() {
         try {
-            Lunimg lunimg = new Lunimg();
-            lunimg.setDisplay("1");
-            lunimgList = baseService.selectList(lunimg);
-            Type ty = new Type();
-            ty.setTypeLei("1");
-            ty.setTopShow("1");
-            typeList = baseService.selectList(ty);
+//            Lunimg lunimg = new Lunimg();
+//            lunimg.setDisplay("1");
+//            lunimgList = baseService.selectList(lunimg);
+//            Type ty = new Type();
+//            ty.setTypeLei("1");
+//            ty.setTopShow("1");
+//            typeList = baseService.selectList(ty);
         } catch (Exception e) {
             e.printStackTrace();
             return "error";

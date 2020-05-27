@@ -84,7 +84,7 @@
 </style>
 <script type="text/javascript">
 var curPage = 1;
-var pageRecordCount = 20;
+var pageRecordCount = 5;
 var uploadSuc = false;
 var upload = false;
 var meiWid = 0;

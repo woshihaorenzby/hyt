@@ -169,7 +169,6 @@ public class GetWxOrderno {
 				sb.append(c);
 			}
 		}
-		System.out.println(sb.toString());
 		return sb.toString();
 	}
 
